@@ -5,7 +5,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-6">
-        <form #zoneForm="ngForm" (ngSubmit)="onSubmitForm(zoneForm)">
+        <form #zoneForm="ngForm" (ngSubmit)="onSubmitForm(zoneForm)" class="form-horizontal">
 
           <div class="form-group" *ngIf="zone && zone.zoneId !== 0 ">
             <div class="row">

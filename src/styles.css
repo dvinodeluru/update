@@ -126,6 +126,7 @@ body {
 
 .nav li>ul>li:hover>a {
     background: #7ad4ff none;
+    color: #222;
 }
 
 .dropdown-submenu {
@@ -152,6 +153,12 @@ body {
 .btn:focus,
 .btn:hover {
     color: #fff;
+}
+
+.btn-block {
+    /*white-space: normal;*/
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .btn-warning {
@@ -197,6 +204,13 @@ input#search {
     border-radius: 20px;
 }
 */
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #f3f3f3;
+    border-color: #f3f3f3;
+}
 
 .panel-default {
     border: 0;
@@ -283,34 +297,6 @@ div.checkbox+label {
     margin-top: 5px;
 }
 
-@media only screen and (min-width:768px) {
-    .savage-header .navbar-brand>img,
-    .savage-header .navbar-brand .sub-logo {
-        padding-top: 0px;
-    }
-    .siteActions {
-        float: right;
-    }
-}
-
-@media only screen and (max-width:767px) {
-    .savage-header .navbar-brand {
-        float: none;
-    }
-    .nav li:hover .dropdown-menu {
-        position: static;
-        min-width: 0;
-        padding-left: 15px;
-        float: none;
-    }
-    .nav li:hover .dropdown-menu a {
-        padding-left: 8px;
-    }
-    .dropdown-submenu>a:after {
-        transform: rotate(90deg);
-    }
-}
-
 
 /*form-horizontal adjustments */
 
@@ -319,23 +305,12 @@ div.checkbox+label {
 }
 
 .form-horizontal label {
-    text-align: right;
+    /*text-align: right;*/
+    margin-bottom: 0;
 }
 
-.form-horizontal [class*="col-"] {
-    padding: 0 10px
-}
-
-.form-horizontal [class*="row"] {
-    margin: 0 -10px
-}
-
-.form-horizontal div[class*="row"] div[class*="col-"]:not(:first-child) {
-    padding-left: 5px
-}
-
-.form-horizontal div[class*="row"] div[class*="col-"] label {
-    padding-right: 5px
+.form-horizontal .form-group {
+    margin: 0 0 15px;
 }
 
 .date-addon,
@@ -346,6 +321,8 @@ input[ngui-datetime-picker] {
     background: url('/assets/images/date_icon.png') no-repeat 98% 50%;
 }
 
+
+/*
 #search {
     padding-left: 30px;
     padding-right: 4px;
@@ -353,7 +330,7 @@ input[ngui-datetime-picker] {
     border-radius: 20px;
     border-bottom-color: gray;
     border-right-color: gray
-}
+}*/
 
 
 /*
@@ -368,7 +345,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .form-control {
     height: 30px;
-    padding: 02px 2px;
+    padding: 2px 2px;
     font-size: 12px;
 }
 
@@ -414,13 +391,13 @@ Put this back when modal code is added
 
 /* For large groups of buttons (see transfer order form) */
 
-.button-group li {
-    list-style-type: none;
-}
-
 .button-group ul {
     margin: auto;
     padding: 0;
+}
+
+.button-group li {
+    list-style-type: none;
 }
 
 div.button-group {
@@ -442,4 +419,60 @@ input+savage-message div.alert {
     margin-top: 5px;
     margin-bottom: 10px;
     padding: 0px;
+}
+
+@media only screen and (min-width:768px) {
+    .savage-header .navbar-brand>img,
+    .savage-header .navbar-brand .sub-logo {
+        padding-top: 0px;
+    }
+    .siteActions {
+        float: right;
+    }
+}
+
+@media only screen and (max-width:767px) {
+    .savage-header .navbar-brand {
+        float: none;
+    }
+    .nav li:hover .dropdown-menu {
+        position: static;
+        min-width: 0;
+        padding-left: 15px;
+        float: none;
+    }
+    .nav li:hover .dropdown-menu a {
+        padding-left: 8px;
+    }
+    .dropdown-submenu>a:after {
+        transform: rotate(90deg);
+    }
+}
+
+@media only screen and (min-width:992px) {
+    .form-horizontal .form-group>[class*="row"] {
+        margin: 0 -10px;
+    }
+    .form-horizontal .form-group>[class*="row"]>[class*="col-"] {
+        padding: 0 10px;
+    }
+    .form-horizontal .form-group>[class*="row"]>[class*="col-"]:nth-child(:even) {
+        padding: 0 5px;
+    }
+    .form-horizontal .form-group.col-span-4>[class*="row"]>[class*="col-md"]:nth-child(odd) {
+        width: calc(15% - 40px);
+    }
+    .form-horizontal .form-group.col-span-4>[class*="row"]>[class*="col-md"]:nth-child(even) {
+        width: calc(90% - 10px);
+    }
+}
+@media only screen and (min-width:1130px) {
+    .form-horizontal .form-group.col-span-4>[class*="row"]>[class*="col-md"]:nth-child(odd) {
+        width: calc(11% - 2px);
+    }    
+}
+@media only screen and (min-width:1200px) {    
+    .form-horizontal .form-group.col-span-4>[class*="row"]>[class*="col-md"]:nth-child(even) {
+        width: calc(90% - 15px);
+    }
 }

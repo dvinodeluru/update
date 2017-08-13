@@ -5,7 +5,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-12">
-        <form #productForm="ngForm" (ngSubmit)="onSubmitForm(productForm)">
+        <form #productForm="ngForm" (ngSubmit)="onSubmitForm(productForm)" class="form-horizontal">
           <div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
@@ -51,8 +51,9 @@
                 </div>
               </div>
             </div>
+             </div><div class="row">
             <div class="col-md-12 col-sm-6">
-              <div class="form-group" *ngIf="product">
+              <div class="form-group col-span-4" *ngIf="product">
                 <div class="row">
                   <label for="#description" class="col-sm-4 col-md-2 col-form-label">Description</label>
                   <div class="col-sm-8 col-md-10">
@@ -61,7 +62,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
                 <div class="row">
@@ -102,7 +103,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
                 <div class="row">
@@ -147,7 +148,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
                 <div class="row">
@@ -180,7 +181,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
                 <div class="row">
@@ -212,7 +213,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
                 <div class="row">
@@ -243,7 +244,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
                 <div class="row">
@@ -274,7 +275,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="product">
                 <div class="row">
@@ -295,9 +296,9 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> </div><div class="row">
             <div class="col-md-12 col-sm-6">
-              <div class="form-group" *ngIf="product">
+              <div class="form-group col-span-4" *ngIf="product">
                 <div class="row">
                   <label for="#hazmatDescription" class="col-sm-4 col-md-2 col-form-label">Hazmat Description</label>
                   <div class="col-sm-8 col-md-10">
@@ -313,7 +314,7 @@
           <product-site-shipper [product]="product"></product-site-shipper>
           <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid  || isInvalid || !pageSecurity.isWritable">Save</button>
           <button type="button" class="btn btn-primary" [disabled]="(!productForm.valid  || isInvalid || !pageSecurity.isWritable)"
-            (click)="saveAndAddDetails($event)" *ngIf="product && (product.productId === null || product.productId === 0)">Save And Add Details</button>
+            (click)="saveAndAddDetails($event)" *ngIf="product && (product.productId === null || product.productId === 0)">Add Details</button>
         </form>
       </div>
     </div>
