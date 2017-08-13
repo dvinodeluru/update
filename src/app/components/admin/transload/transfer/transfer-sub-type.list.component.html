@@ -1,0 +1,78 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Transfer Order Loader List</h2>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="form-group">
+          <div class="form-group">
+              <div class="row">
+                <label class="col-xs-4 control-label" for="input">Search:</label>
+                
+                
+                <div class="col-xs-8">
+                  <div class="icon-addon">
+                  <input  class="form-control search-icon-addon" #input placeholder="transferSubType">
+                  <label for="email" class="glyphicon glyphicon-search icon-left" rel="tooltip" title="email"></label>
+                </div>
+                </div>
+
+
+
+              </div>            
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <label for="isActive" class="col-xs-4 control-label">Is Active</label>
+              <div class="col-xs-8">
+                <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+              </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+    
+  <div class="panel-body">    
+    <div>
+      <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Transfer Sub Type</button>
+    </div>
+<div class="table-responsive ">
+    <table class="table table-condensed table-bordered table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>TransferSubType</th>
+          <th>TransferType</th>
+          <th>IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transferSubType of transferSubTypeList " (click)="gotoDetail(transferSubType)">
+          <td>{{transferSubType.transferSubTypeId}}</td>
+          <td>{{transferSubType.transferSubTypeName}}</td>
+          <td>{{transferSubType.transferType ? transferSubType.transferType.transferType : ""}}</td>
+          <td>{{transferSubType.isActive}}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+    <div>
+          <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Transfer Sub Type</button>
+      </div>
+    
+
+  </div>
+</div>
+
+ <div class="panel-footer">
+    <!--paignation-->
+    </div>
+    <!--TransferTypes: {{transferSubTypeList | json}}-->
