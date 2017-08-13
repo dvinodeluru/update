@@ -7,136 +7,159 @@
       <div class="col-xs-12">
         <form novalidate (ngSubmit)="saveUser()" [formGroup]="userForm" class="form-horizontal">
           <div class="row">
-            <div class="form-group  col-sm-6" *ngIf="user && user.userId !== 0 ">              
-              <label class="col-xs-4 control-label" for="userId">Id</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="userIdId" type="number" formControlName="userId" [readonly]="true" />
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user && user.userId !== 0 ">
+                <label class="col-xs-4 control-label" for="userId">Id</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="userIdId" type="number" formControlName="userId" [readonly]="true" />
+                </div>
               </div>
             </div>
-            <div class="form-group  col-sm-6"></div>
+            <div class="col-sm-6">
+            </div>
           </div>
           <div class="row">
-            <div class="form-group  col-sm-6" *ngIf="user">
-              <label class="col-xs-4 control-label" for="userName">User Name</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="userNameId" type="string" formControlName="userName" [readonly]="true" />
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label class="col-xs-4 control-label" for="userName">User Name</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="userNameId" type="string" formControlName="userName" [readonly]="true" />
+                </div>
               </div>
             </div>
-            <div class="form-group  col-sm-6"></div>
+            <div class="col-sm-6">
+            </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-6 " *ngIf="user && user.employeeId !== 0 ">
-              <label class="col-xs-4 control-label" for="employeeId">EmployeeId</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="employeeIdId" type="number" formControlName="employeeId" [readonly]="false" />
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user && user.employeeId !== 0 ">
+                <label class="col-xs-4 control-label" for="employeeId">EmployeeId</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="employeeIdId" type="number" formControlName="employeeId" [readonly]="false" />
+                </div>
               </div>
             </div>
-            <div class="form-group  col-sm-6"></div>
+            <div class="col-sm-6">
+            </div>
           </div>
           <div class="row">
-            <div class="form-group  col-sm-6" *ngIf="user" [ngClass]="{'has-error': displayMessage.firstName }">
-              <label class="col-xs-4 control-label" for="firstName">First Name</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="firstNameId" type="string" formControlName="firstName" [readonly]="!pageSecurity.isWritable ? true : null"
-                />
-                <span class="help-block alert-danger" *ngIf="displayMessage.firstName">
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user" [ngClass]="{'has-error': displayMessage.firstName }">
+                <label class="col-xs-4 control-label" for="firstName">First Name</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="firstNameId" type="string" formControlName="firstName" [readonly]="!pageSecurity.isWritable ? true : null"
+                  />
+                  <span class="help-block alert-danger" *ngIf="displayMessage.firstName">
                                 {{displayMessage.firstName}}
                         </span>
+                </div>
               </div>
             </div>
-            <div class="form-group  col-sm-6"></div>
+            <div class="col-sm-6">
+            </div>
           </div>
           <div class="row">
-            <div class="form-group  col-sm-6" *ngIf="user" [ngClass]="{'has-error': displayMessage.lastName }">
-              <label class="col-xs-4 control-label" for="lastName">Last Name</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="lastNameId" type="string" formControlName="lastName" [readonly]="!pageSecurity.isWritable ? true : null"
-                />
-                <span class="help-block alert-danger" *ngIf="displayMessage.lastName">
+            <div class="col-sm-6">
+              <div class="form-group " *ngIf="user" [ngClass]="{'has-error': displayMessage.lastName }">
+                <label class="col-xs-4 control-label" for="lastName">Last Name</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="lastNameId" type="string" formControlName="lastName" [readonly]="!pageSecurity.isWritable ? true : null"
+                  />
+                  <span class="help-block alert-danger" *ngIf="displayMessage.lastName">
                                 {{displayMessage.lastName}}
                         </span>
+                </div>
               </div>
             </div>
-            <div class="form-group  col-sm-6"></div>
-          </div>
-          <div class="row">
-            <div class="form-group  col-sm-6" *ngIf="user">
-              <label class="col-xs-4 control-label" for="workPhone">Work Phone</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="workPhoneId" type="number" formControlName="workPhone" [readonly]="!pageSecurity.isWritable ? true : null"
-                />
-              </div>
-            </div>
-            <div class="form-group  col-sm-6" *ngIf="user">
-              <label class="col-xs-4 control-label" for="pager">Pager</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="pagerId" type="number" formControlName="pager" [readonly]="!pageSecurity.isWritable ? true : null"
-                />
-              </div>
+            <div class="col-sm-6">              
             </div>
           </div>
           <div class="row">
-            <div class="form-group  col-sm-6" *ngIf="user">
-              <label class="col-xs-4 control-label" for="cellPhone">Cell Phone</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="cellPhoneId" type="number" formControlName="cellPhone" [readonly]="!pageSecurity.isWritable ? true : null"
-                />
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label class="col-xs-4 control-label" for="workPhone">Work Phone</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="workPhoneId" type="number" formControlName="workPhone" [readonly]="!pageSecurity.isWritable ? true : null"
+                  />
+                </div>
               </div>
             </div>
-            <div class="form-group  col-sm-6" *ngIf="user">
-              <label class="col-xs-4 control-label" for="email">Email</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="emailId" type="string" formControlName="email" [readonly]="!pageSecurity.isWritable ? true : null"
-                />
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label class="col-xs-4 control-label" for="pager">Pager</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="pagerId" type="number" formControlName="pager" [readonly]="!pageSecurity.isWritable ? true : null"
+                  />
+                </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="form-group  col-sm-6" *ngIf="user">
-              <label class="col-xs-4 control-label" for="partnerName">Partner Name</label>
-              <div class="col-xs-8">
-                <input class="form-control" id="partnerNameId" type="string" formControlName="partnerName" [readonly]="!pageSecurity.isWritable ? true : null"
-                />
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label class="col-xs-4 control-label" for="cellPhone">Cell Phone</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="cellPhoneId" type="number" formControlName="cellPhone" [readonly]="!pageSecurity.isWritable ? true : null"
+                  />
+                </div>
               </div>
-              <div class="col-md-6"></div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label class="col-xs-4 control-label" for="email">Email</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="emailId" type="string" formControlName="email" [readonly]="!pageSecurity.isWritable ? true : null"
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-6" *ngIf="user">
-              <label class="col-xs-4 control-label" for="domainId">Domain</label>
-              <div class="col-xs-8">
-                <select class="form-control readOnly" id="domainIdId" formControlName=domainId [disabled]="!pageSecurity.isWritable ? true : null">
-            <option [ngValue]="null">Select Domain</option>
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label class="col-xs-4 control-label" for="partnerName">Partner Name</label>
+                <div class="col-xs-8">
+                  <input class="form-control" id="partnerNameId" type="string" formControlName="partnerName" [readonly]="!pageSecurity.isWritable ? true : null"
+                  />
+                </div>               
+              </div>
+            </div> 
+            <div class="col-md-6"></div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label class="col-xs-4 control-label" for="domainId">Domain</label>
+                <div class="col-xs-8">
+                  <select class="form-control readOnly" id="domainIdId" formControlName=domainId [disabled]="!pageSecurity.isWritable ? true : null">
+                    <option [ngValue]="null">Select Domain</option>
                     <option *ngFor="let domain of domainList" [value]="domain.domainId">{{domain.domainName}}</option>
-                </select>
+                  </select>
+                </div>
               </div>
-              <div class="col-md-6"></div>
-
             </div>
+            <div class="col-md-6"></div>
           </div>
           <div class="row">
-            <div class="form-group col-md-6" *ngIf="user">
-              <label for="isActive" class="col-xs-4 control-label" for="partnerNameId">Is Active</label>
-              <div class="col-xs-8">
-                <input id="partnerNameId" type="checkbox" formControlName="isActive" [readonly]="!pageSecurity.isWritable ? true : null"
-                  [disabled]="!pageSecurity.isWritable ? true : null" />
+            <div class="col-sm-6">
+              <div class="form-group" *ngIf="user">
+                <label for="isActive" class="col-xs-4 control-label" for="partnerNameId">Is Active</label>
+                <div class="col-xs-8">
+                  <input id="partnerNameId" type="checkbox" formControlName="isActive" [readonly]="!pageSecurity.isWritable ? true : null"
+                    [disabled]="!pageSecurity.isWritable ? true : null" />
+                </div>
               </div>
-              <div class="col-md-6"></div>
             </div>
+            <div class="col-md-6"></div>
           </div>
 
-          <div class="form-group row" *ngIf="user">
-
-          </div>
-          <br/>
-          <br/>
           <user-roles [user]="user"></user-roles>
-          <br/>
+
           <user-sites [user]="user"></user-sites>
-          <br/>
-          <br/>
-          <div class="col-md-12">
-            <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
+          <div class="row">
+            <div class="col-xs-12">
+              <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Submit</button>
+            </div>
           </div>
         </form>
       </div>

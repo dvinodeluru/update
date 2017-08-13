@@ -6,7 +6,6 @@
     <div class="row">
       <div class="col-md-6">
         <form #zoneForm="ngForm" (ngSubmit)="onSubmitForm(zoneForm)" class="form-horizontal">
-
           <div class="form-group" *ngIf="zone && zone.zoneId !== 0 ">
             <div class="row">
               <label for="zoneId" class="col-xs-4 col-form-label">Id</label>
@@ -16,7 +15,6 @@
               </div>
             </div>
           </div>
-
           <div class="form-group" *ngIf="zone">
             <div class="row">
               <label for="zoneName" class="col-xs-4 col-form-label">Zone Name</label>

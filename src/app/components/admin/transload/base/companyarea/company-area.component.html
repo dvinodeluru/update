@@ -2,81 +2,66 @@
   <div class="panel-heading">
     <h2 class="panel-title">Company Area</h2>
   </div>
-
   <div class="panel-body">
     <div class="row">
       <div class="col-md-6">
         <form #companyAreaForm="ngForm" (ngSubmit)="onSubmitForm(companyAreaForm)">
-
-            <div class="form-group" *ngIf="companyArea && companyArea.companyAreaId !== 0 ">
-                <div class="row">
-                  <label for="companyAreaId" class="col-xs-4 control-label">Id</label>
-                    <div class="col-xs-8">
-                        <input type="text" class="form-control readOnly" name="companyAreaId" [(ngModel)]=companyArea.companyAreaId #userId="ngModel"
-                            [readonly]="true">
-                    </div>
-                </div>                
+          <div class="form-group" *ngIf="companyArea && companyArea.companyAreaId !== 0 ">
+            <div class="row">
+              <label for="companyAreaId" class="col-xs-4 control-label">Id</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="companyAreaId" [(ngModel)]=companyArea.companyAreaId #userId="ngModel"
+                  [readonly]="true">
+              </div>
             </div>
-
-            <div class="form-group" *ngIf="companyArea">
-                <div class="row">
-            <label for="#areaName" class="col-xs-4 control-label">Area Name</label>
-            <div class="col-xs-8">
+          </div>
+          <div class="form-group" *ngIf="companyArea">
+            <div class="row">
+              <label for="#areaName" class="col-xs-4 control-label">Area Name</label>
+              <div class="col-xs-8">
                 <input type="text" class="form-control" name="areaName" #areaName="ngModel" [(ngModel)]=companyArea.areaName [readonly]="!pageSecurity.isWritable ? true : null"
-                    required>
+                  required>
                 <span class="help-block alert-danger" *ngIf="(areaName.touched || areaName.dirty) && areaName.errors">
                     <span *ngIf="areaName.errors.required">
                         Area name is required
                     </span>
                 </span>
                 <savage-message></savage-message>
+              </div>
             </div>
+          </div>
+          <div class="form-group" *ngIf="companyArea">
+            <div class="row">
+              <label for="comment" class="col-xs-4 control-label">Comment</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="comment" #comment="ngModel" [(ngModel)]=companyArea.comment [readonly]="!pageSecurity.isWritable ? true : null">
+              </div>
             </div>
-            </div>
-
-            <div class="form-group" *ngIf="companyArea">
-                <div class="row">
-                <label for="comment" class="col-xs-4 control-label">Comment</label>
-                <div class="col-xs-8">
-                    <input type="text" class="form-control" name="comment" #comment="ngModel" [(ngModel)]=companyArea.comment [readonly]="!pageSecurity.isWritable ? true : null">
-                </div>
-                </div>
-            </div>
-            
-            <div class="form-group" *ngIf="companyArea">
-                <div class="row">
-                <label for="companyId" class="col-xs-4 control-label">Company</label>
-                <div class="col-xs-8">
-                <select class="form-control " name="companyId" #companyId="ngModel" [(ngModel)]=companyArea.companyId
-                    required [disabled]="!pageSecurity.isWritable" >
+          </div>
+          <div class="form-group" *ngIf="companyArea">
+            <div class="row">
+              <label for="companyId" class="col-xs-4 control-label">Company</label>
+              <div class="col-xs-8">
+                <select class="form-control " name="companyId" #companyId="ngModel" [(ngModel)]=companyArea.companyId required [disabled]="!pageSecurity.isWritable">
                     <option [ngValue]="null">Select</option>
                     <option *ngFor="let company of consigneeList"
                     [value]="company.companyId"
                     >{{company.companyName}}</option>
                 </select>
-                </div>
-                </div>
+              </div>
             </div>
-
-           
-
-
-        <div class="form-group" *ngIf="companyArea">
-            <div class="row">  
-            <label for="checkbox" class="col-xs-4 control-label">Is Active</label>
-            <div class="col-xs-8">
+          </div>
+          <div class="form-group" *ngIf="companyArea">
+            <div class="row">
+              <label for="checkbox" class="col-xs-4 control-label">Is Active</label>
+              <div class="col-xs-8">
                 <input type="checkbox" name="isActive" #isActive="ngModel" [(ngModel)]=companyArea.isActive [disabled]="!pageSecurity.isWritable ? true : null">
+              </div>
             </div>
-            </div>
-        </div>
-
-
-       <div class="col-xs-offset-4 col-xs-4">
-            <button type="submit" class="btn btn-primary" [disabled]="!companyAreaForm.valid || !pageSecurity.isWritable">Save</button>
-       </div>
-         </form>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!companyAreaForm.valid || !pageSecurity.isWritable">Save</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
-

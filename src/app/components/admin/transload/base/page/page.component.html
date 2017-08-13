@@ -1,0 +1,55 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Page</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <form #pageForm="ngForm" (ngSubmit)="onSubmitForm(pageForm)">
+          <div class="form-group" *ngIf="page && page.pageId !== 0 ">
+            <div class="row">
+              <label for="pageId" class="col-xs-4 col-form-label">Id</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="pageId" [(ngModel)]=page.pageId #pageId="ngModel" [readonly]="true">
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="page">
+            <div class="row">
+              <label for="pageName" class="col-xs-4 col-form-label">Page Name</label>
+              <div class="col-xs-8">
+                <select class="form-control readOnly" name="pageName" [(ngModel)]=page.pageName #pageName="ngModel" required> 
+                        <option [ngValue]="null">Select </option>
+                        <option *ngFor="let pageName of pageNames" [value]="pageName" >{{pageName}}</option>
+                </select>
+                <savage-message></savage-message>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="page">
+            <div class="row">
+              <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
+              <div class="col-xs-8">
+                <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=page.isActive>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!pageForm.valid || isInvalid">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--<div class="form-value">
+            Form value:
+            <pre>
+    {{pageForm.value | json}}
+  </pre>
+            <p>
+                Valid: {{pageForm.valid}}
+            </p>
+            <p>
+                page: {{page | json}}
+
+            </p>
+            Security: {{pageSecurity | json}}
+        </div>-->

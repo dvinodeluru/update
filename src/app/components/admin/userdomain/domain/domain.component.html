@@ -6,87 +6,97 @@
     <div class="row">
       <div class="col-xs-12">
         <form #domainForm="ngForm" (ngSubmit)="submitForm(domainForm)" class="form-horizontal">
-
           <div class="form-group" *ngIf="domain && domain.domainId !== 0 ">
             <div class="row"><label for="domainId" class="col-xs-4 col-form-label">Id</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control readOnly" name="domainId" [(ngModel)]=domain.domainId #domainId="ngModel" required
-                [readonly]="true">
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="domainId" [(ngModel)]=domain.domainId #domainId="ngModel" required
+                  [readonly]="true">
+              </div>
             </div>
-          </div></div>
-
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#domainName" class="col-xs-4 col-form-label">Domain Name</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control readOnly" name="domainName" [(ngModel)]=domain.domainName #domainName="ngModel" [readonly]="true">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#domainName" class="col-xs-4 col-form-label">Domain Name</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="domainName" [(ngModel)]=domain.domainName #domainName="ngModel" [readonly]="true">
+              </div>
             </div>
-          </div></div>
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#displayName" class="col-xs-4 col-form-label">Display Name</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="displayName" #displayName="ngModel" [(ngModel)]=domain.displayName [readonly]="!pageSecurity.isWritable ? true : null"
-                required minlength="3" maxlength="100">
-              <span class="help-block alert-danger" *ngIf="(displayName.touched || displayName.dirty) && displayName.errors">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#displayName" class="col-xs-4 col-form-label">Display Name</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="displayName" #displayName="ngModel" [(ngModel)]=domain.displayName [readonly]="!pageSecurity.isWritable ? true : null"
+                  required minlength="3" maxlength="100">
+                <span class="help-block alert-danger" *ngIf="(displayName.touched || displayName.dirty) && displayName.errors">
                             <span *ngIf="displayName.errors.required">
                                 Display name is required
                             </span>
-              <span *ngIf="displayName.errors.minlength">
+                <span *ngIf="displayName.errors.minlength">
                                 Display name must be longer than 3 characters.
                             </span>
-              </span>
+                </span>
+              </div>
             </div>
-          </div></div>
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#address1" class="col-xs-4 col-form-label">Address1</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="address1" #address1="ngModel" [(ngModel)]=domain.address1 [readonly]="!pageSecurity.isWritable ? true : null"
-                minlength="3" maxlength="100">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#address1" class="col-xs-4 col-form-label">Address1</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="address1" #address1="ngModel" [(ngModel)]=domain.address1 [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="3" maxlength="100">
+              </div>
+              <div class="alert alert-danger" [hidden]="address1.valid || address1.pristine">Address1 should be between 3 and 100 characters</div>
             </div>
-            <div class="alert alert-danger" [hidden]="address1.valid || address1.pristine">Address1 should be between 3 and 100 characters</div>
-          </div></div>
-
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#address2" class="col-xs-4 col-form-label">Address2</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="address2" #address2="ngModel" [(ngModel)]=domain.address2 [readonly]="!pageSecurity.isWritable ? true : null"
-                minlength="3" maxlength="100">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#address2" class="col-xs-4 col-form-label">Address2</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="address2" #address2="ngModel" [(ngModel)]=domain.address2 [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="3" maxlength="100">
+              </div>
+              <div class="alert alert-danger" [hidden]="address2.valid || address2.pristine">Address2 should be between 3 and 100 characters</div>
             </div>
-            <div class="alert alert-danger" [hidden]="address2.valid || address2.pristine">Address2 should be between 3 and 100 characters</div>
-          </div></div>
-
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#city" class="col-xs-4 col-form-label">city</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="city" #city="ngModel" [(ngModel)]=domain.city [readonly]="!pageSecurity.isWritable ? true : null"
-                minlength="3" maxlength="100">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#city" class="col-xs-4 col-form-label">city</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="city" #city="ngModel" [(ngModel)]=domain.city [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="3" maxlength="100">
+              </div>
+              <div class="alert alert-danger" [hidden]="city.valid || city.pristine">City should be between 3 and 100 characters</div>
             </div>
-            <div class="alert alert-danger" [hidden]="city.valid || city.pristine">City should be between 3 and 100 characters</div>
-          </div></div>
-
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#state" class="col-xs-4 col-form-label">state</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="state" #state="ngModel" [(ngModel)]=domain.state [readonly]="!pageSecurity.isWritable ? true : null"
-                minlength="2" maxlength="2">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#state" class="col-xs-4 col-form-label">state</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="state" #state="ngModel" [(ngModel)]=domain.state [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="2" maxlength="2">
+              </div>
+              <div class="alert alert-danger" [hidden]="state.valid || state.pristine">State should be 2 characters</div>
             </div>
-            <div class="alert alert-danger" [hidden]="state.valid || state.pristine">State should be 2 characters</div>
-          </div></div>
-
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#zip" class="col-xs-4 col-form-label">zip</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control" name="zip" #zip="ngModel" [(ngModel)]=domain.zip [readonly]="!pageSecurity.isWritable ? true : null"
-                minlength="3" maxlength="10">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#zip" class="col-xs-4 col-form-label">zip</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="zip" #zip="ngModel" [(ngModel)]=domain.zip [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="3" maxlength="10">
+              </div>
+              <div class="alert alert-danger" [hidden]="zip.valid || zip.pristine">State should be 5 to 10 characters</div>
             </div>
-            <div class="alert alert-danger" [hidden]="zip.valid || zip.pristine">State should be 5 to 10 characters</div>
-          </div></div>
-
-          <div class="form-group" *ngIf="domain"><div class="row">
-            <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
-            <div class="col-xs-8">
-              <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=domain.isActive [readonly]="!pageSecurity.isWritable ? true : null">
+          </div>
+          <div class="form-group" *ngIf="domain">
+            <div class="row">
+              <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
+              <div class="col-xs-8">
+                <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=domain.isActive [readonly]="!pageSecurity.isWritable ? true : null">
+              </div>
             </div>
-          </div></div>
+          </div>
           <!--<button type="submit" class="btn btn-primary" [disabled]="!domainForm.valid || pageSecurity.isReadable">Submit</button>-->
           <button type="submit" class="btn btn-primary" [disabled]="!domainForm.valid">Submit</button>
         </form>

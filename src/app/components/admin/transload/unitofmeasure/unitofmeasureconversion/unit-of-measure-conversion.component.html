@@ -5,7 +5,7 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-md-6">
-        <form #unitOfMeasureConversionForm="ngForm" (ngSubmit)="onSubmitForm(unitOfMeasureConversionForm)" form-inline>
+        <form #unitOfMeasureConversionForm="ngForm" (ngSubmit)="onSubmitForm(unitOfMeasureConversionForm)" class="form-horizontal">
           <div class="form-group" *ngIf="unitOfMeasureConversion && unitOfMeasureConversion.unitOfMeasureConversionId !== 0 ">
             <div class="row"><label for="unitOfMeasureConversionId" class="col-xs-4 col-form-label">Id</label>
               <div class="col-xs-8">
@@ -14,7 +14,6 @@
               </div>
             </div>
           </div>
-
           <div class="form-group" *ngIf="unitOfMeasureConversion">
             <div class="row">
               <label for="fromUnitOfMeasureId" class="col-xs-4 col-form-label">From Unit Of Measure</label>
@@ -27,14 +26,13 @@
                     > {{unitOfMeasure.unitOfMeasure}}</option>
                 </select>
                 <span class="help-block  alert-danger" *ngIf="fromUnitOfMeasure.errors">
-                            <span *ngIf="fromUnitOfMeasure.errors.required" >
-                                FromUnitOfMeasure is required
-                            </span>
+                    <span *ngIf="fromUnitOfMeasure.errors.required" >
+                        FromUnitOfMeasure is required
+                    </span>
                 </span>
               </div>
             </div>
           </div>
-
           <div class="form-group" *ngIf="unitOfMeasureConversion">
             <div class="row"> <label for="toUnitOfMeasureId" class="col-xs-4 col-form-label">To Unit Of Measure</label>
               <div class="col-xs-8">
@@ -46,29 +44,28 @@
                     > {{unitOfMeasure.unitOfMeasure}}</option>
                 </select>
                 <span class="help-block  alert-danger" *ngIf="toUnitOfMeasure.errors">
-                            <span *ngIf="toUnitOfMeasure.errors.required" >
-                                ToUnitOfMeasure is required
-                            </span>
+                    <span *ngIf="toUnitOfMeasure.errors.required" >
+                        ToUnitOfMeasure is required
+                    </span>
                 </span>
                 <savage-message></savage-message>
               </div>
             </div>
           </div>
-
           <div class="form-group" *ngIf="unitOfMeasureConversion">
             <div class="row"><label for="#operator" class="col-xs-4 col-form-label">Operator</label>
               <div class="col-xs-8">
                 <select name="operator" class="form-control" #operator="ngModel" [(ngModel)]="unitOfMeasureConversion.operator" [disabled]="!pageSecurity.isWritable ? true : null"
                   required>
                     <option [ngValue]="null">Select  Operator</option>
-            <option *ngFor="let operator of operators" [ngValue]="operator">
-                {{operator}}
-            </option>
-        </select>
+                    <option *ngFor="let operator of operators" [ngValue]="operator">
+                        {{operator}}
+                    </option>
+                </select>
                 <span class="help-block alert-danger" *ngIf="operator.errors">
-                            <span *ngIf="operator.errors.required" >
-                                Operator is required
-                            </span>
+                    <span *ngIf="operator.errors.required" >
+                        Operator is required
+                    </span>
                 </span>
               </div>
             </div>
@@ -82,7 +79,6 @@
               </div>
             </div>
           </div>
-
           <div class="form-group" *ngIf="unitOfMeasureConversion">
             <div class="row">
               <label for="productId" class="col-xs-4 col-form-label">Product</label>
@@ -97,10 +93,12 @@
               </div>
             </div>
           </div>
-          <div class="form-group row" *ngIf="unitOfMeasureConversion">
-            <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
-            <div class="col-xs-8">
-              <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=unitOfMeasureConversion.isActive [disabled]="!pageSecurity.isWritable">
+          <div class="form-group" *ngIf="unitOfMeasureConversion">
+            <div class="row">
+              <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
+              <div class="col-xs-8">
+                <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=unitOfMeasureConversion.isActive [disabled]="!pageSecurity.isWritable">
+              </div>
             </div>
           </div>
           <button type="submit" class="btn btn-primary" [disabled]="!unitOfMeasureConversionForm.valid || isInvalid|| !pageSecurity.isWritable">Save</button>
