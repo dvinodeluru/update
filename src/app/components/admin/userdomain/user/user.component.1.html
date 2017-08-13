@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">User</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <form #userForm="ngForm" (ngSubmit)="submitForm(userForm)" class="form-horizontal">
+          <div class="form-group" *ngIf="user.userId !== 0 ">
+            <div class="row">
+              <label for="name" class="col-xs-4 col-form-label">UserId</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="userId" [(ngModel)]=user.userId #userId="ngModel" required [readonly]="true">
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="#domainId" class="col-xs-4 col-form-label">Domain</label>
+              <div class="col-xs-8">
+                <select name="domainId" class="form-control" #domainId="ngModel" [(ngModel)]="user.domainId">
+          <option [ngValue]="null">Select Domain</option>
+            <option *ngFor="let domain of domainList" [ngValue]="domain.domainId">  
+                {{domain.domainName}}
+            </option>
+        </select></div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="#loginId" class="col-xs-4 col-form-label">Login Id</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="userName" [(ngModel)]=user.userName #userId="ngModel" required [readonly]="true">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="row">
+              <label for="#firstName" class="col-xs-4 col-form-label">First Name</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="firstName" #firstName="ngModel" [(ngModel)]=user.firstName required>
+              </div>
+              <div class="alert alert-danger" [hidden]="firstName.valid || firstName.pristine">First Name is required</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <label for="#lastName" class="col-xs-4 col-form-label">Last Name</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="lastName" #lastName="ngModel" [(ngModel)]=user.lastName required>
+              </div>
+              <div class="alert alert-danger" [hidden]="lastName.valid || lastName.pristine">Last Name is required</div>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-default" [disabled]="!userForm.valid">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="form-value">
+  Form value:
+  <pre>
+    {{userForm.value | json}}
+  </pre>
+  <p>
+    Valid: {{userForm.valid}}
+  </p>
+  <p>
+    User: {{user | json}}
+  </p>
+</div>

@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Domain List</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <label class="col-xs-4 control-label" for="input">Search:</label>
+            <div class="col-xs-8">
+              <div class="icon-addon"><input #input placeholder="Domain Name" class="form-control search-icon-addon"><label for="search" class="glyphicon glyphicon-search icon-left"
+                  rel="tooltip" title="Domain Name"></label></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>DomainId</th>
+          <th>Domain Name</th>
+          <th>Display Name</th>
+          <th>IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let domain of domainList | searchDomain:input.value " (click)="gotoDetail(domain)">
+          <td>{{domain.domainId}}</td>
+          <td>{{domain.domainName}}</td>
+          <td>{{domain.displayName}}</td>
+          <td>{{domain.isActive}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

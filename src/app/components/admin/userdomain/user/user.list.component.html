@@ -1,0 +1,64 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">User List</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <label class="col-xs-4 control-label" for="input">Search:</label>
+            <div class="col-xs-8">
+              <div class="icon-addon"><input #input placeholder="User Name" class="form-control search-icon-addon"><label for="search" class="glyphicon glyphicon-search icon-left"
+                  rel="tooltip" title="User Name"></label></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label for="isActive" class="col-xs-4 col-form-label">IsActive</label>
+            <div class="col-xs-8">
+              <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body" *ngIf="userList">
+    <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>UserId</th>
+          <th>DomainName</th>
+          <th>loginId</th>
+          <th>UserName</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>WorkPhone</th>
+          <th>CellPhone</th>
+          <th>Pager</th>
+          <th>Email</th>
+          <th>PartneName</th>
+          <th>IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of userList |  searchUser: input.value" (click)="gotoDetail(user)">
+          <td>{{user.userId}}</td>
+          <td>{{user.domain.domainName}}</td>
+          <td>{{user.userName}} </td>
+          <td>{{user.firstName}} {{user.lastName}} </td>
+          <td>{{user.firstName}} </td>
+          <td>{{user.lastName}} </td>
+          <td>{{user.workPhone}}</td>
+          <td>{{user.cellPhone}}</td>
+          <td>{{user.pager}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.partnerName}}</td>
+          <td>{{user.isActive ? 'Yes' : 'No'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Transfer Sub Type</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+            <form #transferSubTypeForm="ngForm" (ngSubmit)="onSubmitForm(transferSubTypeForm)" form-inline>
+               <div class="form-group" *ngIf="transferSubType && transferSubType.transferSubTypeId !== 0 ">
+                 <div class="row">
+                   <label for="transferSubTypeId" class="col-xs-4 control-label">Id</label>
+                    <div class="col-xs-8">
+                      <input type="text" class="form-control readOnly" name="transferSubTypeId" [(ngModel)]=transferSubType.transferSubTypeId #transferSubTypeId="ngModel"
+                            [readonly]="true">
+                    </div>
+                 </div>
+                </div>
+
+                <div class="form-group" *ngIf="transferSubType">
+                  <div class="row">
+                     <label for="transferSubTypeName" class="col-xs-4 control-label">Transfer Sub Type</label>
+                      <div class="col-xs-8">
+                        <input type="text" class="form-control readOnly" name="transferSubTypeName" [(ngModel)]=transferSubType.transferSubTypeName #transferSubTypeName="ngModel"
+                            [readonly]="!pageSecurity.isWritable ? true : null" required minlength="3" maxlength="50">
+                        <span class="help-block alert-danger" *ngIf="(transferSubTypeName.touched || transferSubTypeName.dirty) && transferSubTypeName.errors">
+                            <span *ngIf="transferSubTypeName.errors.required">
+                            Transfer Sub Type is required </span>
+                        <span *ngIf="transferSubTypeName.errors.minlength">
+                              Transfer Sub Type must be longer than 3 characters.</span>
+                        </span>
+                        <savage-message></savage-message>
+                      </div>
+                   </div>                  
+                </div>
+
+            <div class="form-group" *ngIf="transferSubType">
+             <div class="row">
+                <label for="transferTypeId" class="col-xs-4 control-label">Transfer Type</label>
+                <div class="col-xs-8">
+                    <select class="form-control readOnly" name="transferTypeId" [(ngModel)]=transferSubType.transferType.transferTypeId #transferTypeId="ngModel"
+                        required [disabled]="!pageSecurity.isWritable" >
+                        <option [ngValue]="null">Select TransferType</option>
+                        <option *ngFor="let transferType of transferTypeList"
+                        [value]="transferType.transferTypeId" [disabled]="!pageSecurity.isWritable"
+                        >{{transferType.transferType}}</option>
+                    </select>
+                <span class="help-block  alert-danger" *ngIf="transferTypeId.errors">
+                    <span *ngIf="transferTypeId.errors.required" >
+                        TransferType is required</span>
+                    </span>
+                </div>
+
+             </div>                
+            </div>
+
+            <div class="form-group" *ngIf="transferSubType">
+              <div class="row">
+                 <label for="#isActive" class="col-xs-4 control-label">Is Active</label>
+                <div class="col-xs-8">
+                    <input type="checkbox" name="isActive" #isActive="ngModel" [(ngModel)]=transferSubType.isActive [disabled]="!pageSecurity.isWritable" >
+                </div>
+               </div>
+            </div>
+
+             <div class="text-right">
+                <button type="submit" class="btn btn-primary" [disabled]="!transferSubTypeForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
+            </div>
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+     <div class="panel-footer">
+    <!--paignation-->
+    </div>

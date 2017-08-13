@@ -1,0 +1,147 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Location</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <form #locationForm="ngForm" (ngSubmit)="onSubmitForm(locationForm)">
+          <div class="form-group row" *ngIf="location && location.locationId !== 0 ">
+            <label for="locationId" class="col-xs-4 col-form-label">Id</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control readOnly" name="locationId" [(ngModel)]=location.locationId #locationId="ngModel"
+                [readonly]="true">
+            </div>
+          </div>
+
+          <div class="form-group row" *ngIf="location">
+            <label for="#locationName" class="col-xs-4 col-form-label">location Name</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control readOnly" name="locationName" [(ngModel)]=location.locationName #locationName="ngModel"
+                [readonly]="!pageSecurity.isWritable ? true : null" required minlength="3" maxlength="50">
+            </div>
+            <span class="help-block alert-danger" *ngIf="(locationName.touched || locationName.dirty) && locationName.errors">
+                            <span *ngIf="locationName.errors.required">
+                                Location name is required
+                            </span>
+            <span *ngIf="locationName.errors.minlength">
+                                Location name must be longer than 3 characters.
+                            </span>
+            </span>
+            <savage-message></savage-message>
+          </div>
+          <!--public locationTypeId,
+        public locationUsageId,
+        public description='',
+        public capacity='',
+        public displaySequence='',-->
+          <div class="form-group row" *ngIf="location">
+            <label for="#description" class="col-xs-4 col-form-label">Description</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control readOnly" name="description" [(ngModel)]=location.description #description="ngModel"
+                [readonly]="!pageSecurity.isWritable ? true : null" required minlength="3" maxlength="200">
+            </div>
+            <span class="help-block alert-danger" *ngIf="(description.touched || description.dirty) && description.errors">
+                            <span *ngIf="description.errors.required">
+                                Description is required
+                            </span>
+            <span *ngIf="description.errors.minlength">
+                                Description must be longer than 3 characters.
+                            </span>
+            </span>
+          </div>
+          <div class="form-group row" *ngIf="location">
+            <label for="#capacity" class="col-xs-4 col-form-label">Capacity</label>
+            <div class="col-xs-8">
+              <input type="number" class="form-control readOnly" name="capacity" [(ngModel)]=location.capacity #capacity="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="location">
+            <label for="#displaySequence" class="col-xs-4 col-form-label">Display Sequence</label>
+            <div class="col-xs-8">
+              <input type="number" class="form-control readOnly" name="displaySequence" [(ngModel)]=location.displaySequence #displaySequence="ngModel"
+                [readonly]="!pageSecurity.isWritable ? true : null" required>
+              <span class="help-block alert-danger" *ngIf="(displaySequence.touched || displaySequence.dirty) && displaySequence.errors">
+                            <span *ngIf="displaySequence.errors.required">
+                                Display Sequence is required
+                            </span>
+              </span>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="location">
+            <label for="locationTypeId" class="col-xs-4 col-form-label">LocationType</label>
+            <div class="col-xs-8">
+              <select class="form-control readOnly" name="locationTypeId" [(ngModel)]=location.locationTypeId #locationTypeId="ngModel"
+                (change)="onChangeLocationType($event.target.value)" required [disabled]="!pageSecurity.isWritable"> 
+                    <option [ngValue]="null">Select LocationType</option>
+                    <option *ngFor="let locationType of locationTypeList" [value]="locationType.locationTypeId" 
+                    [disabled]="!pageSecurity.isWritable"
+                    >{{locationType.locationTypeName}}</option>
+                </select>
+              <span class="help-block alert-danger" *ngIf="locationTypeId.errors">
+                            <span *ngIf="locationTypeId.errors.required" >
+                                LocationType is required
+                            </span>
+
+              </span>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="location">
+            <label for="locationUsageId" class="col-xs-4 col-form-label">LocationUsage</label>
+            <div class="col-xs-8">
+              <select class="form-control readOnly" name="locationUsageId" [(ngModel)]=location.locationUsageId #locationUsageId="ngModel"
+                (change)="onChangeLocationUsage($event.target.value)" required [disabled]="!pageSecurity.isWritable"> 
+                    <option [ngValue]="null">Select LocationUsage </option>
+                    <option *ngFor="let locationUsage of locationUsageList" [value]="locationUsage.locationUsageId" [disabled]="!pageSecurity.isWritable">{{locationUsage.locationUsageName}}</option>
+                </select>
+              <span class="help-block alert-danger" *ngIf="locationUsageId.errors">
+                            <span *ngIf="locationUsageId.errors.required" >
+                                LocationUSage is required
+                            </span>
+              </span>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="location">
+            <label for="zoneId" class="col-xs-4 col-form-label">Zone</label>
+            <div class="col-xs-8">
+              <select class="form-control readOnly" name="zoneId" [(ngModel)]=location.zoneId #zoneId="ngModel" (change)="onChangeZone($event.target.value)"
+                required [disabled]="!pageSecurity.isWritable"> 
+                    <option [ngValue]="null">Select Zone</option>
+                    <option *ngFor="let zone of zoneList" [value]="zone.zoneId" [disabled]="!pageSecurity.isWritable">{{zone.zoneName}}</option>
+                </select>
+              <span class="help-block alert-danger" *ngIf="zoneId.errors">
+                            <span *ngIf="zoneId.errors.required" >
+                                Zone is required
+                            </span>
+              </span>
+            </div>
+          </div>
+          <div class="form-group row" *ngIf="location">
+            <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
+            <div class="col-xs-8">
+              <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=location.isActive [disabled]="!pageSecurity.isWritable">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!locationForm.valid || isInvalid|| !pageSecurity.isWritable">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="form-value">
+        Form value:
+        <pre>
+    {{locationForm.value | json}}
+  </pre>
+        <p>
+            location: {{location | json}}
+
+        </p>
+        <p>
+            Valid: {{locationForm.valid}}
+            Valid: {{isInvalid}}
+        </p>
+
+        Security: {{locationSecurity | json}}
+    </div>-->

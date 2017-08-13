@@ -1,0 +1,98 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Role</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <form #roleForm="ngForm" (ngSubmit)="submitForm(roleForm)" class="form-horizontal">
+          <div class="form-group" *ngIf="role && role.roleId !== 0 ">
+            <div class="row">
+              <label for="roleId" class="col-xs-4 col-form-label">Id</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="roleId" [(ngModel)]=role.roleId #userId="ngModel" [readonly]="true">
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="role">
+            <div class="row">
+              <label for="#domainId" class="col-xs-4 col-form-label">Domain</label>
+              <div class="col-xs-8">
+                <select name="domainId" class="form-control" #domainId="ngModel" [(ngModel)]="role.domain.domainId" (change)="onDomainChange($event.target.value)"
+                  [disabled]="!pageSecurity.isWritable ? true : null" required>
+                <option [ngValue]="null">Select Domain</option>
+                  <option *ngFor="let domain of domainList" [value]="domain.domainId">
+                      {{domain.domainName}}
+                  </option>
+              </select>
+                <span class="help-block alert-danger" *ngIf="domainId.errors">
+                  <span *ngIf="domainId.errors.required" >
+                      Domain is required
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="role">
+            <div class="row">
+              <label for="#roleName" class="col-xs-4 col-form-label">Role Name</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="roleName" #roleName="ngModel" [(ngModel)]=role.roleName [readonly]="!pageSecurity.isWritable ? true : null"
+                  required>
+                <span class="help-block alert-danger" *ngIf="(roleName.touched || roleName.dirty) && roleName.errors">
+                  <span *ngIf="roleName.errors.required">
+                      Role name is required
+                  </span>
+                </span>
+                <savage-message></savage-message>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="role">
+            <div class="row">
+              <label for="#roleType" class="col-xs-4 col-form-label">Role Type</label>
+              <div class="col-xs-8">
+                <select name="roleType" class="form-control" #roleType="ngModel" [(ngModel)]="role.roleType" [disabled]="!pageSecurity.isWritable ? true : null"
+                  required>
+                <option [ngValue]="null">Select RoleType</option>
+                  <option *ngFor="let rt of roleTypes" [ngValue]="rt">
+                      {{rt}}
+                  </option>
+              </select>
+                <span class="help-block alert-danger" *ngIf="roleType.errors">
+                  <span *ngIf="roleType.errors.required" >
+                      Role Type is required
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="role">
+            <div class="row">
+              <label for="checkbox" class="col-xs-4 col-form-label">Is Active</label>
+              <div class="col-xs-8 checkbox">
+                <input type="checkbox" class="checkbox-addon" name="isActive" #isActive="ngModel" [(ngModel)]=role.isActive [disabled]="!pageSecurity.isWritable ? true : null">
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="role">
+            <div class="row">
+              <label for="isForAllSites" class="col-xs-4 col-form-label">Is For All Sites</label>
+              <div class="col-xs-8 checkbox">
+                <input type="checkbox" class="checkbox-addon" name="isForAllSites" #isForAllSites="ngModel" [(ngModel)]=role.isForAllSites
+                  [disabled]="!pageSecurity.isWritable ? true : null">
+              </div>
+            </div>
+          </div>
+
+          <role-sites [role]="role"></role-sites>
+
+          <role-pages [role]="role"></role-pages>
+
+          <button type="submit" class="btn btn-primary" [disabled]="!roleForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

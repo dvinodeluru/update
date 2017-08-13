@@ -1,0 +1,321 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Product</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-12">
+        <form #productForm="ngForm" (ngSubmit)="onSubmitForm(productForm)">
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="productId" class="col-sm-4 col-form-label">Id</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="productId" [(ngModel)]=product.productId #productId="ngModel" [readonly]="true"
+                      *ngIf="product.productId !== 0 ">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#productName" class="col-sm-4 col-form-label">Product Name*</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="productName" [(ngModel)]=product.productName #productName="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null" required>
+                    <savage-message></savage-message>
+                    <span class="help-block alert-danger" *ngIf="(productName.touched || productName.dirty) && productName.errors">
+                    <span *ngIf="productName.errors.required">
+                        Product name is required
+                    </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="dobiId" class="col-sm-4 col-form-label">DOBI Id*</label>
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control readOnly" name="dobiId" [(ngModel)]=product.dobiId #dobiId="ngModel" [readonly]="!pageSecurity.isWritable ? true : null"
+                      required>
+                    <span class="help-block alert-danger" *ngIf="(dobiId.touched || dobiId.dirty) && dobiId.errors">
+                            <span *ngIf="dobiId.errors.required">
+                                DOBIId is required
+                            </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#description" class="col-sm-4 col-md-2 col-form-label">Description</label>
+                  <div class="col-sm-8 col-md-10">
+                    <input type="text" class="form-control readOnly" name="description" [(ngModel)]=product.description #description="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="productType" class="col-sm-4 col-form-label">Type</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="productType" [(ngModel)]=product.productType #productType="ngModel"> 
+                    <option [ngValue]="null">Select ProductType</option>
+                    <option *ngFor="let productType of productTypes" [value]="productType" [disabled]="!pageSecurity.isWritable">{{productType}}</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="productGroupId" class="col-sm-4 col-form-label">Group</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="productGroupId" [(ngModel)]=product.productGroupId #productGroupId="ngModel"> 
+                    <option [ngValue]="null">Select ProductGroup</option>
+                    <option *ngFor="let productGroup of productGroupList" [value]="productGroup.productGroupId" [disabled]="!pageSecurity.isWritable">{{productGroup.productGroup}}</option>
+                </select>
+                    <span class="help-block alert-danger" *ngIf="productGroupId.errors">
+                            <span *ngIf="productGroupId.errors.required" >
+                                ProductGroup is required
+                            </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#stcc" class="col-sm-4 col-form-label">STCC</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="stcc" [(ngModel)]=product.stcc #stcc="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="weightUnitOfMeasureId" class="col-sm-4 col-form-label">Weight UOM*</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="weightUnitOfMeasureId" [(ngModel)]=product.weightUnitOfMeasureId #weightUnitOfMeasureId="ngModel"
+                      required> 
+                    <option [ngValue]="null">Select Weight UOM</option>
+                    <option *ngFor="let weightUnitOfMeasure of weightUnitOfMeasureList" [value]="weightUnitOfMeasure.unitOfMeasureId" [disabled]="!pageSecurity.isWritable">{{weightUnitOfMeasure.unitOfMeasure}}</option>
+                </select>
+                    <span class="help-block  alert-danger" *ngIf="weightUnitOfMeasureId.errors">
+                            <span *ngIf="weightUnitOfMeasureId.errors.required" >
+                                Weight UOM is required
+                            </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="volumeUnitOfMeasureId" class="col-sm-4 col-form-label">Volume UOM</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="volumeUnitOfMeasureId" [(ngModel)]=product.volumeUnitOfMeasureId #productType="ngModel"> 
+                    <option [ngValue]="null">Select Volume UOM</option>
+                    <option *ngFor="let volumeUnitOfMeasure of volumeUnitOfMeasureList" [value]="volumeUnitOfMeasure.unitOfMeasureId" [disabled]="!pageSecurity.isWritable">{{volumeUnitOfMeasure.unitOfMeasure}}</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="conversionBase" class="col-sm-4 col-form-label">Weight to Volume</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="conversionBase" [(ngModel)]=product.conversionBase #productType="ngModel"> 
+                    <option [ngValue]="null">Select Conversion</option>
+                    <option *ngFor="let conversionBase of convrsionBases" [value]="conversionBase" [disabled]="!pageSecurity.isWritable">{{conversionBase}}</option>
+                </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#minimumTemperature" class="col-sm-4 col-form-label">Min Temp</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="minimumTemperature" [(ngModel)]=product.minimumTemperature #minimumTemperature="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#maximumTemperature" class="col-sm-4 col-form-label">Max Temp</label>
+                  <div class="col-sm-8">
+                    <input type="number" class="form-control readOnly" name="maximumTemperature" [(ngModel)]=product.maximumTemperature #maximumTemperature="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#pickupTemperature" class="col-sm-4 col-form-label">Pickup Temp</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="pickupTemperature" [(ngModel)]=product.pickupTemperature #pickupTemperature="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#assayPercentage" class="col-sm-4 col-form-label">Assay Percentage</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="assayPercentage" [(ngModel)]=product.assayPercentage #assayPercentage="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#grade" class="col-sm-4 col-form-label">Grade</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="grade" [(ngModel)]=product.grade #grade="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#baseStrength" class="col-sm-4 col-form-label">Base Strength</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="baseStrength" [(ngModel)]=product.baseStrength #baseStrength="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#typicalStrength" class="col-sm-4 col-form-label">Typical Strength</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="typicalStrength" [(ngModel)]=product.typicalStrength #typicalStrength="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#height" class="col-sm-4 col-form-label">Height</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="height" [(ngModel)]=product.height #height="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#length" class="col-sm-4 col-form-label">Length</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="length" [(ngModel)]=product.length #length="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#width" class="col-sm-4 col-form-label">Width</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="width" [(ngModel)]=product.width #width="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#weight" class="col-sm-4 col-form-label">Weight</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="weight" [(ngModel)]=product.weight #weight="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#hazmatPhone" class="col-sm-4 col-form-label">Hazmat Phone</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="hazmatPhone" [(ngModel)]=product.hazmatPhone #hazmatPhone="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#unNumber" class="col-sm-4 col-form-label">UN Number</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="unNumber" [(ngModel)]=product.unNumber #unNumber="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#emptyRevenue" class="col-sm-4 col-form-label">Empty Revenue</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control readOnly" name="emptyRevenue" [(ngModel)]=product.emptyRevenue #emptyRevenue="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 col-sm-6">
+              <div class="form-group" *ngIf="product">
+                <div class="row">
+                  <label for="#hazmatDescription" class="col-sm-4 col-md-2 col-form-label">Hazmat Description</label>
+                  <div class="col-sm-8 col-md-10">
+                    <input type="text" class="form-control readOnly" name="hazmatDescription" [(ngModel)]=product.hazmatDescription #hazmatDescription="ngModel"
+                      [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <product-alias [product]="product"></product-alias>
+          <product-composition [product]="product"></product-composition>
+          <product-site-shipper [product]="product"></product-site-shipper>
+          <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid  || isInvalid || !pageSecurity.isWritable">Save</button>
+          <button type="button" class="btn btn-primary" [disabled]="(!productForm.valid  || isInvalid || !pageSecurity.isWritable)"
+            (click)="saveAndAddDetails($event)" *ngIf="product && (product.productId === null || product.productId === 0)">Save And Add Details</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

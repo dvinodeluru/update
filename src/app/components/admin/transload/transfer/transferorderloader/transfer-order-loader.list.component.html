@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Transfer Order Loader List</h2>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+        <div class="col-md-6">
+
+        <div class="form-group">      
+          <div class="row">
+            <label class="col-xs-4 control-label" for="input">Search:</label>
+            <div class=" col-xs-8">
+              <div class="icon-addon"><input class="form-control search-icon-addon" #input placeholder="transferOrderLoaderName"  />
+                <label for="email" class="glyphicon glyphicon-search icon-left" rel="tooltip" title="email"></label>
+              </div>
+            </div>
+          </div>
+         </div>
+
+        <div class="form-group">
+          <div class="row">
+            <label for="isActive" class="col-xs-4 control-label">Is Active</label>
+            <div class="col-xs-8">
+              <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+            </div>
+          </div>
+        </div>
+
+      </div>      
+    </div>
+
+    
+  </div>
+
+  
+  <div class="panel-body">
+    <div class="text-right">
+      <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Transfer Order Loader</button>
+    </div>
+    
+    <div class="table-responsive ">
+    <table class="table table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Is Active</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transferOrderLoader of transferOrderLoaderList " (click)="gotoDetail(transferOrderLoader)">
+          <td>{{transferOrderLoader.transferOrderLoaderId}}</td>
+          <td>{{transferOrderLoader.loaderName}}</td>
+          <td>{{transferOrderLoader.isActive}}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="text-right">
+      <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Transfer Order Loader</button>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <!--paignation-->
+  </div>

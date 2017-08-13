@@ -1,0 +1,59 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Product Group</h2>
+  </div>
+  <div class="panel-body">
+      <div class="row">
+          <div class="col-md-6"> 
+              <form #productGroupForm="ngForm" (ngSubmit)="onSubmitForm(productGroupForm)" form-inline>
+      <div class="form-group" *ngIf="productGroup && productGroup.productGroupId !== 0 ">
+        <div class="row"> <label for="productGroupId" class="col-xs-4 col-form-label">Id</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control readOnly" name="productGroupId" [(ngModel)]=productGroup.productGroupId #productGroupId="ngModel"
+              [readonly]="true">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="productGroup">
+        <div class="row"><label for="#productGroup" class="col-xs-4 col-form-label">Product Group</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control readOnly" name="productGroup" [(ngModel)]=productGroup.productGroup #productGroupName="ngModel"
+              [readonly]="!pageSecurity.isWritable ? true : null" required minlength="3" maxlength="100">
+          </div>
+          <span class="help-block alert-danger" *ngIf="(productGroupName.touched || productGroupName.dirty) && productGroupName.errors">
+                            <span *ngIf="productGroupName.errors.required">
+                                Product Group is required
+                            </span>
+          <span *ngIf="productGroupName.errors.minlength">
+                                Product Group must be longer than 3 characters.
+                            </span>
+          </span>
+          <savage-message></savage-message>
+        </div>
+      </div>
+      <div class="form-group" *ngIf="productGroup">
+        <div class="row"><label for="#description" class="col-xs-4 col-form-label">Description</label>
+          <div class="col-xs-8">
+            <input type="text" class="form-control readOnly" name="description" [(ngModel)]=productGroup.description #productGroupName="ngModel"
+              [readonly]="!pageSecurity.isWritable ? true : null" maxlength="200">
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="productGroup">
+        <div class="row">
+          <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
+          <div class="col-xs-8">
+            <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=productGroup.isActive [disabled]="!pageSecurity.isWritable">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!productGroupForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
+
+    </form></div>
+      </div>
+   
+  </div>
+</div>

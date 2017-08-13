@@ -1,0 +1,54 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Role List</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <label class="col-xs-4 control-label" for="input">Search:</label>
+            <div class="col-xs-8">
+              <div class="icon-addon"><input #input placeholder="Role Name" class="form-control search-icon-addon"><label for="search" class="glyphicon glyphicon-search icon-left"
+                  rel="tooltip" title="Role Name"></label></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label for="isActive" class="col-xs-4 col-form-label">IsActive</label>
+            <div class="col-xs-8">
+              <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Role</button>
+    <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>RoleId</th>
+          <th>DomainName</th>
+          <th>roleName</th>
+          <th>roleType</th>
+          <th>isForAllSites</th>
+          <th>IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roleList | searchRole: input.value" (click)="gotoDetail(role)">
+          <td>{{role.roleId}}</td>
+          <td>{{role.domain.domainName}}</td>
+          <td>{{role.roleName}} </td>
+          <td>{{role.roleType}}</td>
+          <td>{{role.isForAllSites}}</td>
+          <td>{{role.isActive}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Role</button>
+  </div>
+</div>
