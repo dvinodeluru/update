@@ -5,7 +5,7 @@
   <div class="panel-body">
     <div class="row">
         <div class="col-md-6">
-            <form #transferSubTypeForm="ngForm" (ngSubmit)="onSubmitForm(transferSubTypeForm)" form-inline>
+            <form #transferSubTypeForm="ngForm" (ngSubmit)="onSubmitForm(transferSubTypeForm)">
                <div class="form-group" *ngIf="transferSubType && transferSubType.transferSubTypeId !== 0 ">
                  <div class="row">
                    <label for="transferSubTypeId" class="col-xs-4 control-label">Id</label>
@@ -62,15 +62,13 @@
                </div>
             </div>
 
-             <div class="text-right">
+           
                 <button type="submit" class="btn btn-primary" [disabled]="!transferSubTypeForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
-            </div>
+           
             </form>
         </div>
     </div>
   </div>
 </div>
 
-     <div class="panel-footer">
-    <!--paignation-->
-    </div>
+    

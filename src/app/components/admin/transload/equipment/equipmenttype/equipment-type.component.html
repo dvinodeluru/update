@@ -1,55 +1,70 @@
-<div class="container">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Equipment Type</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
 
-    <h2>EquipmentType</h2>
-    <span layout="row"><hr flex/></span>
-    <form #equipmentTypeForm="ngForm" (ngSubmit)="onSubmitForm(equipmentTypeForm)" form-inline>
-        <div class="form-group row" *ngIf="equipmentType && equipmentType.equipmentTypeId !== 0 ">
-            <label for="equipmentTypeId" class="col-sm-2 col-form-label">Id</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control readOnly" name="equipmentTypeId" [(ngModel)]=equipmentType.equipmentTypeId #equipmentTypeId="ngModel"
-                    [readonly]="true">
+        <form #equipmentTypeForm="ngForm" (ngSubmit)="onSubmitForm(equipmentTypeForm)">
+          <div class="form-group" *ngIf="equipmentType && equipmentType.equipmentTypeId !== 0 " <div class="row">
+            <div class="row">
+            <label for="equipmentTypeId" class="col-xs-4 control-label">Id</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control readOnly" name="equipmentTypeId" [(ngModel)]=equipmentType.equipmentTypeId #equipmentTypeId="ngModel"
+                [readonly]="true">
             </div>
-        </div>
+            </div>
+          </div>
 
-        <div class="form-group row" *ngIf="equipmentType">
-            <label for="#equipmentType" class="col-sm-2 col-form-label">equipmentType</label>
-            <div class="col-sm-4">
+
+          <div class="form-group" *ngIf="equipmentType">
+            <div class="row">
+              <label for="#equipmentType" class="col-xs-4 control-label">Equipment Type</label>
+              <div class="col-xs-8">
                 <input type="text" class="form-control readOnly" name="equipmentType" [(ngModel)]=equipmentType.equipmentType #equipmentTypeName="ngModel"
-                    [readonly]="!pageSecurity.isWritable ? true : null"
-                    required minlength="3" maxlength="50">
+                  [readonly]="!pageSecurity.isWritable ? true : null" required minlength="3" maxlength="50">
 
                 <span class="help-block alert-danger" *ngIf="(equipmentTypeName.touched || equipmentTypeName.dirty) && equipmentTypeName.errors">
                             <span *ngIf="equipmentTypeName.errors.required">
-                            EquipmentType is required
+                            Equipment Type is Required
                             </span>
                 <span *ngIf="equipmentTypeName.errors.minlength">
-                                EquipmentType must be longer than 3 characters.
+                                Equipment Type must be longer than 3 characters.
                             </span>
                 </span>
                 <savage-message></savage-message>
+              </div>
             </div>
-        </div>
-        <div class="form-group row" *ngIf="equipmentType">
-            <label for="#isGlobal" class="col-sm-2 col-form-label">Is Global</label>
-            <div class="col-sm-4">
+          </div>
+          <div class="form-group" *ngIf="equipmentType">
+            <div class="row">
+              <label for="#isGlobal" class="col-xs-4 control-label">Is Global</label>
+              <div class="col-xs-8">
                 <input type="checkbox" name="isGlobal" #isGlobal="ngModel" [(ngModel)]=equipmentType.isGlobal>
+              </div>
             </div>
-        </div>
-        <div class="form-group row" *ngIf="equipmentType">
-            <label for="#isActive" class="col-sm-2 col-form-label">Is Active</label>
-            <div class="col-sm-4">
+          </div>
+          <div class="form-group" *ngIf="equipmentType">
+            <div class="row">
+              <label for="#isActive" class="col-xs-4 control-label">Is Active</label>
+              <div class="col-xs-8">
                 <input type="checkbox" name="isActive" #isActive="ngModel" [(ngModel)]=equipmentType.isActive>
+              </div>
             </div>
-        </div>
-        <br/>
-        <br/>
-        <button type="submit" class="btn btn-primary" [disabled]="!equipmentTypeForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
-        
-    </form>
-    <br/>
-    <br/>
+          </div>
 
-    <!--<div class="form-value">
+          <button type="submit" class="btn btn-primary" [disabled]="!equipmentTypeForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
+
+        </form>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="form-value">
         Form value:
         <pre>
     {{equipmentTypeForm.value | json}}
