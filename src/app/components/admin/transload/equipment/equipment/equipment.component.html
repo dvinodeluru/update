@@ -1,0 +1,148 @@
+<div class="container">
+
+    <h2>Equipment</h2>
+    <span layout="row"><hr flex/></span>
+    <form novalidate [formGroup]="equipmentForm" form-inline>
+        <div class="form-group row" *ngIf="equipment && equipment.equipmentId !== 0 ">
+            <label for="equipmentId" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-4">
+                <input type="number" id="userIdId" class="form-control readOnly" formControlName="equipmentId" [readonly]="true">
+            </div>
+            <label for="#equipmentName" class="col-sm-2 col-form-label">Equipment Name*</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control readOnly" id="equipmentNameId" placeholder="Required" formControlName="equipmentName"
+                    [readonly]="!pageSecurity.isWritable ? true : null">
+                <span class="help-block alert-danger" *ngIf="displayMessage.equipmentName">
+                                {{displayMessage.equipmentName}}
+                        </span>
+                <savage-message></savage-message>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="equipment">
+            <label for="#equipmentTypeId" class="col-sm-2 col-form-label">Equipment Type*</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" id="equipmentTypeIdId" formControlName="equipmentTypeId" (change)="onChangeEquipmentType($event.target.value)"
+                    required>
+                    <option [ngValue]="null" [disabled]="!pageSecurity.isWritable">Select  EquipmentType</option>
+                    <option *ngFor="let equipmentType of equipmentTypeList"
+                    [value]="equipmentType.equipmentTypeId" [disabled]="!pageSecurity.isWritable"
+                    >{{equipmentType.equipmentType}}</option>
+                </select>
+            </div>
+
+            <label for="#equipmentSubTypeId" class="col-sm-2 col-form-label">Equipment Sub Type</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" id="equipmentSubTypeIdId" formControlName="equipmentSubTypeId">
+                    <option [ngValue]="null">Select  EquipmentSubType</option>
+                    <option *ngFor="let equipmentSubType of equipmentSubTypeList"
+                    [value]="equipmentSubType.equipmentSubTypeId" [disabled]="!pageSecurity.isWritable"
+                    > {{equipmentSubType.equipmentSubType}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="equipment">
+            <label for="#fleetId" class="col-sm-2 col-form-label">Fleet</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" id="fleetIdId" formControlName="fleetId" (change)="onChangeFleet($event.target.value)">
+                    <option [ngValue]="null">Select  Fleet</option>
+                    <option *ngFor="let fleet of fleetList"
+                    [value]="fleet.fleetId" [disabled]="!pageSecurity.isWritable"
+                    > {{fleet.fleetName}}</option>
+                </select>
+            </div>
+
+            <label for="#subFleetId" class="col-sm-2 col-form-label">Sub Fleet</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" id="subFleetIdId" formControlName="subFleetId">
+                    <option [ngValue]="null">Select  SubFleet</option>
+                    <option *ngFor="let subFleet of subFleetList"
+                    [value]="subFleet.subFleetId" [disabled]="!pageSecurity.isWritable"
+
+                    > {{subFleet.subFleetName}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="equipment">
+            <label for="#vesselTypeId" class="col-sm-2 col-form-label">Vessel Type</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" id="vesselTypeIdId" formControlName="vesselTypeId">
+                    <option [ngValue]="null">Select  VesselType</option>
+                    <option *ngFor="let vesselType of vesselTypeList"
+                    [value]="vesselType.vesselTypeId" [disabled]="!pageSecurity.isWritable"
+                    > {{vesselType.vesselType}}</option>
+                </select>
+            </div>
+            <label for="#outagePercentage" class="col-sm-2 col-form-label">Outage %</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control readOnly" id="outagePercentageId" formControlName="outagePercentage" >
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="equipment">
+            <label for="#grossWeight" class="col-sm-2 col-form-label">Gross Weight</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control readOnly" id="grossWeightId" formControlName="grossWeight" >
+            </div>
+            <label for="#lightWeight" class="col-sm-2 col-form-label">Light Weight</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control readOnly" id="lightWeightId" formControlName="lightWeight" >
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="equipment">
+            <label for="#customerId" class="col-sm-2 col-form-label">Customer</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" id="customerIdId" formControlName="customerId" >
+                    <option [ngValue]="null">Select Customer</option>
+                    <option *ngFor="let customer of customerList"
+                    [value]="customer.companyId" [disabled]="!pageSecurity.isWritable"
+                    > {{customer.companyName}}</option>
+                </select>
+            </div>
+            <label for="#carrierId" class="col-sm-2 col-form-label">Carrier</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" id="carrierIdId" formControlName="carrierId" >
+                    <option [ngValue]="null">Select Carrier</option>
+                    <option *ngFor="let carrier of carrierList"
+                    [value]="carrier.companyId" [disabled]="!pageSecurity.isWritable"
+                    > {{carrier.companyName}}</option>
+                </select>
+                <span class="help-block" *ngIf="displayMessage.carrierId">
+                                {{displayMessage.carrierId}}
+                        </span>
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="equipment">
+            <label for="#isActive" class="col-sm-2 col-form-label">Is Active</label>
+            <div class="col-sm-4">
+                <input type="checkbox" name="isActive"  formControlName=isActive [disabled]="!pageSecurity.isWritable">
+            </div>
+        </div>
+        <br/>
+        <div *ngIf="equipment != null && equipment.equipmentId!=null && equipment.equipmentType != null && equipment.equipmentType.equipmentTypeId != null && equipment.equipmentType.equipmentType.toUpperCase() !== 'RAILCAR'">
+            <equipment-sites [equipment]="equipment"></equipment-sites>
+        </div>
+
+        <br/>
+        <br/>
+        <button type="button" class="btn btn-primary" [disabled]="!equipmentForm.valid || isInvalid || !pageSecurity.isWritable" (click)="saveEquipment()">Save</button>
+
+    </form>
+    <br/>
+    <br/>
+
+    <!--<div class="form-value">
+        Form value:
+        <pre>
+    {{equipmentForm.value | json}}
+  </pre>
+        <p>
+            equipment: {{equipment | json}}
+
+        </p>
+        <p>
+            Valid: {{equipmentForm.valid}}
+        </p>
+
+        Security: {{equipmentSecurity | json}}
+    </div>-->

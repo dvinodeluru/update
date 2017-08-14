@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">SubFleet List</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <label for="fleetId" class="col-xs-4 col-form-label">Fleet</label>
+            <div class="col-xs-8">
+              <select class="form-control readOnly" id="fleetId" #fleetId [(ngModel)]=fleet>
+            <option [ngValue]="null">Select Fleet</option>
+                    <option *ngFor="let fleet of fleetList"
+                    [value]="fleet.fleetId" >{{fleet.fleetName}}</option>
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label class="col-md-2 col-form-label" for="input">Search:</label>
+            <div class="col-xs-8">
+              <input #input placeholder="subFleetName" id="search">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label for="isActive" class="col-xs-4 col-form-label">IsActive</label>
+            <div class="col-md-2">
+              <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Sub Fleet</button>
+    <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>SubFleetId</th>
+          <th>SubFleet Name</th>
+          <th>Fleet</th>
+          <th>IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let subFleet of subFleetList |  searchSubFleet: input.value:fleetId.value" (click)="gotoDetail(subFleet)">
+          <td>{{subFleet.subFleetId}}</td>
+          <td>{{subFleet.subFleetName}}</td>
+          <td>{{subFleet.fleet.fleetName}}</td>
+          <td>{{subFleet.isActive}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Sub Fleet</button>
+  </div>
+</div>

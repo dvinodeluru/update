@@ -1,0 +1,32 @@
+<div class="container">
+
+    <h4>Alias</h4>
+    <form #productAliasForm="ngForm" (ngSubmit)="submitForm(productAliasForm)" form-inline>
+        <div class="col-md-12 row">
+            <div class="col-md-4">
+                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="product && product.productAliasList">
+                    <thead>
+                        <tr>
+                            <th>Alias</th>
+                            <th>Is Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let productAlias of product.productAliasList; let i=index">
+                            <td>{{productAlias.alias}} </td>
+                            <td>
+                                <input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel" (change)="onChangeIsActive(i,$event)"
+                                    [(ngModel)]=productAlias.isActive [disabled]="!pageSecurity.isWritable ? true : null">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-8">
+                <button class="col-md-offset-1 col-md-4 btn btn-primary" type="button" (click)="onAddProductAlias()" [disabled]="!pageSecurity.isWritable  || !(product && product.productId) ">Add ProductAlias</button>
+                <div class="col-md-5">
+                    <input type="text" class="form-control readOnly" name="productAlias" [(ngModel)]=myProductAlias #productAlias="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+                </div>
+            </div>
+        </div>
+    </form>

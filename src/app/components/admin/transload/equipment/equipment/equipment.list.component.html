@@ -1,0 +1,50 @@
+<div class="container">
+  <h2>Equipment List</h2>
+  <span layout="row"><hr flex/></span>
+  <div class="row">
+    <div class="form-group  col-sm-6">
+      <label class="col-sm-3 control-label" for="input">Search:</label>
+      <div class="col-sm-9">
+        <input #input placeholder="equipmentName" id="search">
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="form-group col-sm-6">
+    <label for="isActive" class="col-sm-3 col-form-label">IsActive</label>
+    <div class="col-sm-9">
+      <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+    </div>
+  </div>
+  </div>
+</div>
+
+  <button type="button" class="btn btn-primary" (click)="addNewDetail($event)">Add New Equipment</button>
+
+  <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+    <thead>
+      <tr>
+        <th>EquipmentId</th>
+        <th>Equipment</th>
+        <th>Type</th>
+        <th>Lt Weight</th>
+        <th>Gross Weight</th>
+        <th>Net Weight</th>
+        <th>IsActive</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let equipment of equipmentList |  searchEquipment: input.value" (click)="gotoDetail(equipment)">
+        <td>{{equipment.equipmentId}}</td>
+        <td>{{equipment.equipmentName}}</td>
+        <td>{{equipment.equipmentType.equipmentType.toString()}}</td>
+        <td>{{equipment.lightWeight}}</td>
+        <td>{{equipment.grossWeight}}</td>
+        <td>{{equipment.grossWeight - equipment.lightWeight}}</td>
+        <td>{{equipment.isActive}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable"  (click)="addNewDetail($event)">Add New Equipment</button>

@@ -1,0 +1,64 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Fleet</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <form #fleetForm="ngForm" (ngSubmit)="onSubmitForm(fleetForm)" class="form-horizontal">
+          <div class="form-group" *ngIf="fleet && fleet.fleetId !== 0 ">
+            <div class="row">
+              <label for="fleetId" class="col-xs-4 col-form-label">Id</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="fleetId" [(ngModel)]=fleet.fleetId #fleetId="ngModel" [readonly]="true">
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="fleet">
+            <div class="row">
+              <label for="#fleetName" class="col-xs-4 col-form-label">Fleet Name</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="fleetName" [(ngModel)]=fleet.fleetName #fleetName="ngModel" [readonly]="!pageSecurity.isWritable ? true : null"
+                  required minlength="3" maxlength="50" [disabled]="!pageSecurity.isWritable">
+                <span class="help-block alert-danger" *ngIf="(fleetName.touched || fleetName.dirty) && fleetName.errors">
+                            <span *ngIf="fleetName.errors.required">
+                            Fleet Name is required
+                            </span>
+                <span *ngIf="fleetName.errors.minlength">
+                                Fleet name must be longer than 3 characters.
+                            </span>
+                </span>
+                <savage-message></savage-message>
+              </div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="fleet">
+            <div class="row">
+              <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
+              <div class="col-xs-8">
+                <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=fleet.isActive [disabled]="!pageSecurity.isWritable">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!fleetForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<div class="form-value">
+        Form value:
+        <pre>
+    {{fleetForm.value | json}}
+  </pre>
+        <p>
+            fleet: {{fleet | json}}
+
+        </p>
+        <p>
+            Valid: {{fleetForm.valid}}
+        </p>
+
+        Security: {{fleetSecurity | json}}
+    </div>-->

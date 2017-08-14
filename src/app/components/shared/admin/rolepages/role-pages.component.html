@@ -1,0 +1,40 @@
+<div class="container">
+    <h4>Pages (read, write and void access)</h4>
+    <form #roleSiteForm="ngForm" (ngSubmit)="submitForm(rolePageForm)" form-inline>
+        <div class="col-md-12 row">
+            <div class="col-md-7">
+                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="role && role.rolePages">
+                    <thead>
+                        <tr>
+                            <th>PageName</th>
+                            <th>IsReadable</th>
+                            <th>IsWritable</th>
+                            <th>IsVoidable</th>
+                            <!--<th>Save</th>
+                            <th>Delete</th>-->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let rolePage of role.rolePages; let i=index">
+                            <td>{{getPageName(rolePage.pageId)}} </td>
+                            <td><input type="checkbox" class="checkbox" name="{{i}}IsReadable" #{{i}}IsReadable="ngModel" (change)="onChangeReadable(i,$event)" [(ngModel)]=rolePage.isReadable [disabled]="!pageSecurity.isWritable ? true : null"> </td>
+                            <td><input type="checkbox" class="checkbox" name="{{i}}IsWritable" #{{i}}IsWritable="ngModel" (change)="onChangeWritable(i,$event)" [(ngModel)]=rolePage.isWritable [disabled]="!pageSecurity.isWritable ? true : null"> </td>
+                            <td><input type="checkbox" class="checkbox" name="{{i}}IsVoidable" #{{i}}IsVoidable="ngModel" (change)="onChangeVoidable(i,$event)" [(ngModel)]=rolePage.isVoidable [disabled]="!pageSecurity.isWritable ? true : null"> </td>
+                            <!--<td  (click)="onSaveRolePage(i)" ><span class="btn btn-primary" > Save</span></td>
+                            <td (click)="onDeleteRolePage(rolePage.roleId,rolePage.rolePageId)"><span class="btn btn-primary" >delete</span> </td>-->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-5" *ngIf="role && role.roleId && pageList">
+                <button class="col-md-offset-1 col-md-3 btn btn-primary" type="button" (click)="onAddPage()" [disabled]="!pageSecurity.isWritable ? true : null">Add Page</button>
+                <div class="col-md-4">
+                    <select class="form-control " name="selectedPage" #selectedPage="ngModel" [(ngModel)]="mySelectedPage" [disabled]="!pageSecurity.isWritable ? true : null">
+                        <option [ngValue]="null">Select  Page</option>
+                        <option *ngFor="let page of pageList" [ngValue]="page.pageId">{{page.pageName}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>

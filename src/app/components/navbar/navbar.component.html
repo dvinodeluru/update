@@ -1,0 +1,149 @@
+<nav class="navbar navbar-default" *ngIf="isLoggedIn() == true">
+  <div class="container-fluid">
+    <div class="masthead">
+      <h1 class="text-warning">Savage Transload</h1>
+      <!--<h4 class="text-success">mySelectedSiteIsNull:{{mySelectedSite==null}}</h4>-->
+    </div>
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-id">
+            <span class="sr-only btn btn-default" >Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbar-collapse-id">
+      <ul class="nav navbar-nav">
+        <li role="menuitem"><a class="dropdown-toggle" [routerLink]="['/']">Home</a></li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Transload
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentTripList']">Trip</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/inventoryAdjustmentList']">InventoryAdjustment</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferOrderList']">Transfer</a></li>
+          </ul>
+        </li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Admin UserDomain
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/domainList']">Domain</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/userList']">User</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/roleList']">Role</a></li>
+          </ul>
+        </li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Admin Misc
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/siteList']">Site</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/pageList']">Page</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/companyList']">Company</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/serviceTypeList']">ServiceType</a></li>
+          </ul>
+        </li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Admin Location
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/locationTypeList']">LocationType</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/locationUsageList']">LocationUsage</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/locationList']">Location</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/zoneList']">Zone</a></li>
+          </ul>
+        </li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Unit Of Measure
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/unitOfMeasureList']">Unit Of Measure</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/unitOfMeasureConversionList']">Unit Of Measure Conversion</a></li>
+          </ul>
+        </li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Admin Product
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/productGroupList']">Product Group</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/productList']">Product</a></li>
+          </ul>
+        </li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Admin Equipment
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentList']">Equipment</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentTypeList']">Equipment Type</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentSubTypeList']">Equipment SubType</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/fleetList']">Fleet</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/subFleetList']">SubFleet</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/vesselTypeList']">VesselType</a></li>
+          </ul>
+        </li>
+        <li dropdown keyboardNav="true">
+          <a *ngIf="mySelectedSite!=null" href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            Admin Transfer
+          </a>
+          <ul class="dropdown-menu">
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferOrderLoaderList']">Loader</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferTypeList']">Transfer Type</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferSubTypeList']">Transfer SubType</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <form #siteForm="ngForm" class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <select class="form-control " name="selectedSite" #selectedRole="ngModel" [(ngModel)]="mySelectedSite" (change)="onSelectSite()">
+                          <!--<option [ngValue]="null">Select</option>-->
+                          <option *ngFor="let site of siteList"  [ngValue]="site.siteId" >{{site.siteName}}</option>
+                    </select>
+        </div>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li role="menuitem"><a class="dropdown-item" *ngIf="isLoggedIn() == false" [routerLink]="['/login']">Login</a></li>
+        <li dropdown keyboardNav="true" *ngIf="isLoggedIn() == true">
+          <a href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{getLoggedInUserName()}}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li role="menuitem"><a class="dropdown-item" href="#">Account Settings</a></li>
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" [routerLink]="['/login']">Logout</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

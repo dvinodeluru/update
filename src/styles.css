@@ -305,7 +305,7 @@ div.checkbox+label {
 }
 
 .form-horizontal label {
-    /*text-align: right;*/
+    text-align: right;
     margin-bottom: 0;
 }
 

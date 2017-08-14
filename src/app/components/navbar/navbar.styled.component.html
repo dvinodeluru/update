@@ -1,0 +1,187 @@
+<nav class="navbar " *ngIf="isLoggedIn() == true">
+
+  <div class="navbar-header navbar-inverse">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only btn btn-default" >Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    <a class="navbar-brand" href="/"><img src="/assets/images/savage-white-logo.png" alt="Savage - Home" /><span class="sub-logo">Transload</span></a>
+  </div>
+  <div class="siteActions">
+  <!--<ul class="nav navbar-nav">-->
+    <ul class="navlink">
+    <li role="menuitem"><a class="dropdown-item" *ngIf="isLoggedIn() == false" [routerLink]="['/login']">Login</a></li>
+    <li role="menuitem"><a class="dropdown-item" keyboardNav="true" *ngIf="isLoggedIn() == true" [routerLink]="['/login']">Logout</a></li>
+    <!--<li dropdown keyboardNav="true" *ngIf="isLoggedIn() == true">
+      <a href class="dropdown-toggle" role="button" aria-expanded="false" dropdownToggle>
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{getLoggedInUserName()}}
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li role="menuitem"><a class="dropdown-item" href="#">Account Settings</a></li>
+        <li role="menuitem"><a class="dropdown-item" [routerLink]="['/login']">Logout</a></li>
+      </ul>
+    </li>-->
+    <div class="clearfix"></div>
+    <!--<li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>Site 1</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li><a href="#">Site 1</a></li>
+        <li><a href="#">Site 2</a></li>
+        <li><a href="#">Site 3</a></li>
+        <li><a href="#">Site 4</a></li>
+      </ul>
+    </li>-->
+
+    <!-- attempting to use for loop -->
+<!--    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span [(ngModel)]="mySelectedSite">{{site.siteName}}</span> <b class="caret"></b></a>
+      <ul class="dropdown-menu">
+        <li *ngFor="let site of siteList"><a [routerLink]="['/site.siteId']" (click)="onSelectSite()">{{site.siteName}}</a></li>
+        <li><a href="#">Site 1</a></li>
+        <li><a href="#">Site 2</a></li>
+        <li><a href="#">Site 3</a></li>
+        <li><a href="#">Site 4</a></li>
+      </ul>
+    </li>
+-->
+    <li>
+      <form #siteForm="ngForm" class="navbar-form" role="search">
+        <!--<div class="form-group">-->
+          <select class=" " name="selectedSite" #selectedRole="ngModel" [(ngModel)]="mySelectedSite" (change)="onSelectSite()">
+                  <option *ngFor="let site of siteList"  [ngValue]="site.siteId" >{{site.siteName}}</option>
+            </select>
+        <!--</div>-->
+      </form>
+    </li>
+  </ul>
+</div>
+  <div class="clearfix"></div>
+  <div class="collapse navbar-collapse" id="navbar">
+    <ul class="nav navbar-nav">
+      <li role="menuitem"><a [routerLink]="['/']">Home</a></li>
+
+      <li dropdown keyboardNav="true">
+        <a href="javascript:void(0);">
+            Equipment
+          </a>
+        <ul class="dropdown-menu" role="menu">
+          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentList']">Equipment</a></li>
+          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentTripList']">Equipment Trip</a></li>
+        </ul>
+      </li>
+
+      <li dropdown keyboardNav="true">
+        <a href="javascript:void(0);">
+            Transload
+          </a>
+        <ul class="dropdown-menu" role="menu">
+          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/inventoryAdjustmentList']">InventoryAdjustment</a></li>
+          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferOrderList']">Transfer Order</a></li>
+        </ul>
+      </li>
+
+      <li dropdown keyboardNav="true">
+        <a href="javascript:void(0);">
+            Reports
+          </a>
+        <ul class="dropdown-menu" role="menu">
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Bill%20Of%20Lading">Bill Of Lading</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&page=Customer%20Inventory">Customer Inventory (ShipperInventory)</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Heat%20List">Heat List</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Inventory%20Railcars%20On%20Site%20Report">Inventory Railcars on Site Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Miscellaneous%20Services%20Report">Miscellaneous Services Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Railcar%20Aging%20Report">Railcar Aging Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Railcar%20Arrival%20Report">Railcar Arrival Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Railcar%20Detail%20Report">Railcar Detail Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Railcar%20Storage%20Report">Railcar Storage Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Shipment%20Detail%20Report">Shipment Detail Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Switch%20List">Switch List</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Track%20Report">Track Report</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Transfer%20Order">Transfer Order</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Work%20Order">Work Order</a></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank" href="https://obi.savageservices.com/analytics/saw.dll?Dashboard&PortalPath=%2Fshared%2FSavage%20Reports%2F_Portal%2FTransload&Page=Yard%20Report">Yard Report</a></li>
+        </ul>
+      </li>
+
+      <li dropdown keyboardNav="true">
+        <a href="javascript:void(0);">
+            Interface
+          </a>
+        <ul class="dropdown-menu" role="menu">
+          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/']">Transfer Interface</a></li>
+          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/']">Storage Interface</a></li>
+          <li role="menuitem"><a class="dropdown-item" [routerLink]="['/']">Miscellaneous Interface</a></li>
+        </ul>
+      </li>
+
+      <li dropdown keyboardNav="true">
+        <a href="javascript:void(0);">
+            Admin
+          </a>
+        <ul class="dropdown-menu" role="menu">
+
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="javascript:void(0);">Operation</a>
+            <ul class="dropdown-menu">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/domainList']">Domain</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/siteList']">Site</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/locationTypeList']">LocationType</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/locationUsageList']">LocationUsage</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/locationList']">Location</a></li>
+<!--              <li class="divider dropdown-divider"></li> -->
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/zoneList']">Zone</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="javascript:void(0);">Product</a>
+            <ul class="dropdown-menu">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/productGroupList']">Product Group</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/unitOfMeasureList']">Unit Of Measure</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/unitOfMeasureConversionList']">Unit Of Measure Conversion</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/productList']">Product</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="javascript:void(0);">Equipment</a>
+            <ul class="dropdown-menu">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentTypeList']">EquipmentType</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/equipmentSubTypeList']">EquipmentSubType</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/fleetList']">Fleet</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/subFleetList']">SubFleet</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/vesselTypeList']">VesselType</a></li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="javascript:void(0);">Transfer</a>
+            <ul class="dropdown-menu">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferOrderLoaderList']">Loader</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferTypeList']">Transfer Type</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/transferSubTypeList']">Transfer SubType</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/companyList']">Company</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/companyAreaList']">CompanyArea</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/serviceTypeList']">ServiceType</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown-submenu">
+            <a tabindex="-1" href="javascript:void(0);">Users</a>
+            <ul class="dropdown-menu">
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/userList']">User</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/roleList']">Role</a></li>
+              <li role="menuitem"><a class="dropdown-item" [routerLink]="['/pageList']">Page</a></li>
+            </ul>
+          </li>
+
+        </ul>
+      </li>
+    </ul>
+
+
+
+
+  </div>
+
+</nav>

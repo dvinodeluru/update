@@ -1,0 +1,130 @@
+<div class="container">
+
+    <h2>Company</h2>
+    <span layout="row"><hr flex/></span>
+    <form #companyForm="ngForm" (ngSubmit)="onSubmitForm(companyForm)" form-inline>
+        <div class="form-group row" *ngIf="company && company.companyId !== 0 ">
+            <label for="companyId" class="col-sm-1 col-form-label">Id</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="companyId" [(ngModel)]=company.companyId #companyId="ngModel" [readonly]="true">
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="company">
+            <label for="#companyName" class="col-sm-1 col-form-label">Name</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="companyName" [(ngModel)]=company.companyName #companyName="ngModel"
+                    [readonly]="!pageSecurity.isWritable ? true : null"
+                    required minlength="3" maxlength="50">
+                                <span class="help-block alert-danger" *ngIf="(companyName.touched || companyName.dirty) && companyName.errors">
+                            <span *ngIf="companyName.errors.required">
+                            Company name is required
+                            </span>
+            <span *ngIf="companyName.errors.minlength">
+                                Company name must be longer than 3 characters.
+                            </span>
+            </span>
+            </div>
+            <label for="#isActive" class="col-sm-1 col-form-label">Active</label>
+            <div class="checkbox col-sm-3">
+                <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=company.isActive>
+            </div>
+            <label class="col-sm-4 col-form-label">DOBI IDS</label>
+        </div>
+        <div class="form-group row" *ngIf="company">
+            <label for="#address1" class="col-sm-1 col-form-label">Address1</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="address1" [(ngModel)]=company.address1 #address1="ngModel" 
+                [readonly]="!pageSecurity.isWritable ? true : null"
+                maxlength="100">
+            </div>
+            <label for="#isCustomer" class="col-sm-1 col-form-label">Customer</label>
+            <div class="col-sm-3">
+                <input type="checkbox" name="isCustomer" #isCustomer="ngModel" [(ngModel)]=company.isCustomer>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="dobiCustomerId" [(ngModel)]=company.dobiCustomerId #dobiCustomerId="ngModel"
+                    [readonly]="!pageSecurity.isWritable ? true : null">
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="company">
+            <label for="#address2" class="col-sm-1 col-form-label">Address2</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="address2" [(ngModel)]=company.address2 #address2="ngModel" 
+                [readonly]="!pageSecurity.isWritable ? true : null" maxlength="100">
+            </div>
+            <label for="#isShipper" class="col-sm-1 col-form-label">Shipper</label>
+            <div class="col-sm-3">
+                <input type="checkbox" name="isShipper" #isShipper="ngModel" [(ngModel)]=company.isShipper>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="dobiShipperId" [(ngModel)]=company.dobiShipperId #dobiShipperId="ngModel"
+                    [readonly]="!pageSecurity.isWritable ? true : null">
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="company">
+            <label for="#city" class="col-sm-1 col-form-label">City</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="city" [(ngModel)]=company.city #city="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+            </div>
+            <label for="#isConsignee" class="col-sm-1 col-form-label">Consignee</label>
+            <div class="col-sm-3">
+                <input type="checkbox" name="isConsignee" #isConsignee="ngModel" [(ngModel)]=company.isConsignee>
+            </div>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="dobiConsigneeId" [(ngModel)]=company.dobiConsigneeId #dobiConsigneeId="ngModel"
+                    [readonly]="!pageSecurity.isWritable ? true : null">
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="company">
+            <label for="#stateId" class="col-sm-1 col-form-label">State</label>
+            <div class="col-sm-3">
+                <select class="form-control readOnly" name="stateId" [(ngModel)]=company.state.stateId #stateId="ngModel" (change)="onStateChange($event.target.value)"> 
+                    <option [ngValue]="null">Select </option>
+                    <option *ngFor="let state of stateList" 
+                    [value]="state.stateId" [disabled]="!pageSecurity.isWritable"
+                    
+                    > {{state.stateCode}}</option>
+                </select>
+            </div>
+            <label for="#isCarrier" class="col-sm-1 col-form-label">Carrier</label>
+            <div class="col-sm-3">
+                <input type="checkbox" name="isCarrier" #isCarrier="ngModel" [(ngModel)]=company.isCarrier>
+            </div>
+
+        </div>
+        <div class="form-group row" *ngIf="company">
+            <label for="#zip" class="col-sm-1 col-form-label">Zip</label>
+            <div class="col-sm-3">
+                <input type="text" class="form-control readOnly" name="zip" [(ngModel)]=company.zip #zip="ngModel" [readonly]="!pageSecurity.isWritable ? true : null">
+            </div>
+            <label for="#isDestination" class="col-sm-1 col-form-label">Destination</label>
+            <div class="col-sm-3">
+                <input type="checkbox" name="isDestination" #isDestination="ngModel" [(ngModel)]=company.isDestination>
+            </div>
+
+        </div>
+        <br/>
+        <br/>
+        <button type="submit" class="btn btn-primary" [disabled]="!companyForm.valid">Save</button>
+        <button type="button" class="btn btn-primary" [disabled]="company && company.companyId == null" (click)="addNewDetail($event)">Add New Company</button>
+
+    </form>
+    <br/>
+    <br/>
+
+    <div class="form-value">
+        Form value:
+        <pre>
+    {{companyForm.value | json}}
+  </pre>
+        <p>
+            company: {{company | json}}
+
+        </p>
+        <p>
+            Valid: {{companyForm.valid}}
+        </p>
+
+        Security: {{companySecurity | json}}
+    </div>

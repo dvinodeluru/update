@@ -1,0 +1,112 @@
+<div class="container">
+
+    <h2>ServiceType</h2>
+    <span layout="row"><hr flex/></span>
+    <form #serviceTypeForm="ngForm" (ngSubmit)="onSubmitForm(serviceTypeForm)" form-inline>
+        <div class="form-group row" *ngIf="serviceType && serviceType.serviceTypeId !== 0 ">
+            <label for="serviceTypeId" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control readOnly" name="serviceTypeId" [(ngModel)]=serviceType.serviceTypeId #serviceTypeId="ngModel"
+                    [readonly]="true">
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="serviceType">
+            <label for="#dobiActivityId" class="col-sm-2 col-form-label">Dobi ActivityId</label>
+            <div class="col-sm-4">
+                <input type="number" class="form-control readOnly" name="dobiActivityId" [(ngModel)]=serviceType.dobiActivityId #dobiActivityId="ngModel"
+                    [disabled]="!pageSecurity.isWritable" >
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="serviceType">
+            <label for="#unitOfMeasureId" class="col-sm-2 col-form-label">UOM</label>
+            <div class="col-sm-4">
+                <select class="form-control readOnly" name="unitOfMeasureId" [(ngModel)]=serviceType.unitOfMeasureId #unitOfMeasureId="ngModel"
+                    required [disabled]="!pageSecurity.isWritable" >
+                    <option [ngValue]="null">Select  UOM</option>
+                    <option *ngFor="let unitOfMeasure of unitOfMeasureList" [value]="unitOfMeasure.unitOfMeasureId" [disabled]="!pageSecurity.isWritable">{{unitOfMeasure.unitOfMeasure}}</option>
+                </select>
+                <span class="help-block  alert-danger" *ngIf="unitOfMeasureId.errors">
+                            <span *ngIf="unitOfMeasureId.errors.required" >
+                                UOM is required
+                            </span>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group row" *ngIf="serviceType">
+            <label for="serviceType" class="col-sm-2 col-form-label">ServiceType</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control readOnly" name="serviceType" [(ngModel)]=serviceTypeName #serviceType="ngModel"
+                    [disabled]="!pageSecurity.isWritable"  required minlength="3" maxlength="50">
+
+                <span class="help-block alert-danger" *ngIf="(serviceType.touched || serviceType.dirty) && serviceType.errors">
+                            <span *ngIf="serviceType.errors.required">
+                            ServiceType is required
+                            </span>
+                <span *ngIf="serviceType.errors.minlength">
+                                ServiceType must be longer than 3 characters.
+                            </span>
+                </span>
+                <savage-message></savage-message>
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="serviceType">
+            <label for="#serviceCode" class="col-sm-2 col-form-label">ServiceCode</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control readOnly" name="serviceCode" [(ngModel)]=serviceType.serviceCode #serviceCode="ngModel"
+                    [disabled]="!pageSecurity.isWritable" >
+                <savage-message2></savage-message2>
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="serviceType">
+            <label for="#category" class="col-sm-2 col-form-label">Category</label>
+            <div class="col-sm-4">
+                <select class="form-control " name="category" [(ngModel)]=serviceType.category #category="ngModel" required
+                [disabled]="!pageSecurity.isWritable" >
+                    <option [ngValue]=null>Select Category</option>
+                    <option *ngFor="let serviceTypeCategory of serviceTypeCategories"
+                    [value]="serviceTypeCategory"
+                    > {{serviceTypeCategory}}</option>
+                </select>
+                <span class="help-block  alert-danger" *ngIf="category.errors">
+                            <span *ngIf="category.errors.required" >
+                                Category is required
+                            </span>
+                </span>
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="serviceType">
+            <label for="#description" class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control readOnly" name="description" [(ngModel)]=serviceType.description #description="ngModel"
+                    [disabled]="!pageSecurity.isWritable" >
+            </div>
+        </div>
+        <div class="form-group row" *ngIf="serviceType">
+            <label for="#isActive" class="col-sm-2 col-form-label">Is Active</label>
+            <div class="col-sm-4">
+                <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=serviceType.isActive [disabled]="!pageSecurity.isWritable" >
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <button type="submit" class="btn btn-primary" [disabled]="!serviceTypeForm.valid || isServiceCodeInvalid || isServiceTypeInvalid || !pageSecurity.isWritable">Save</button>
+
+    </form>
+    <br/>
+    <br/>
+
+    <!--<div class="form-value">
+        Form value:
+        <pre>
+        {{serviceTypeForm.value | json}}
+  </pre>
+        <p>
+            serviceType: {{serviceType | json}}
+        </p>
+        <p>
+            Valid: {{serviceTypeForm.valid}}
+        </p>
+
+        Security: {{serviceTypeSecurity | json}}
+    </div>-->

@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>ServiceType List</h2>
+  <span layout="row"><hr flex/></span>
+  <div class="form-group  col-md-12">
+    <label class="col-md-2 control-label" for="input">Search:</label>
+    <div class="col-md-10">
+      <input #input placeholder="serviceType" id="search">
+    </div>
+  </div>
+  <div class="form-group  col-md-12">
+    <label for="isActive" class="col-sm-2 col-form-label">IsActive</label>
+    <div class="col-md-2">
+      <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+    </div>
+  </div>
+  <br/> <br/><br/>
+  <button type="button" class="btn btn-primary" (click)="addNewDetail($event)">Add New ServiceType</button>
+  <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+    <thead>
+      <tr>
+        <th>ServiceTypeId</th>
+        <th>ServiceType</th>
+        <th>ServiceCode</th>
+        <th>UOM</th>
+        <th>Category</th>
+        <th>IsActive</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let serviceType of serviceTypeList |  searchServiceType: input.value" (click)="gotoDetail(serviceType)">
+        <td>{{serviceType.serviceTypeId}}</td>
+        <td>{{serviceType.serviceTypeEnum}}</td>
+        <td>{{serviceType.serviceCode}}</td>
+        <td>{{serviceType.unitOfMeasureId}}</td>
+        <td>{{serviceType.category}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button type="button" class="btn btn-primary" (click)="addNewDetail($event)">Add New ServiceType</button>

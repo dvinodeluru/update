@@ -1,0 +1,20 @@
+<div class="container">
+
+    <h2>State</h2>
+    <span layout="row"><hr flex/></span>
+    <form #stateForm="ngForm" (ngSubmit)="onSubmitForm(stateForm)" form-inline>
+        <div class="form-group row" *ngIf="state && state.stateId !== 0 ">
+            <label for="stateId" class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control readOnly" name="stateId" [(ngModel)]=state.stateId #stateId="ngModel"
+                    [readonly]="true">
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <button type="submit" class="btn btn-primary" [disabled]="!stateForm.valid">Save</button>
+        
+    </form>
+    <br/>
+    <br/>
+

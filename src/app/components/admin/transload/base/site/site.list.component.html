@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Site List</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <div class="row">
+            <label class="col-xs-4 control-label" for="input">Search:</label>
+            <div class="col-xs-8">
+              <div class="icon-addon"><input #input placeholder="Location Type Name" class="form-control search-icon-addon" id="search"><label for="search" class="glyphicon glyphicon-search icon-left"
+                  rel="tooltip" title="Location Type Name"></label></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label for="isActive" class="col-xs-4 col-form-label">Is Active</label>
+            <div class="col-xs-8">
+              <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Site</button>
+    <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>SiteId</th>
+          <th>Domain</th>
+          <th>Site Name</th>
+          <th>Address</th>
+          <th>IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let site of siteList | searchSite1:input.value" (click)="gotoDetail(site)">
+          <td>{{site.siteId}}</td>
+          <td>{{site.domainName}}</td>
+          <td>{{site.siteName}}</td>
+          <td>{{site.address1}} {{site.address2}}, {{site.city}}, {{site.state}}, {{site.zip}}</td>
+          <td>{{site.isActive}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Site</button>
+  </div>
+</div>

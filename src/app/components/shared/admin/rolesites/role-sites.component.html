@@ -1,0 +1,36 @@
+<div class="container">
+
+    <h4>Sites</h4>
+    <form #roleSiteForm="ngForm" (ngSubmit)="submitForm(roleSiteForm)" form-inline>
+        <div class="col-md-12 row">
+            <div class="col-md-4">
+                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="role && role.roleSites">
+                    <thead>
+                        <tr>
+                            <th>SiteName</th>
+                            <th>Is Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let roleSite of role.roleSites;let i=index">
+                            <td>{{getSiteName(roleSite.siteId)}} </td>
+                            <td >
+                            <input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel" (change)="onChangeIsActive(i,$event)"
+                                    [(ngModel)]=roleSite.isActive [disabled]="!pageSecurity.isWritable ? true : null ">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-8" *ngIf="role && role.roleId && siteList">
+                <button class="col-md-offset-1 col-md-3 btn btn-primary" type="button" (click)="onAddSite()" [disabled]="!pageSecurity.isWritable">Add Site</button>
+                <div class="col-md-4">
+                    <select class="form-control " name="selectedSite" #selectedRole="ngModel" [(ngModel)]="mySelectedSite" [disabled]="!pageSecurity.isWritable">
+                        <option [ngValue]="null">Select  Site</option>
+                        <option *ngFor="let site of siteList" [ngValue]="site.siteId">{{site.siteName}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>

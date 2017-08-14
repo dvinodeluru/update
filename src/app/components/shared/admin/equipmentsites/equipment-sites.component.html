@@ -1,0 +1,36 @@
+<div class="container">
+
+    <h4>Sites</h4>
+    <form #equipmentSiteForm="ngForm" (ngSubmit)="submitForm(equipmentSiteForm)" form-inline>
+        <div class="col-md-12 row">
+            <div class="col-md-4">
+                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="equipment && equipment.equipmentSites">
+                    <thead>
+                        <tr>
+                            <th>Site Name</th>
+                            <th>IsActive</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let equipmentSite of equipment.equipmentSites;let i=index">
+                            <td>{{getSiteName(equipmentSite.siteId)}} </td>
+                            <td><input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel"
+                                    (change)="onChangeIsActive(i,$event)" [(ngModel)]=equipmentSite.isActive [disabled]="!pageSecurity.isWritable ? true : null || equipment.equipmentType.equipmentType!=='Truck'">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-8" *ngIf="siteList && equipment && equipment.equipmentType && equipment.equipmentType.equipmentType.toUpperCase()==='TRUCK'">
+                <button class="col-md-offset-1 col-md-3 btn btn-primary" type="button" (click)="onAddSite()" [disabled]="!pageSecurity.isWritable">Add Site</button>
+                <div class="col-md-4">
+                    <select class="form-control " name="selectedSite" #selectedequipment="ngModel" [(ngModel)]="mySelectedSite" [disabled]="!pageSecurity.isWritable">
+                        <option [ngValue]="null">Select  Site</option>
+                        <option *ngFor="let site of siteList" [ngValue]="site.siteId">{{site.siteName}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>

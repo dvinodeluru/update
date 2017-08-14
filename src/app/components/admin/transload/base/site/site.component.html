@@ -1,0 +1,143 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Site</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <form #siteForm="ngForm" (ngSubmit)="submitForm(siteForm)" class="form-horizontal">
+
+          <div class="form-group" *ngIf="site && site.siteId !== 0 ">
+            <div class="row">
+              <label for="siteId" class="col-xs-4 col-form-label">Id</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="siteId" [(ngModel)]=site.siteId #siteId="ngModel" [readonly]="true">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="domainId" class="col-xs-4 col-form-label">Domain</label>
+              <div class="col-xs-8">
+                <select class="form-control readOnly" name="domainId" [(ngModel)]=site.domainId #domainId="ngModel" required> 
+                    <option [ngValue]="null">Select Domain</option>
+                    <option *ngFor="let domain of domainList" [value]="domain.domainId" [disabled]="!pageSecurity.isWritable">{{domain.domainName}}</option>
+                </select>
+                <span class="help-block  alert-danger" *ngIf="domainId.errors">
+                    <span *ngIf="domainId.errors.required" >
+                        Domain is required
+                    </span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="#siteName" class="col-xs-4 col-form-label">Site Name</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="siteName" [(ngModel)]=site.siteName #siteName="ngModel" [readonly]="!pageSecurity.isWritable ? true : null"
+                  required minlength="3" maxlength="50">
+                <span class="help-block alert-danger" *ngIf="(siteName.touched || siteName.dirty) && siteName.errors">
+                    <span *ngIf="siteName.errors.required">
+                        Site name is required
+                    </span>
+                <span *ngIf="siteName.errors.minlength">
+                        Site name must be longer than 3 characters.
+                    </span>
+                </span>
+                <savage-message></savage-message>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="#address1" class="col-xs-4 col-form-label">Address1</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="address1" #address1="ngModel" [(ngModel)]=site.address1 [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="3" maxlength="100">
+              </div>
+              <div class="alert alert-danger" [hidden]="address1.valid || address1.pristine">Address1 should be between 3 and 100 characters</div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="#address2" class="col-xs-4 col-form-label">Address2</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="address2" #address2="ngModel" [(ngModel)]=site.address2 [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="3" maxlength="100">
+              </div>
+              <div class="alert alert-danger" [hidden]="address2.valid || address2.pristine">Address2 should be between 3 and 100 characters</div>
+            </div>
+          </div>
+
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="#city" class="col-xs-4 col-form-label">city</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="city" #city="ngModel" [(ngModel)]=site.city [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="3" maxlength="100">
+              </div>
+              <div class="alert alert-danger" [hidden]="city.valid || city.pristine">City should be between 3 and 100 characters</div>
+            </div>
+          </div>
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="#stateId" class="col-xs-4 col-form-label">state</label>
+              <div class="col-xs-8">
+
+                <select class="form-control readOnly" name="stateId" [(ngModel)]=site.stateId #stateId="ngModel"> 
+                    <option [ngValue]="null">Select State</option>
+                    <option *ngFor="let state of stateList" 
+                    [value]="state.stateId" [disabled]="!pageSecurity.isWritable"> {{state.stateCode}}</option>
+                </select>
+
+                <!--<input type="text" class="form-control" name="state" #state="ngModel" [(ngModel)]=site.state [readonly]="!pageSecurity.isWritable ? true : null"
+                    minlength="2" maxlength="2">-->
+              </div>
+            </div>
+            <!--<div class="alert alert-danger" [hidden]="state.valid || state.pristine">State should be 2 characters</div>-->
+          </div>
+
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="#zip" class="col-xs-4 col-form-label">zip</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control" name="zip" #zip="ngModel" [(ngModel)]=site.zip [readonly]="!pageSecurity.isWritable ? true : null"
+                  minlength="5" maxlength="10">
+              </div>
+            </div>
+            <!--<div class="alert alert-danger" [hidden]="zip.valid || zip.pristine">State should be 5 to 10 characters</div>-->
+          </div>
+
+          <div class="form-group" *ngIf="site">
+            <div class="row">
+              <label for="#isActive" class="col-xs-4 col-form-label">Is Active</label>
+              <div class="col-xs-8">
+                <input type="checkbox" name="isActive" #displayName="ngModel" [(ngModel)]=site.isActive [readonly]="!pageSecurity.isWritable ? true : null">
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="!siteForm.valid || isInvalid">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+        <div class="form-value">
+            Form value:
+            <pre>
+    {{siteForm.value | json}}
+  </pre>
+            <p>
+                Valid: {{siteForm.valid}} and {{isInvalid}}
+            </p>
+            <p>
+                Site: {{site | json}}
+            </p>
+
+        </div>-->

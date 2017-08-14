@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Equipment Sub Type List</h2>
+  <span layout="row"><hr flex/></span>
+  <div class="form-group  col-md-12">
+    <div class="form-group row">
+      <label for="equipmentTypeId" class="col-sm-2 col-form-label">EquipmentType</label>
+      <div class="col-sm-6">
+        <select class="form-control readOnly" id="equipmentTypeId" #equipmentTypeId [(ngModel)]=equipmentType>
+          <option [ngValue]="null">Select EquipmentType</option>
+                    <option *ngFor="let equipmentType of equipmentTypeList"
+                    [value]="equipmentType.equipmentTypeId" >{{equipmentType.equipmentType}}</option>
+                </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="input">Search:</label>
+      <div class="col-sm-6">
+        <input #input placeholder="equipmentSubTypeName" id="search">
+      </div>
+    </div>
+    <div class="form-group  col-md-12">
+      <label for="isActive" class="col-sm-2 col-form-label">IsActive</label>
+      <div class="col-md-2">
+        <input type="checkbox" class="readOnly" name="isActive" [(ngModel)]=isActive (change)="onChangeIsActive($event)">
+      </div>
+    </div>
+
+
+    <br/> <br/><br/>
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable"  (click)="addNewDetail($event)">Add New Equipment Sub Type</button>
+    <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>EquipmentSubTypeId</th>
+          <th>EquipmentSubType</th>
+          <th>EquipmentType</th>
+          <th>IsActive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipmentSubType of equipmentSubTypeList |  searchEquipmentSubType: input.value:equipmentTypeId.value" (click)="gotoDetail(equipmentSubType)">
+          <td>{{equipmentSubType.equipmentSubTypeId}}</td>
+          <td>{{equipmentSubType.equipmentSubType}}</td>
+          <td>{{equipmentSubType.equipmentType.equipmentType}}</td>
+          <td>{{equipmentSubType.isActive}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable"  (click)="addNewDetail($event)">Add New Equipment Sub Type</button>
+  </div>

@@ -1,0 +1,67 @@
+<div class="container">
+  <h2>Inventory Adjustment List</h2>
+  <span layout="row"><hr flex/></span>
+  <form #inventoryAdjustmentSearchForm="ngForm" form-inline>
+    <div class="form-group row">
+      <label for="equipmentId" class="col-sm-1 col-form-label">Equipment</label>
+      <div class="col-sm-3">
+        <select class="form-control readOnly" name="equipmentId" [(ngModel)]=inventoryAdjustmentSearch.equipmentId>
+          <option [ngValue]="null">Select Equipment</option>
+          <option *ngFor="let equipment of equipmentList"
+                  [value]="equipment.equipmentId"
+          > {{equipment.equipmentName}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="startDate" class="col-sm-1 col-form-label">StartDate</label>
+      <div class="col-sm-2">
+        <input type="date" name="startDate" useValueAsDate [(ngModel)]="inventoryAdjustmentSearch.startDate">
+      </div>
+      <div class="col-sm-2">
+        <input type="date" name="endDate" useValueAsDate [(ngModel)]="inventoryAdjustmentSearch.endDate">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">Show All</label>
+      <div class="col-md-2">
+        <input type="checkbox" class="readOnly" name="showAll" [(ngModel)]=inventoryAdjustmentSearch.isVoided>
+      </div>
+    </div>
+  <div class="form-group ">
+    <button class="btn btn-primary" type="button" (click)="searchInventoryAdjustment()">Search</button>
+  </div>
+  </form>
+    <br/> 
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Adjustment</button>
+    <table class="table table-condensed table-bordered table-responsive table-striped table-hover list">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>EquipmentTripId</th>
+          <th>Equipment</th>
+          <th>Amount</th>
+          <th>Weight UOM</th>
+          <th>TransactionDate</th>
+          <th>Reason</th>
+          <th>Voided</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inventoryAdjustment of inventoryAdjustmentList " (click)="gotoDetail(inventoryAdjustment)">
+          <td>{{inventoryAdjustment.inventoryAdjustmentId}}</td>
+          <td>{{inventoryAdjustment.equipmentTripId}}</td>
+          <td>{{getEquipmentName(inventoryAdjustment.equipmentId)}}</td>
+          <td>{{inventoryAdjustment.amount}}</td>
+          <td>{{getUnitOfMeasureName(inventoryAdjustment.weightUnitOfMeasureId)}}</td>
+          <td>{{inventoryAdjustment.transactionDate | date: 'MM/dd/yyyy'}}</td>
+          <td>{{inventoryAdjustment.reason}}</td>
+          <td>{{inventoryAdjustment.isVoided ? 'Yes' : 'No'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Adjustment</button>
+</div>
+
