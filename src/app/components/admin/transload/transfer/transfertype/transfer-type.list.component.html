@@ -11,8 +11,8 @@
             <label class="col-xs-4 control-label" for="input">Search:</label>
             
             <div class="col-xs-8">
-              <div class="icon-addon"><input  class="form-control search-icon-addon" #input placeholder="Transfer Type Name" id="search">
-                  <label for="email" class="glyphicon glyphicon-search icon-left" rel="tooltip" title="Transfer Type Name"></label>
+              <div class="icon-addon"><input  class="form-control search-icon-addon" #input placeholder="transferTypeName">
+                  <label for="email" class="glyphicon glyphicon-search icon-left" rel="tooltip" title="email"></label>
                 </div>
             </div>
           </div>
@@ -33,7 +33,7 @@
   </div>
 
  <div class="panel-body">
-    <div class="text-right">
+    <div>
       <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable"  (click)="addNewDetail($event)">Add New Transfer Type</button>
     </div>
 
@@ -56,7 +56,7 @@
   </table>
     </div>
 
-  <div class="text-right">
+  <div>
     <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable"  (click)="addNewDetail($event)">Add New Transfer Type</button>
   </div>
   </div>
