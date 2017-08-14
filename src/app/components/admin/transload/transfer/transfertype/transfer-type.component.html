@@ -1,6 +1,3 @@
-<div class="container">
-
-
  <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Transfer Type</h2>
@@ -8,7 +5,7 @@
   <div class="panel-body">
     <div class="row">
         <div class="col-md-6">
-          <form #transferTypeForm="ngForm" (ngSubmit)="onSubmitForm(transferTypeForm)" form-inline>
+          <form #transferTypeForm="ngForm" (ngSubmit)="onSubmitForm(transferTypeForm)" class="form-horizontal"e>
         
             <div class="form-group row" *ngIf="transferType && transferType.transferTypeId !== 0 ">
             <label for="transferTypeId" class="col-xs-4 control-label">Id</label>
@@ -42,7 +39,7 @@
             </div>
         </div>
        
-        <div class="text-right">
+        <div class="col-xs-offset-4 col-xs-4">
             <button type="submit" class="btn btn-primary " [disabled]="!transferTypeForm.valid || isInvalid	|| !pageSecurity.isWritable">Save</button>
         </div>
         </form>
@@ -54,7 +51,6 @@
        
       </div>
   </div>
- </div>
 
 
 
