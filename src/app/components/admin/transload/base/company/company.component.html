@@ -16,6 +16,8 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company && company.companyId !== 0 ">
                 <div class="row">
+                  <label for="companyId" class="col-sm-4 col-form-label">Id</label>
+                  <div class="col-sm-8">
                   <label for="companyId" class="col-xs-4 col-form-label">Id</label>
                   <div class="col-xs-8">
                     <input type="number" id="userIdId" class="form-control readOnly" formControlName="companyId" [readonly]="true">
@@ -29,6 +31,8 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
+                  <label for="#companyName" class="col-sm-4 col-form-label">Name</label>
+                  <div class="col-sm-8">
                   <label for="#companyName" class="col-xs-4 col-form-label">Name</label>
                   <div class="col-xs-8">
                     <input type="text" class="form-control readOnly" id="companyNameId" formControlName="companyName" [readonly]="!pageSecurity.isWritable ? true : null">
@@ -59,7 +63,7 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
-                  <label for="#address1" class="col-xs-4 col-form-label">Address1</label>
+                  <label for="#address1" class="col-sm-4 col-form-label">Address1</label>
                   <div class="col-xs-8">
                     <input type="text" class="form-control readOnly" id="address1Id" formControlName="address1" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
@@ -70,19 +74,16 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
-                  <label for="#isCustomer" class="col-xs-4 col-form-label">Customer</label>
+                  <label for="#isCustomer" class="col-xs-4 col-form-label">Customer</label>                
                   <div class="col-xs-2">
-
                     <input type="checkbox" id="isCustomerId" formControlName="isCustomer" (change)="onIsCustomerChange($event.target.checked)"
                       [readonly]="!pageSecurity.isWritable ? true : null">
-
-                  </div>
+                  </div>                 
                   <div class="col-xs-6">
                     <input type="number" class="form-control readOnly" id="dobiCustomerIdId" formControlName="dobiCustomerId" [readonly]="!pageSecurity.isWritable ? true : null">
-
                     <span class="help-block" *ngIf="displayMessage.dobiCustomerId">
-                    {{displayMessage.dobiCustomerId}}
-                </span>
+                      {{displayMessage.dobiCustomerId}}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -94,7 +95,7 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
-                  <label for="#address2" class="col-xs-4 col-form-label">Address2</label>
+                  <label for="#address2" class="col-sm-4 col-form-label">Address2</label>
                   <div class="col-xs-8">
                     <input type="text" class="form-control readOnly" id="address2Id" formControlName="address2" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
@@ -107,13 +108,11 @@
                 <div class="row">
                   <label for="#isShipper" class="col-xs-4 col-form-label">Shipper</label>
                   <div class="col-xs-2">
-
                     <input type="checkbox" id="isShipperId" formControlName="isShipper" (change)="onIsShipperChange($event.target.checked)" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                   <div class="col-xs-6">
                     <input type="number" class="form-control readOnly" id="dobiShipperIdId" formControlName="dobiShipperId" [readonly]="!pageSecurity.isWritable ? true : null"
                       min="1">
-
                     <span class="help-block" *ngIf="displayMessage.dobiShipperId">
                                 {{displayMessage.dobiShipperId}}
                   </span>
@@ -142,14 +141,11 @@
                 <div class="row">
                   <label for="#isConsignee" class="col-xs-4 col-form-label">Consignee</label>
                   <div class="col-xs-2">
-
                     <input type="checkbox" id="isConsigneeId" formControlName="isConsignee" (change)="onIsConsigneeChange($event.target.checked)"
                       [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                   <div class="col-xs-6">
                     <input type="number" class="form-control readOnly" id="dobiConsigneeIdId" formControlName="dobiConsigneeId" [readonly]="!pageSecurity.isWritable ? true : null">
-
-
                     <span class="help-block" *ngIf="displayMessage.dobiConsigneeId">
                                 {{displayMessage.dobiConsigneeId}}
                         </span>
@@ -169,10 +165,9 @@
                     <select class="form-control readOnly" id="stateIdId" formControlName="stateId"> 
                     <option [ngValue]="null">Select  State</option>
                     <option *ngFor="let state of stateList" 
-                    [value]="state.stateId" [disabled]="!pageSecurity.isWritable"
-                    
-                    > {{state.stateCode}}</option>
-                </select>
+                    [value]="state.stateId" [disabled]="!pageSecurity.isWritable"                   
+                        > {{state.stateCode}}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -221,8 +216,6 @@
         <div class="row">
               <button type="submit" class="btn btn-primary" [disabled]="!companyForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
         </div> 
-
-
             <!--<div class="form-value">
         Form value:
         <pre>
