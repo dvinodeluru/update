@@ -16,8 +16,13 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company && company.companyId !== 0 ">
                 <div class="row">
+<<<<<<< HEAD
                   <label for="companyId" class="col-sm-4 col-form-label">Id</label>
                   <div class="col-sm-8">
+=======
+                  <label for="companyId" class="col-xs-4 col-form-label">Id</label>
+                  <div class="col-xs-8">
+>>>>>>> origin/Sub-type-htmls
                     <input type="number" id="userIdId" class="form-control readOnly" formControlName="companyId" [readonly]="true">
                   </div>
                 </div>
@@ -29,8 +34,13 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
+<<<<<<< HEAD
                   <label for="#companyName" class="col-sm-4 col-form-label">Name</label>
                   <div class="col-sm-8">
+=======
+                  <label for="#companyName" class="col-xs-4 col-form-label">Name</label>
+                  <div class="col-xs-8">
+>>>>>>> origin/Sub-type-htmls
                     <input type="text" class="form-control readOnly" id="companyNameId" formControlName="companyName" [readonly]="!pageSecurity.isWritable ? true : null">
                     <span class="help-block alert-danger" *ngIf="displayMessage.companyName">
                        {{displayMessage.companyName}}
@@ -44,10 +54,17 @@
               <div class="form-group" *ngIf="company">
                 <div class="row">
                   <label for="#isActive" class="col-xs-4 col-form-label">Active</label>
+<<<<<<< HEAD
                   <div class="col-xs-1">
                     <input type="checkbox" id="isActiveId" formControlName="isActive">
                   </div>
                   <label class="col-xs-7 col-form-label">DOBI IDS</label>
+=======
+                  <div class="col-xs-2">
+                    <input type="checkbox" id="isActiveId" formControlName="isActive">
+                  </div>
+                  <label class="col-xs-6 col-form-label">DOBI IDS</label>
+>>>>>>> origin/Sub-type-htmls
                 </div>
               </div>
             </div>
@@ -59,8 +76,13 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
+<<<<<<< HEAD
                   <label for="#address1" class="col-sm-4 col-form-label">Address1</label>
                   <div class="col-sm-8">
+=======
+                  <label for="#address1" class="col-xs-4 col-form-label">Address1</label>
+                  <div class="col-xs-8">
+>>>>>>> origin/Sub-type-htmls
                     <input type="text" class="form-control readOnly" id="address1Id" formControlName="address1" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                 </div>
@@ -71,13 +93,21 @@
               <div class="form-group" *ngIf="company">
                 <div class="row">
                   <label for="#isCustomer" class="col-xs-4 col-form-label">Customer</label>
+<<<<<<< HEAD
                   <div class="col-xs-1">
+=======
+                  <div class="col-xs-2">
+>>>>>>> origin/Sub-type-htmls
 
                     <input type="checkbox" id="isCustomerId" formControlName="isCustomer" (change)="onIsCustomerChange($event.target.checked)"
                       [readonly]="!pageSecurity.isWritable ? true : null">
 
                   </div>
+<<<<<<< HEAD
                   <div class="col-xs-7">
+=======
+                  <div class="col-xs-6">
+>>>>>>> origin/Sub-type-htmls
                     <input type="number" class="form-control readOnly" id="dobiCustomerIdId" formControlName="dobiCustomerId" [readonly]="!pageSecurity.isWritable ? true : null">
 
                     <span class="help-block" *ngIf="displayMessage.dobiCustomerId">
@@ -94,8 +124,13 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
+<<<<<<< HEAD
                   <label for="#address2" class="col-sm-4 col-form-label">Address2</label>
                   <div class="col-sm-8">
+=======
+                  <label for="#address2" class="col-xs-4 col-form-label">Address2</label>
+                  <div class="col-xs-8">
+>>>>>>> origin/Sub-type-htmls
                     <input type="text" class="form-control readOnly" id="address2Id" formControlName="address2" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                 </div>
@@ -106,11 +141,19 @@
               <div class="form-group" *ngIf="company">
                 <div class="row">
                   <label for="#isShipper" class="col-xs-4 col-form-label">Shipper</label>
+<<<<<<< HEAD
                   <div class="col-xs-1">
 
                     <input type="checkbox" id="isShipperId" formControlName="isShipper" (change)="onIsShipperChange($event.target.checked)" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                   <div class="col-xs-7">
+=======
+                  <div class="col-xs-2">
+
+                    <input type="checkbox" id="isShipperId" formControlName="isShipper" (change)="onIsShipperChange($event.target.checked)" [readonly]="!pageSecurity.isWritable ? true : null">
+                  </div>
+                  <div class="col-xs-6">
+>>>>>>> origin/Sub-type-htmls
                     <input type="number" class="form-control readOnly" id="dobiShipperIdId" formControlName="dobiShipperId" [readonly]="!pageSecurity.isWritable ? true : null"
                       min="1">
 
@@ -129,8 +172,13 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
+<<<<<<< HEAD
                   <label for="#city" class="col-sm-4 col-form-label">City</label>
                   <div class="col-sm-8 col-xs-6">
+=======
+                  <label for="#city" class="col-xs-4 col-form-label">City</label>
+                  <div class="col-xs-8">
+>>>>>>> origin/Sub-type-htmls
                     <input type="text" class="form-control readOnly" id="cityId" formControlName="city" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                 </div>
@@ -141,12 +189,20 @@
               <div class="form-group" *ngIf="company">
                 <div class="row">
                   <label for="#isConsignee" class="col-xs-4 col-form-label">Consignee</label>
+<<<<<<< HEAD
                   <div class="col-xs-1">
+=======
+                  <div class="col-xs-2">
+>>>>>>> origin/Sub-type-htmls
 
                     <input type="checkbox" id="isConsigneeId" formControlName="isConsignee" (change)="onIsConsigneeChange($event.target.checked)"
                       [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
+<<<<<<< HEAD
                   <div class="col-xs-7">
+=======
+                  <div class="col-xs-6">
+>>>>>>> origin/Sub-type-htmls
                     <input type="number" class="form-control readOnly" id="dobiConsigneeIdId" formControlName="dobiConsigneeId" [readonly]="!pageSecurity.isWritable ? true : null">
 
 
@@ -164,8 +220,13 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
+<<<<<<< HEAD
                   <label for="#stateId" class="col-sm-4 col-form-label">State</label>
                   <div class="col-sm-8 col-form-label">
+=======
+                  <label for="#stateId" class="col-xs-4 col-form-label">State</label>
+                  <div class="col-xs-8 col-form-label">
+>>>>>>> origin/Sub-type-htmls
                     <select class="form-control readOnly" id="stateIdId" formControlName="stateId"> 
                     <option [ngValue]="null">Select  State</option>
                     <option *ngFor="let state of stateList" 
@@ -195,8 +256,13 @@
             <div class="col-md-4 col-sm-6">
               <div class="form-group" *ngIf="company">
                 <div class="row">
+<<<<<<< HEAD
                   <label for="#zip" class="col-sm-4 col-form-label">Zip</label>
                   <div class="col-sm-8 control-label">
+=======
+                  <label for="#zip" class="col-xs-4 col-form-label">Zip</label>
+                  <div class="col-xs-8 control-label">
+>>>>>>> origin/Sub-type-htmls
                     <input type="text" class="form-control readOnly" id="zipId" formControlName="zip" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                 </div>
@@ -207,7 +273,11 @@
               <div class="form-group" *ngIf="company">
                 <div class="row">
                   <label for="#isDestination" class="col-xs-4 col-form-label">Destination</label>
+<<<<<<< HEAD
                   <div class="col-xs-1">
+=======
+                  <div class="col-xs-2">
+>>>>>>> origin/Sub-type-htmls
                     <input type="checkbox" id="isDestinationId" name="isDestination" [readonly]="!pageSecurity.isWritable ? true : null">
                   </div>
                 </div>
@@ -222,6 +292,7 @@
               <button type="submit" class="btn btn-primary" [disabled]="!companyForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
         </div> 
 
+<<<<<<< HEAD
 
 
 
@@ -343,6 +414,9 @@
             <br/>
             <br/>
 -->
+=======
+
+>>>>>>> origin/Sub-type-htmls
             <!--<div class="form-value">
         Form value:
         <pre>
