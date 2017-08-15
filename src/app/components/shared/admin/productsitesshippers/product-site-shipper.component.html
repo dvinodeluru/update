@@ -1,46 +1,48 @@
-<div class="container">
+<h4>Site-Customer</h4>
+<form #productSiteShipperForm="ngForm" (ngSubmit)="submitForm(productSiteShipperForm)">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="product && product.productSiteShipperList">
+          <thead>
+            <tr>
+              <th>Site</th>
+              <th>Customer</th>
+              <th>Is Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let productSiteShipper of product.productSiteShipperList;let i=index">
+              <td>{{getSiteName(productSiteShipper.siteId)}}</td>
+              <td>{{getShipperName(productSiteShipper.shipperId)}}</td>
+              <td>
+                <input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel" (change)="onChangeIsActive(i,$event)"
+                  [(ngModel)]=productSiteShipper.isActive [disabled]="!pageSecurity.isWritable ? true : null">
 
-    <h4>Site-Customer</h4>
-    <form #productSiteShipperForm="ngForm" (ngSubmit)="submitForm(productSiteShipperForm)" form-inline>
-        <div class="col-md-12 row">
-            <div class="col-md-4">
-                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="product && product.productSiteShipperList">
-                    <thead>
-                        <tr>
-                            <th>Site</th>
-                            <th>Customer</th>
-                            <th>Is Active</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let productSiteShipper of product.productSiteShipperList;let i=index">
-                            <td>{{getSiteName(productSiteShipper.siteId)}}</td>
-                            <td>{{getShipperName(productSiteShipper.shipperId)}}</td>
-                            <td>
-                                <input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel" (change)="onChangeIsActive(i,$event)"
-                                    [(ngModel)]=productSiteShipper.isActive [disabled]="!pageSecurity.isWritable ? true : null">
 
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-md-8" *ngIf="siteList && shipperList">
-                <button class="col-md-offset-1 col-md-3 btn btn-primary" type="button" (click)="onAddSiteShipper()" [disabled]="!pageSecurity.isWritable || !(product && product.productId)">Add Site Customer</button>
-                <div class="col-md-4">
-                    <select class="form-control " name="selectedSite" #selectedSite="ngModel" [(ngModel)]="mySelectedSite" [disabled]="!pageSecurity.isWritable">
-                        <option [ngValue]=null>Select  Site</option>
-                        <option *ngFor="let site of siteList" [ngValue]="site.siteId">{{site.siteName}}</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <select class="form-control " name="selectedShipper" #selectedShipper="ngModel" [(ngModel)]="mySelectedShipper" [disabled]="!pageSecurity.isWritable">
-                        <option [ngValue]=null>Select  Customer</option>
-                        <option *ngFor="let shipper of shipperList" [ngValue]="shipper.companyId">{{shipper.companyName}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row" *ngIf="siteList && shipperList">
+      <div class="col-md-3"> <button class="btn btn-primary btn-block" type="button" (click)="onAddSiteShipper()" [disabled]="!pageSecurity.isWritable || !(product && product.productId)">Add Site Customer</button>
+      </div>
+      <div class="col-md-4">
+        <select class="form-control " name="selectedSite" #selectedSite="ngModel" [(ngModel)]="mySelectedSite" [disabled]="!pageSecurity.isWritable">
+            <option [ngValue]=null>Select  Site</option>
+            <option *ngFor="let site of siteList" [ngValue]="site.siteId">{{site.siteName}}</option>
+        </select>
+      </div>
+      <div class="col-md-5">
+        <select class="form-control " name="selectedShipper" #selectedShipper="ngModel" [(ngModel)]="mySelectedShipper" [disabled]="!pageSecurity.isWritable">
+            <option [ngValue]=null>Select  Customer</option>
+            <option *ngFor="let shipper of shipperList" [ngValue]="shipper.companyId">{{shipper.companyName}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</form>

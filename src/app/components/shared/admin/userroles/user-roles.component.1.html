@@ -1,36 +1,36 @@
-<div class="container">
+<h4>Roles</h4>
+<form #userRolesForm="ngForm">
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="user && user.userRoles">
+        <thead>
+          <tr>
+            <th>RoleId</th>
+            <th>RoleName</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userRole of user.userRoles">
+            <td>{{userRole.userRoleId}} </td>
+            <td>{{getRoleName(userRole.roleId)}} </td>
+            <td (click)="onDeleteUseRole(userRole.userId,userRole.userRoleId)">delete</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <label for="#roleName" class="col-xs-4 col-form-label">Role Name</label>
+      <div class="col-xs-8">
+        <input type="text" class="form-control" name="roleName" #roleName="ngModel" [(ngModel)]=roleName required>
+        <div class="alert alert-danger" [hidden]="roleName.valid || roleName.pristine">Role Name is required</div>
+      </div>
+    </div>
+  </div>
 
-    <form #userRolesForm="ngForm" form-inline>
-        Roles
-        <div class="col-md-12 row">
-            <div class="col-md-4">
-                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="user && user.userRoles">
-                    <thead>
-                        <tr>
-                            <th>RoleId</th>
-                            <th>RoleName</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let userRole of user.userRoles">
-                            <td>{{userRole.userRoleId}} </td>
-                            <td>{{getRoleName(userRole.roleId)}} </td>
-                            <td (click)="onDeleteUseRole(userRole.userId,userRole.userRoleId)">delete</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="form-group row">
-                <label for="#roleName" class="col-sm-2 col-form-label">Role Name</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" name="roleName" #roleName="ngModel" [(ngModel)]=roleName required>
-                </div>
-                <div class="alert alert-danger" [hidden]="roleName.valid || roleName.pristine">Role Name is required</div>
-            </div>
-
-            <!--<div class="col-md-8" *ngIf="roleList">
+  <!--<div class="col-md-8" *ngIf="roleList">
                 <button class="col-md-offset-1 col-md-3 btn btn-primary" type="button" (click)="onAddRole()">Add Role</button>
                 <div class="col-md-4">
                     <select class="form-control " name="selectedRole" #selectedRole="ngModel" [(ngModel)]="selectedRole">
@@ -38,9 +38,6 @@
                     </select>
                 </div>
             </div>-->
-        </div>
 
-    </form>
 
-    <br/>
-    <br/>
+</form>

@@ -1,38 +1,40 @@
-<div class="container">
+<h4>
+  Composition</h4>
+<form #productCompositionForm="ngForm" (ngSubmit)="submitForm(productCompositionForm)">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="product && product.productCompositionList">
+          <thead>
+            <tr>
+              <th>Composition</th>
+              <th>Is Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let productComposition of product.productCompositionList;let i=index">
+              <td>{{productComposition.childProduct.productName}} </td>
+              <td><input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel" (change)="onChangeIsActive(i,$event)"
+                  [(ngModel)]=productComposition.isActive [disabled]="!pageSecurity.isWritable ? true : null">
 
-    <h4>Composition</h4>
-    <form #productCompositionForm="ngForm" (ngSubmit)="submitForm(productCompositionForm)" form-inline>
-        <div class="col-md-12 row">
-            <div class="col-md-4">
-                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="product && product.productCompositionList">
-                    <thead>
-                        <tr>
-                            <th>Composition</th>
-                            <th>Is Active</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let productComposition of product.productCompositionList;let i=index">
-                            <td>{{productComposition.childProduct.productName}} </td>
-                            <td><input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel"
-                                    (change)="onChangeIsActive(i,$event)" [(ngModel)]=productComposition.isActive [disabled]="!pageSecurity.isWritable ? true : null">
-
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-md-8" *ngIf="productList">
-                <button class="col-md-offset-1 col-md-4 btn btn-primary" type="button" (click)="onAddProductComposition()" [disabled]="!pageSecurity.isWritable|| !(product && product.productId)">Add Product Composition</button>
-                <div class="col-md-5">
-                    <select class="form-control  col-md-offset-1 " name="selectedProduct" #selectedPage="ngModel" [(ngModel)]="mySelectedProduct"
-                        [disabled]="!pageSecurity.isWritable ? true : null">
-                        <option [ngValue]="null">Select  Product</option>
-                        <option *ngFor="let product of productList" [ngValue]="product">{{product.productName}}</option>
-                    </select>
-
-                </div>
-            </div>
-        </div>
-    </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row" *ngIf="productList">
+      <div class="col-xs-3"><button class="btn btn-primary btn-block" type="button" (click)="onAddProductComposition()" [disabled]="!pageSecurity.isWritable|| !(product && product.productId)">Add Product Composition</button>
+      </div>
+      <div class="col-xs-9">
+        <select class="form-control  col-md-offset-1 " name="selectedProduct" #selectedPage="ngModel" [(ngModel)]="mySelectedProduct"
+          [disabled]="!pageSecurity.isWritable ? true : null">
+                <option [ngValue]="null">Select  Product</option>
+                <option *ngFor="let product of productList" [ngValue]="product">{{product.productName}}</option>
+            </select>
+      </div>
+    </div>
+  </div>
+</form>

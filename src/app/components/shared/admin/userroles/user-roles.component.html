@@ -1,40 +1,42 @@
-<div class="container">
-
-    <h4>Roles</h4>
-    <form #userRolesForm="ngForm" (ngSubmit)="submitForm(userRolesForm)" form-inline>
-        <div class="col-md-12 row">
-            <div class="col-md-4">
-                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="user && user.userRoles">
-                    <thead>
-                        <tr>
-                            <th>RoleId</th>
-                            <th>RoleName</th>
-                            <th>Is Active</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let userRole of user.userRoles;let i=index">
-                            <td>{{userRole.userRoleId}} </td>
-                            <td>{{getRoleName(userRole.roleId)}} </td>
-                            <td>
-                                 <input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel" (change)="onChangeIsActive(i,$event)"
-                                    [(ngModel)]=userRole.isActive [disabled]="!pageSecurity.isWritable ? true : null ">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-md-8" *ngIf="roleList">
-                <button class="col-md-offset-1 col-md-3 btn btn-primary" type="button" (click)="onAddRole()" [disabled]="!pageSecurity.isWritable">Add Role</button>
-                <div class="col-md-4">
-                    <select class="form-control " name="selectedRole" #selectedRole="ngModel" [(ngModel)]="mySelectedRole" [disabled]="!pageSecurity.isWritable">
-                        <option [ngValue]="null">Select  Role</option>
-                        <option *ngFor="let role of roleList" [ngValue]="role.roleId">{{role.roleName}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </form>
+<h4>Roles</h4>
+<form #userRolesForm="ngForm" (ngSubmit)="submitForm(userRolesForm)">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-responsive table-striped table-hover" *ngIf="user && user.userRoles">
+          <thead>
+            <tr>
+              <th>RoleId</th>
+              <th>RoleName</th>
+              <th>Is Active</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let userRole of user.userRoles;let i=index">
+              <td>{{userRole.userRoleId}} </td>
+              <td>{{getRoleName(userRole.roleId)}} </td>
+              <td>
+                <input type="checkbox" class="checkbox" name="{{i}}IsActive" #{{i}}IsActive="ngModel" (change)="onChangeIsActive(i,$event)"
+                  [(ngModel)]=userRole.isActive [disabled]="!pageSecurity.isWritable ? true : null ">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="row" *ngIf="roleList">
+      <div class="col-xs-3"><button class="btn btn-primary btn-block" type="button" (click)="onAddRole()" [disabled]="!pageSecurity.isWritable">Add Role</button>
+      </div>
+      <div class="col-xs-9">
+        <select class="form-control " name="selectedRole" #selectedRole="ngModel" [(ngModel)]="mySelectedRole" [disabled]="!pageSecurity.isWritable">
+            <option [ngValue]="null">Select  Role</option>
+            <option *ngFor="let role of roleList" [ngValue]="role.roleId">{{role.roleName}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</form>
 <!--
     Security: {{pageSecurity | json}}-->
