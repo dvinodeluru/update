@@ -7,20 +7,20 @@
       <div class="col-md-6">
 
         <form #equipmentTypeForm="ngForm" (ngSubmit)="onSubmitForm(equipmentTypeForm)">
-          <div class="form-group" *ngIf="equipmentType && equipmentType.equipmentTypeId !== 0 " <div class="row">
+          <div class="form-group" *ngIf="equipmentType && equipmentType.equipmentTypeId !== 0 ">
             <div class="row">
-            <label for="equipmentTypeId" class="col-xs-4 control-label">Id</label>
-            <div class="col-xs-8">
-              <input type="text" class="form-control readOnly" name="equipmentTypeId" [(ngModel)]=equipmentType.equipmentTypeId #equipmentTypeId="ngModel"
-                [readonly]="true">
-            </div>
+              <label for="equipmentTypeId" class="col-xs-4 col-control-label">Id</label>
+              <div class="col-xs-8">
+                <input type="text" class="form-control readOnly" name="equipmentTypeId" [(ngModel)]=equipmentType.equipmentTypeId #equipmentTypeId="ngModel"
+                  [readonly]="true">
+              </div>
             </div>
           </div>
 
 
           <div class="form-group" *ngIf="equipmentType">
             <div class="row">
-              <label for="#equipmentType" class="col-xs-4 control-label">Equipment Type</label>
+              <label for="#equipmentType" class="col-xs-4 col-control-label">Equipment Type</label>
               <div class="col-xs-8">
                 <input type="text" class="form-control readOnly" name="equipmentType" [(ngModel)]=equipmentType.equipmentType #equipmentTypeName="ngModel"
                   [readonly]="!pageSecurity.isWritable ? true : null" required minlength="3" maxlength="50">
@@ -39,7 +39,7 @@
           </div>
           <div class="form-group" *ngIf="equipmentType">
             <div class="row">
-              <label for="#isGlobal" class="col-xs-4 control-label">Is Global</label>
+              <label for="#isGlobal" class="col-xs-4 col-control-label">Is Global</label>
               <div class="col-xs-8">
                 <input type="checkbox" name="isGlobal" #isGlobal="ngModel" [(ngModel)]=equipmentType.isGlobal>
               </div>
@@ -47,18 +47,14 @@
           </div>
           <div class="form-group" *ngIf="equipmentType">
             <div class="row">
-              <label for="#isActive" class="col-xs-4 control-label">Is Active</label>
+              <label for="#isActive" class="col-xs-4 col-control-label">Is Active</label>
               <div class="col-xs-8">
                 <input type="checkbox" name="isActive" #isActive="ngModel" [(ngModel)]=equipmentType.isActive>
               </div>
             </div>
           </div>
-
           <button type="submit" class="btn btn-primary" [disabled]="!equipmentTypeForm.valid || isInvalid || !pageSecurity.isWritable">Save</button>
-
         </form>
-
-
       </div>
     </div>
   </div>

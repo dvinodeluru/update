@@ -21,14 +21,16 @@
       </div>
     </div>
   </div>
-  <div class="row" *ngIf="company && company.companyId && siteList">
-    <div class="col-xs-3"><button class="btn btn-primary btn-block" type="button" (click)="onAddSite()" [disabled]="!pageSecurity.isWritable">Add Site</button>
-    </div>
-    <div class="col-xs-9">
-      <select class="form-control " name="selectedSite" #selectedcompany="ngModel" [(ngModel)]="mySelectedSite" [disabled]="!pageSecurity.isWritable">
+  <div class="form-group">
+    <div class="row" *ngIf="company && company.companyId && siteList">
+      <div class="col-xs-3"><button class="btn btn-primary btn-block" type="button" (click)="onAddSite()" [disabled]="!pageSecurity.isWritable">Add Site</button>
+      </div>
+      <div class="col-xs-9">
+        <select class="form-control " name="selectedSite" #selectedcompany="ngModel" [(ngModel)]="mySelectedSite" [disabled]="!pageSecurity.isWritable">
             <option [ngValue]="null">Select  Site</option>
             <option *ngFor="let site of siteList" [ngValue]="site.siteId">{{site.siteName}}</option>
         </select>
+      </div>
     </div>
   </div>
 </form>

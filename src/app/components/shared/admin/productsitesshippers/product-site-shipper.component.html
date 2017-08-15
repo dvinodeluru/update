@@ -29,15 +29,15 @@
   </div>
   <div class="form-group">
     <div class="row" *ngIf="siteList && shipperList">
-      <div class="col-md-3"> <button class="btn btn-primary btn-block" type="button" (click)="onAddSiteShipper()" [disabled]="!pageSecurity.isWritable || !(product && product.productId)">Add Site Customer</button>
+      <div class="col-xs-3"> <button class="btn btn-primary btn-block" type="button" (click)="onAddSiteShipper()" [disabled]="!pageSecurity.isWritable || !(product && product.productId)">Add Site Customer</button>
       </div>
-      <div class="col-md-4">
+      <div class="col-xs-4">
         <select class="form-control " name="selectedSite" #selectedSite="ngModel" [(ngModel)]="mySelectedSite" [disabled]="!pageSecurity.isWritable">
             <option [ngValue]=null>Select  Site</option>
             <option *ngFor="let site of siteList" [ngValue]="site.siteId">{{site.siteName}}</option>
         </select>
       </div>
-      <div class="col-md-5">
+      <div class="col-xs-5">
         <select class="form-control " name="selectedShipper" #selectedShipper="ngModel" [(ngModel)]="mySelectedShipper" [disabled]="!pageSecurity.isWritable">
             <option [ngValue]=null>Select  Customer</option>
             <option *ngFor="let shipper of shipperList" [ngValue]="shipper.companyId">{{shipper.companyName}}</option>

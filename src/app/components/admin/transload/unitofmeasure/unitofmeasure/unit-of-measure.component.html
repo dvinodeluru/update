@@ -1,13 +1,15 @@
 <div class="panel panel-default">
   <div class="panel-heading">
     <h2 class="panel-title">Unit Of Measure</h2>
+
   </div>
   <div class="panel-body">
     <div class="row">
       <div class="col-md-6">
         <form #unitOfMeasureForm="ngForm" (ngSubmit)="onSubmitForm(unitOfMeasureForm)" class="form-horizontal">
           <div class="form-group" *ngIf="unitOfMeasure && unitOfMeasure.unitOfMeasureId !== 0 ">
-            <div class="row"><label for="unitOfMeasureId" class="col-xs-4 col-form-label">Id</label>
+            <div class="row">
+              <label for="unitOfMeasureId" class="col-xs-4 col-form-label">Id</label>
               <div class="col-xs-8">
                 <input type="text" class="form-control readOnly" name="unitOfMeasureId" [(ngModel)]=unitOfMeasure.unitOfMeasureId #unitOfMeasureId="ngModel"
                   [readonly]="true">

@@ -270,6 +270,7 @@ input[type=checkbox] {
     /* Opera */
     transform: scale(1.75);
     margin-left: 5px;
+    margin-top:8px;
 }
 
 input[type=radio] {
@@ -323,7 +324,7 @@ input[ngui-datetime-picker] {
     background: url('/assets/images/date_icon.png') no-repeat 98% 50%;
 }
 
-
+.off-control{border: 0 none; box-shadow: none;}
 /*
 #search {
     padding-left: 30px;
