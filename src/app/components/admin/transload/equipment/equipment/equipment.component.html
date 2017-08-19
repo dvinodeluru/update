@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
 
     <h2>Equipment</h2>
     <span layout="row"><hr flex/></span>
@@ -128,6 +128,7 @@
         <button type="button" class="btn btn-primary" [disabled]="!equipmentForm.valid || isInvalid || !pageSecurity.isWritable" (click)="saveEquipment()">Save</button>
 
     </form>
+    <div *ngIf="loading == true" class="loader">Loading/Processing..</div>
     <br/>
     <br/>
 
