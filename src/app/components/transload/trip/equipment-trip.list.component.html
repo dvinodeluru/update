@@ -1,134 +1,220 @@
-<div class="container-fluid">
-  <h2>EquipmentTrip List</h2>
-  <span layout="row"><hr flex/></span>
-  <form #equipmentTripSearchForm="ngForm" form-inline>
-    <div class="form-group row">
-      <label for="equipmentId" class="col-sm-1 col-form-label">Equipment</label>
-      <div class="col-sm-3">
-        <select class="form-control readOnly" name="equipmentId" [(ngModel)]=equipmentTripSearch.equipmentId>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Equipment Trip List</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+
+        <form #equipmentTripSearchForm="ngForm" class="form-horizontal">
+
+          <div class="row">
+
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group">
+                <div class="row">
+                  <label for="equipmentId" class="col-sm-4 col-form-label">Equipment</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="equipmentId" [(ngModel)]=equipmentTripSearch.equipmentId>
                   <option [ngValue]="null">Select Equipment</option>
                     <option *ngFor="let equipment of equipmentList"
                     [value]="equipment.equipmentId"
                     >{{equipment.equipmentName}}</option>
                 </select>
-      </div>
-      <label for="productId" class="col-sm-1 col-form-label">Product</label>
-      <div class="col-sm-3">
-        <select class="form-control readOnly" id="productId" name="productId" [(ngModel)]=equipmentTripSearch.productId>
-          <option [ngValue]="null">Select Product</option>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group">
+                <div class="row">
+                  <label for="productId" class="col-sm-4 col-form-label">Product</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" id="productId" name="productId" [(ngModel)]=equipmentTripSearch.productId>
+                    <option [ngValue]="null">Select Product</option>
                     <option *ngFor="let product of productList"
                     [value]="product.productId"
                     >{{product.productName}}</option>
-                </select>
-      </div>
-      <label for="shipperId" class="col-sm-1 col-form-label">Shipper</label>
-      <div class="col-sm-3">
-        <select class="form-control readOnly" name="shipperId" [(ngModel)]="equipmentTripSearch.shipperId">
-          <option [ngValue]="null">Select Shipper</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group">
+                <div class="row">
+                  <label for="shipperId" class="col-sm-4 col-form-label">Shipper</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="shipperId" [(ngModel)]="equipmentTripSearch.shipperId">
+              <option [ngValue]="null">Select Shipper</option>
                     <option *ngFor="let shipper of shipperList"
                     [value]="shipper.companyId"
                     >{{shipper.companyName}}</option>
                 </select>
-      </div>
-    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <div class="form-group row">
-      <label for="locationId" class="col-sm-1 col-form-label">Location</label>
-      <div class="col-sm-3">
-        <select class="form-control readOnly" id="locationId" name="locationId" [(ngModel)]="equipmentTripSearch.locationId">
-          <option [ngValue]="null">Select Location</option>
+          </div>
+
+
+
+          <div class="row">
+
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group">
+                <div class="row">
+                  <label for="locationId" class="col-sm-4 col-form-label">Location</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" id="locationId" name="locationId" [(ngModel)]="equipmentTripSearch.locationId">
+                     <option [ngValue]="null">Select Location</option>
                     <option *ngFor="let location of locationList"
                     [value]="location.locationId"
                     >{{location.locationName}}</option>
-                </select>
-      </div>
-      <label for="equipmentTripLoadedStatus" class="col-sm-1 col-form-label">Load/Empty</label>
-      <div class="col-sm-3">
-        <select class="form-control readOnly" name="loadedEmptyStatus" [(ngModel)]="equipmentTripSearch.loadedEmptyStatus">
-          <option [ngValue]="null">Select Status</option>
+                     </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group">
+                <div class="row">
+                  <label for="equipmentTripLoadedStatus" class="col-sm-4 col-form-label">Load/Empty</label>
+                  <div class="col-sm-8">
+                    <select class="form-control readOnly" name="loadedEmptyStatus" [(ngModel)]="equipmentTripSearch.loadedEmptyStatus">
+                    <option [ngValue]="null">Select Status</option>
                     <option *ngFor="let tripLoadedStatus of tripLoadedStatuses" [value]="tripLoadedStatus" >{{tripLoadedStatus}}</option>
                 </select>
-      </div>
-      <label for="isVoided" class="col-sm-1 col-form-label">Show All</label>
-      <div class="col-sm-3">
-        <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=equipmentTripSearch.isVoided>
-      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+
+            <div class="col-md-4 col-sm-6">
+              <div class="form-group">
+                <div class="row">
+                  <label for="isVoided" class="col-sm-4 col-form-label">Show All</label>
+                  <div class="col-sm-8">
+                    <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=equipmentTripSearch.isVoided>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          
+          <div class="row">
+            <div class="col-md-4 col-sm-6">              
+              <div class="form-group">
+                <div class="row">
+                  <label for="dateType" class="col-xs-4 col-form-label">Date Type</label>
+                  <div class="col-xs-8">
+                    <label for="dateType" class="radio-inline">                   
+                      <input name="dateType" type="radio" value="Ship Date" [(ngModel)]=equipmentTripSearch.dateType> Ship Date
+                    </label>
+                    <label for="dateType" class="radio-inline">                  
+                      <input name="dateType" type="radio" value="Depart Date" [(ngModel)]=equipmentTripSearch.dateType> Depart Date
+                      </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+           <div class="row">
+            <div class="col-sm-4">	
+              <div class="form-group">
+                <div class="row">
+                  <label for="startDate" class="col-xs-4 col-form-label">Start Date</label>
+                  <div class="col-xs-4">
+                    <div id="startDate" class="input-group date">
+                      <input type="type" class="form-control" name="startDate" ngui-datetime-picker useValueAsDate [(ngModel)]="equipmentTripSearch.startDate">
+                      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div id="startDate" class="input-group date"> <input type="type" ngui-datetime-picker class="form-control" name="startDate" useValueAsDate [(ngModel)]="equipmentTripSearch.endDate">
+                      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-sm-4">
+              <button class="btn btn-warning" type="button" (click)="searchEquipmentTrip()">Search</button>
+            </div>
+          </div>
+        </form>
+
+
+      </div>
     </div>
-
-    <div class="form-group row">
-      <label for="dateType" class="col-sm-1 col-form-label">DateType</label>
-      <label for="dateType" class="col-sm-1 col-form-label">ShipDate</label>
-      <div class="col-sm-1">
-        <input name="dateType" type="radio" value="Ship Date" [(ngModel)]=equipmentTripSearch.dateType>
-      </div>
-      <label for="dateType" class="col-sm-1 col-form-label">DepartDate</label>
-      <div class="col-sm-1">
-        <input name="dateType" type="radio" value="Depart Date" [(ngModel)]=equipmentTripSearch.dateType>
-      </div>
-    </div>
-
-    <div class="form-group row">
-      <label for="startDate" class="col-sm-1 col-form-label">StartDate</label>
-      <div class="col-sm-2">
-        <input type="date" name="startDate" useValueAsDate [(ngModel)]="equipmentTripSearch.startDate">
-      </div>
-      <div class="col-sm-2">
-        <input type="date" name="endDate" useValueAsDate [(ngModel)]="equipmentTripSearch.endDate">
-      </div>
-    </div>
-    <br/>
-
-    <div class="form-group ">
-      <button class="btn btn-primary" type="button" (click)="searchEquipmentTrip()">Search</button>
-    </div>
-  </form>
-
-  <div class="form-group  col-md-12  list">
-    <br/> 
-    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Trip</button>
-    <table class="table table-condensed table-bordered table-responsive table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>Equipment</th>
-          <th>Location</th>
-          <th>Shipper</th>
-          <th>Product</th>
-
-          <th>RedTag</th>
-          <th>L/E</th>
-          <th>Ship Date</th>
-          <th>CP Date</th>
-          <th>ArrivalDate</th>
-
-          <th>L/E Date</th>
-          <th>Release Date</th>
-          <th>Depart Date</th>
-          <th>Weight Received</th>
-          <th>Weight Remaining</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let equipmentTrip of equipmentTripDisplayList" (click)="gotoDetail(equipmentTrip)">
-          <td>{{equipmentTrip.equipmentTripId}}</td>
-          <td>{{equipmentTrip.equipmentName}}</td>
-          <td>{{equipmentTrip.locationName}}</td>
-          <td>{{equipmentTrip.shipperName}}</td>
-          <td>{{equipmentTrip.productName}}</td>
-          <td>{{equipmentTrip.isRedTag}}</td>
-          <td>{{equipmentTrip.loadedEmptyStatus}}</td>
-          <td>{{equipmentTrip.shipDate| date: 'MM/dd/yyyy'}}</td>
-          <td>{{equipmentTrip.cpDate| date: 'MM/dd/yyyy'}}</td>
-          <td>{{equipmentTrip.arrivalDate| date: 'MM/dd/yyyy'}}</td>
-          <td>{{equipmentTrip.loadedEmptyDate| date: 'MM/dd/yyyy'}}</td>
-          <td>{{equipmentTrip.releaseDate| date: 'MM/dd/yyyy'}}</td>
-          <td>{{equipmentTrip.departDate| date: 'MM/dd/yyyy'}}</td>
-          <td>{{equipmentTrip.weightReceived}}</td>
-          <td>{{equipmentTrip.weightRemaining}}</td>
-
-        </tr>
-      </tbody>
-    </table>
-    <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Trip</button>
   </div>
+
+  <div class="panel-body">
+    <div class="table-responsive">
+      <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Trip</button>
+      <table class="table table-condensed table-bordered table-responsive table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Equipment</th>
+            <th>Location</th>
+            <th>Shipper</th>
+            <th>Product</th>
+
+            <th>RedTag</th>
+            <th>L/E</th>
+            <th>Ship Date</th>
+            <th>CP Date</th>
+            <th>ArrivalDate</th>
+
+            <th>L/E Date</th>
+            <th>Release Date</th>
+            <th>Depart Date</th>
+            <th>Weight Received</th>
+            <th>Weight Remaining</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let equipmentTrip of equipmentTripDisplayList" (click)="gotoDetail(equipmentTrip)">
+            <td>{{equipmentTrip.equipmentTripId}}</td>
+            <td>{{equipmentTrip.equipmentName}}</td>
+            <td>{{equipmentTrip.locationName}}</td>
+            <td>{{equipmentTrip.shipperName}}</td>
+            <td>{{equipmentTrip.productName}}</td>
+            <td>{{equipmentTrip.isRedTag}}</td>
+            <td>{{equipmentTrip.loadedEmptyStatus}}</td>
+            <td>{{equipmentTrip.shipDate| date: 'MM/dd/yyyy'}}</td>
+            <td>{{equipmentTrip.cpDate| date: 'MM/dd/yyyy'}}</td>
+            <td>{{equipmentTrip.arrivalDate| date: 'MM/dd/yyyy'}}</td>
+            <td>{{equipmentTrip.loadedEmptyDate| date: 'MM/dd/yyyy'}}</td>
+            <td>{{equipmentTrip.releaseDate| date: 'MM/dd/yyyy'}}</td>
+            <td>{{equipmentTrip.departDate| date: 'MM/dd/yyyy'}}</td>
+            <td>{{equipmentTrip.weightReceived}}</td>
+            <td>{{equipmentTrip.weightRemaining}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isWritable" (click)="addNewDetail($event)">Add New Trip</button>
+    </div>
+  </div>
+
+</div>

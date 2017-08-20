@@ -1,70 +1,86 @@
-<div class="container-fluid">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Equipment Trip</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+          <form class="form-horizontal" novalidate (ngSubmit)="saveEquipmentTrip()" [formGroup]="equipmentTripForm">
+       
+       <!-- row 1 -->
+       <div class="row">  
 
-    <h2>EquipmentTrip</h2>
-    <span layout="row"><hr flex/></span>
-    <form class="form-horizontal" novalidate (ngSubmit)="saveEquipmentTrip()" [formGroup]="equipmentTripForm" form-inline>
-        <!-- row 1 -->
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="equipmentTrip && equipmentTrip.equipmentTripId !== 0 ">
-                    <label for="equipmentTripId" class="col-sm-4 col-form-label">Id</label>
-                    <div class="col-sm-8">
-                        <input type="number" id="userIdId" class="form-control readOnly" formControlName="equipmentTripId" [readonly]="true">
-                    </div>
+         <div class="col-md-3 col-sm-6">
+            <div class="form-group " *ngIf="equipmentTrip && equipmentTrip.equipmentTripId !== 0 ">
+                <div class="row">
+                <label for="equipmentTripId" class="col-sm-4 col-form-label">Id</label>
+                <div class="col-sm-8">
+                    <input type="number" id="userIdId" class="form-control readOnly" formControlName="equipmentTripId" [readonly]="true">
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="equipmentTrip">
-                    <label for="equipmentId" class="col-sm-4 col-form-label">Equipment*</label>
-                    <div class="col-sm-8">
-                        <select class="form-control readOnly" name="equipmentId" formControlName="equipmentId" required *ngIf="equipmentTrip.equipmentTripId === 0 || equipmentTrip.equipmentTripId === null "> 
-                        <option [ngValue]="null">Select </option>
-                        <option *ngFor="let equipment of equipmentList" 
-                        [value]="equipment.equipmentId" 
-                        >{{equipment.equipmentName}}</option>
-                    </select>
-                    <div *ngIf="equipmentTrip.equipmentTripId !== 0 ">
-                            {{getEquipmentName(equipmentTrip.equipmentId)}}
-                        </div>
-                    </div>
-                    <savage-message></savage-message>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="equipmentTrip">
-                    <label for="customerId" class="col-sm-4 col-form-label">Customer*</label>
-                    <div class="col-sm-8">
-                        <select class="form-control readOnly" name="customerId" formControlName="customerId" required> 
-                            <option [ngValue]="null">Select </option>
-                        <option *ngFor="let customer of customerList" 
-                        [value]="customer.companyId" 
-                        > {{customer.companyName}}</option>
-                    </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="equipmentTrip">
-                    <label for="locationId" class="col-sm-4 col-form-label">Location*</label>
-                    <div class="col-sm-8">
-                        <select class="form-control readOnly" name="locationId" formControlName="locationId" *ngIf="equipmentTrip.equipmentTripId === 0 || equipmentTrip.equipmentTripId === null "> 
-                            <option [ngValue]="null">Select </option>
-                        <option *ngFor="let location of locationList" 
-                        [value]="location.locationId" 
-                        >{{location.locationName}}</option>
-                    </select>
-                        <div *ngIf="equipmentTrip.equipmentTripId !== 0 ">
-                            {{getLocationName(equipmentTrip.locationId)}}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
+
+        <div class="col-md-3 col-sm-6">
+            <div class="form-group " *ngIf="equipmentTrip">
+                <div class="row">
+                <label for="equipmentId" class="col-sm-4 col-form-label">Equipment*</label>
+                <div class="col-sm-8">
+                    <select class="form-control readOnly" name="equipmentId" formControlName="equipmentId" required *ngIf="equipmentTrip.equipmentTripId === 0 || equipmentTrip.equipmentTripId === null "> 
+                    <option [ngValue]="null">Select </option>
+                    <option *ngFor="let equipment of equipmentList" 
+                    [value]="equipment.equipmentId" 
+                    >{{equipment.equipmentName}}</option>
+                </select>
+                <div *ngIf="equipmentTrip.equipmentTripId !== 0 ">
+                        {{getEquipmentName(equipmentTrip.equipmentId)}}
+                    </div>
+                </div>
+                <savage-message></savage-message>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="form-group " *ngIf="equipmentTrip">
+                <div class="row">
+                <label for="customerId" class="col-sm-4 col-form-label">Customer*</label>
+                <div class="col-sm-8">
+                    <select class="form-control readOnly" name="customerId" formControlName="customerId" required> 
+                        <option [ngValue]="null">Select </option>
+                    <option *ngFor="let customer of customerList" 
+                    [value]="customer.companyId" 
+                    > {{customer.companyName}}</option>
+                </select>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="form-group " *ngIf="equipmentTrip">
+                <div class="row">
+                <label for="locationId" class="col-sm-4 col-form-label">Location*</label>
+                <div class="col-sm-8">
+                    <select class="form-control readOnly" name="locationId" formControlName="locationId" *ngIf="equipmentTrip.equipmentTripId === 0 || equipmentTrip.equipmentTripId === null "> 
+                        <option [ngValue]="null">Select </option>
+                    <option *ngFor="let location of locationList" 
+                    [value]="location.locationId" 
+                    >{{location.locationName}}</option>
+                </select>
+                    <div *ngIf="equipmentTrip.equipmentTripId !== 0 ">
+                        {{getLocationName(equipmentTrip.locationId)}}
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
         <!-- row 2 -->
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="equipmentTripLoadedStatus" class="col-sm-4 col-form-label">Load/Empty</label>
                     <div class="col-sm-8">
                         <select class="form-control readOnly" name="equipmentTripLoadedStatus" formControlName="equipmentTripLoadedStatus">
@@ -72,55 +88,68 @@
                         <option *ngFor="let tripLoadedStatus of tripLoadedStatuses" [value]="tripLoadedStatus" >{{tripLoadedStatus}}</option>
                         </select>
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="loadedEmptyDate" class="col-sm-4 col-form-label">L/E Date</label>
                     <div class="col-sm-8">
                         <!--<input type="date" formControlName="loadedEmptyDate" useValueAsDate>-->
                         <input formControlName="loadedEmptyDate" ngui-datetime-picker class="form-control date-addon" />
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="arrivalWeight" class="col-sm-4 col-form-label">Arrival Weight</label>
                     <div class="col-sm-8">
                         <input type="number" id="arrivalWeight" class="form-control readOnly" formControlName="arrivalWeight">
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="sequence" class="col-sm-4 col-form-label">Sequence</label>
                     <div class="col-sm-8">
                         <input type="number" id="sequence" class="form-control readOnly" formControlName="sequence">
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
 
+
         <!-- row 3 -->
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="unitTrain" class="col-sm-4 col-form-label">Unit Train</label>
                     <div class="col-sm-8">
                         <input type="text" id="unitTrain" class="form-control readOnly" formControlName="unitTrain">
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="outboundUnitTrain" class="col-sm-4 col-form-label">Outbound Unit Train</label>
                     <div class="col-sm-8">
                         <input type="text" id="outboundUnitTrain" class="form-control readOnly" formControlName="outboundUnitTrain">
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="status" class="col-sm-4 col-form-label">Status*</label>
                     <div class="col-sm-8">
                         <select class="form-control readOnly" name="status" formControlName="status" required> 
@@ -129,30 +158,37 @@
                     </select>
                     </div>
                 </div>
+                </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group" *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="verificationSeal" class="col-sm-4 col-form-label">Verification Seal</label>
                     <div class="col-sm-8">
                         <input type="text" id="verificationSeal" class="form-control readOnly" formControlName="verificationSeal">
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- row 4 -->
+
+<!-- row 4 -->
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip ">
+                    <div class="row">
                     <label for="arrivalDate" class="col-sm-4 col-form-label">Arrival Date*</label>
                     <div class="col-sm-8">
                         <!--<input type="date" formControlName="arrivalDate" useValueAsDate required>-->
                         <input formControlName="arrivalDate" ngui-datetime-picker required class="form-control date-addon" />
                     </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-md-3 col-sm-6">
                 <div class="form-group " *ngIf="equipmentTrip ">
+                      <div class="row">
                     <label for="cpDate" class="col-sm-4 col-form-label">CP Date</label>
                     <div class="col-sm-8">
                         <!--<input type="date" formControlName="cpDate" useValueAsDate>-->
@@ -160,41 +196,52 @@
                             {{equipmentTrip.cpDate}}
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group" *ngIf="equipmentTrip">
+                      <div class="row">
                     <label for="seals" class="col-sm-4 col-form-label">Seals</label>
                     <div class="col-sm-8">
                         <input type="text" id="seals" class="form-control readOnly" formControlName="seals">
                     </div>
+                      </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group" *ngIf="equipmentTrip">
+                      <div class="row">
                     <label for="serialNumber" class="col-sm-4 col-form-label">Serial#</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control readOnly" formControlName="serialNumber">
                     </div>
+                      </div>
                 </div>
             </div>
         </div>
 
-        <!-- isRedTag row -->
+
+         <!-- isRedTag row -->
         <div class="row">
-            <div class="col-sm-12 col-md-2">
+            <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip ">
-                    <label for="isRedTag" class="col-sm-2 col-md-6 col-form-label">Red Tag</label>
-                    <div class="col-sm-4 col-md-6">
+                    <div class="row">
+                    <label for="isRedTag" class="col-sm-4 col-form-label">Red Tag</label>
+                    <div class="col-sm-8">
                         <input type="checkbox" id="isRedTag" formControlName="isRedTag">
+                    </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-10">
+
+           <div class="col-sm-12 col-md-9">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="redTagComment" class="col-sm-1 col-form-label">Red Tag Comment</label>
                     <div class="col-sm-11">
                         <input type="text" id="redTagComment" class="form-control readOnly" formControlName="redTagComment">
+                    </div>
                     </div>
                 </div>
             </div>
@@ -202,28 +249,34 @@
 
         <!-- isReserve row -->
         <div class="row">
-            <div class="col-sm-12 col-md-2">
+            <div class="col-sm-6 col-md-3">
                 <div class="form-group" *ngIf="equipmentTrip && equipmentTrip.equipmentTripId !== 0 ">
-                    <label for="isReserve" class="col-sm-2 col-md-6  col-form-label">Reserve</label>
-                    <div class="col-sm-4 col-md-6">
+                    <div class="row">
+                    <label for="isReserve" class="col-sm-4 col-form-label">Reserve</label>
+                    <div class="col-sm-8">
                         <input type="checkbox" id="isReserve" formControlName="isReserve">
+                    </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-10">
+            <div class="col-sm-12 col-md-9">
+                <div class="row">
                 <div class="form-group " *ngIf="equipmentTrip && equipmentTrip.equipmentTripId !== 0 ">
                     <label for="reserveComment" class="col-sm-1 col-form-label">Reserve Comment</label>
                     <div class="col-sm-11">
                         <input type="text" id="reserveComment" class="form-control readOnly" formControlName="reserveComment">
                     </div>
                 </div>
+                </div>
             </div>
         </div>
+
 
         <!-- row 7 -->
         <div class="row">
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip && equipmentTrip.equipmentTripId !== 0 ">
+                    <div class="row">   
                     <label for="shipperId" class="col-sm-4 col-form-label">Shipper</label>
                     <div class="col-sm-8">
                         <select class="form-control readOnly" name="shipperId" formControlName="shipperId"> 
@@ -234,19 +287,23 @@
                     </select>
                     </div>
                 </div>
+                </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip">
+                  <div class="row">
                     <label for="shipDate" class="col-sm-4 col-form-label">Ship Date*</label>
                     <div class="col-sm-8">
                         <!--<input type="date" formControlName="shipDate" useValueAsDate required>-->
                         <input formControlName="shipDate" ngui-datetime-picker required class="form-control date-addon" />
 
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip">
+                   <div class="row">
                     <label for="arriveDepartStatus" class="col-sm-4 col-form-label">Arrive/Depart</label>
                     <div class="col-sm-8">
                         <select class="form-control readOnly" name="status" formControlName="arriveDepartStatus"> 
@@ -254,22 +311,26 @@
                         <option *ngFor="let arrivalDepartureStatus of arrivalDepartureStatuses" [value]="arrivalDepartureStatus" >{{arrivalDepartureStatus}}</option>
                         </select>
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip ">
+                    <div class="row">
                     <label for="releaseDate" class="col-sm-4 col-form-label">Release Date</label>
                     <div class="col-sm-8">
                         <input formControlName="releaseDate" ngui-datetime-picker class="form-control date-addon" />
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- row 8 -->
+         <!-- row 8 -->
         <div class="row">
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="arrivalInspectionLoadedEmptyStatus" class="col-sm-4 col-form-label">Arr. Inspect L/E</label>
                     <div class="col-sm-8">
                         <select class="form-control readOnly" name="arrivalInspectionLoadedEmptyStatus" formControlName="arrivalInspectionLoadedEmptyStatus"> 
@@ -277,33 +338,39 @@
                             <option *ngFor="let tripLoadedStatus of tripLoadedStatuses" [value]="tripLoadedStatus" >{{tripLoadedStatus}}</option>
                         </select>
                     </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="equipmentTrip">
-                    <label for="arrivalInspectionDate" class="col-sm-4 col-form-label">Arr. Inspect Date</label>
-                    <div class="col-sm-8">
-                        <input formControlName="arrivalInspectionDate" ngui-datetime-picker class="form-control date-addon" />
                     </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
+                    <label for="arrivalInspectionDate" class="col-sm-4 col-form-label">Arr. Inspect Date</label>
+                    <div class="col-sm-8">
+                        <input formControlName="arrivalInspectionDate" ngui-datetime-picker class="form-control date-addon" />
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="releaseInspectionLoadedEmptyStatus" class="col-sm-4 col-form-label">Rel Inspec L/E</label>
                     <div class="col-sm-8">
                         <select class="form-control readOnly" name="releaseInspectionLoadedEmptyStatus" formControlName="releaseInspectionLoadedEmptyStatus"> 
                             <option [ngValue]="null">Select </option>
                         <option *ngFor="let tripLoadedStatus of tripLoadedStatuses" [value]="tripLoadedStatus" >{{tripLoadedStatus}}</option>
                     </select>
-
                     </div>
+                </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group" *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="releaseInspectionDate" class="col-sm-4 col-form-label">Rel Inspect Date</label>
                     <div class="col-sm-8">
                         <input formControlName="releaseInspectionDate" ngui-datetime-picker class="form-control date-addon" />
+                    </div>
                     </div>
                 </div>
             </div>
@@ -313,69 +380,93 @@
         <div class="row">
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="releaseAuthorizationLoadedEmptyStatus" class="col-sm-4 col-form-label">Rel Auth L/E</label>
                     <div class="col-sm-8">
                         <select class="form-control readOnly" name="releaseAuthorizationLoadedEmptyStatus" formControlName="releaseAuthorizationLoadedEmptyStatus"> 
                             <option [ngValue]="null">Select </option>
                         <option *ngFor="let tripLoadedStatus of tripLoadedStatuses" [value]="tripLoadedStatus" >{{tripLoadedStatus}}</option>
                     </select>
-
                     </div>
+                </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="releaseAuthorizationDate" class="col-sm-4 col-form-label">Rel Auth Date</label>
                     <div class="col-sm-8">
                         <!--<input type="date" formControlName="releaseAuthorizationDate" useValueAsDate>-->
                         <input formControlName="releaseAuthorizationDate" ngui-datetime-picker class="form-control date-addon" />
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip">
+                    <div class="row">
                     <label for="fileTransferDate" class="col-sm-4 col-form-label">Fin. Transfer Date</label>
                     <div class="col-sm-8">
                         <!--<input type="date" formControlName="fileTransferDate" useValueAsDate>-->
                         <input formControlName="fileTransferDate" ngui-datetime-picker class="form-control date-addon" />
 
                     </div>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6 col-md-3">
                 <div class="form-group " *ngIf="equipmentTrip ">
+                    <div class="row">
                     <label for="departDate" class="col-sm-4 col-form-label">Depart Date</label>
                     <div class="col-sm-8">
                         <!--<input type="date" formControlName="departDate" useValueAsDate>-->
                         <input formControlName="departDate" ngui-datetime-picker class="form-control date-addon" />
 
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <br/>
-        <equipment-trip-products *ngIf="equipmentTrip" [equipmentTripProducts]="equipmentTrip.equipmentTripProducts" [equipmentTrip]="equipmentTripForm.value"
+
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <equipment-trip-products *ngIf="equipmentTrip" [equipmentTripProducts]="equipmentTrip.equipmentTripProducts" [equipmentTrip]="equipmentTripForm.value"
             [isEquipmentTripValid]="equipmentTripForm.valid"></equipment-trip-products>
-        <br/>
+                  
         <equipment-trip-events *ngIf="equipmentTrip  && equipmentTrip.equipmentTripEvents" [equipmentTripEventList]="equipmentTrip.equipmentTripEvents"
             [equipmentTrip]="equipmentTripForm.value" [locationList]="locationList"  (equipmentTripResponseEvent)="onEquipmentTripResponseEvent($event)"></equipment-trip-events>
-        <br/>
+      
         <equipment-trip-heatings *ngIf="equipmentTrip  && equipmentTrip.equipmentTripHeatings" [equipmentTripHeatings]="equipmentTrip.equipmentTripHeatings"
             [equipmentTrip]="equipmentTripForm.value"></equipment-trip-heatings>
-        <br/>
+        
         <equipment-trip-services *ngIf="equipmentTrip  && equipmentTrip.equipmentTripServices" [equipmentTripServices]="equipmentTrip.equipmentTripServices"
             [equipmentTrip]="equipmentTripForm.value"></equipment-trip-services>
-        <br/>
+        </div>
 
+        <div class="row">
         <button type="submit" class="btn btn-primary" [disabled]="!equipmentTripForm.valid || isInvalid || !hasActiveProduct() || !pageSecurity.isWritable">Save</button>
         <button type="button" class="btn btn-primary" [disabled]="!equipmentTripForm.valid || isInvalid || !hasActiveProduct() || !pageSecurity.isWritable"
             (click)="saveEquipmentTripAndRepeat($event)">Save And Repeat</button>
         <button type="button" class="btn btn-primary" [disabled]="!pageSecurity.isVoidable" (click)="voidEquipmentTrip($event)">Void</button>
         <button type="button" class="btn btn-primary" (click)="cancelEquipmentTrip($event)">Cancel</button>
 
-    </form>
-    <br/>
-    <br/>
+
+        </div>
+
+
+
+
+
+
+
+
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
     <!--<pre>
     form:{{equipmentTripForm.value | json}}
