@@ -224,11 +224,22 @@ fieldset[disabled] .form-control {
 .panel-title {
     font-size: 28px;
 }
-
+.panel-group .panel-title{font-size: 18px;}
+.panel-group .panel-default>.panel-heading{border: 1px solid #ccc; background: #efefef none;}
 .table {
     margin: 20px 0;
 }
-
+.panel-group .panel-heading .panel-title:after{
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e082";
+    float: right;
+    opacity:0.6;
+ }
+ .panel-group .panel-heading .panel-title.collapsed:after  {
+    /* symbol for "collapsed" panels */
+    content: "\e081";
+ }
 .form-control[disabled],
 fieldset[disabled] .form-control {
     background: transparent;
@@ -315,16 +326,20 @@ div.checkbox+label {
 .form-horizontal .form-group {
     margin: 0 0 15px;
 }
-
+.form-horizontal inout[type="text"]{padding: 4px;}
+/* commented the date styles as changed with bootstrap styling
 .date-addon,
 input[type="date"],
 input[ngui-datetime-picker] {
     padding-left: 4px;
     padding-right: 4px;
     background: url('/assets/images/date_icon.png') no-repeat 98% 50%;
-}
-
+}*/
+.off-scroll{height: auto;overflow: visible;}
 .off-control{border: 0 none; box-shadow: none;}
+.btn-group .dropdown-menu{background: #fff none; border-color: #ccc;}
+.btn-group .dropdown-menu a{background: #fff none; color: #333;}
+.btn-group .dropdown-menu .divider{background: #ccc; margin: 2px 4px}
 /*
 #search {
     padding-left: 30px;
