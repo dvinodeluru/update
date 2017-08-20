@@ -224,6 +224,7 @@ fieldset[disabled] .form-control {
 .panel-title {
     font-size: 28px;
 }
+.panel-group .panel-default{border: 1px solid #ccc; margin-bottom:10px; }
 .panel-group .panel-title{font-size: 18px;}
 .panel-group .panel-default>.panel-heading{border: 1px solid #ccc; background: #efefef none;}
 .table {
