@@ -95,10 +95,10 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <div class="row"><label for="transferType" class="col-xs-4 col-form-label">TransferType</label>
+                <div class="row"><label for="transferType" class="col-xs-4 col-form-label">Transfer Type</label>
                   <div class="col-xs-8">
                     <select class="form-control readOnly" name="transferTypeId" [(ngModel)]="transferOrderSearch.transferTypeId">
-                        <option [ngValue]="null">Select TransferType</option>
+                        <option [ngValue]="null">Select Transfer Type</option>
                         <option *ngFor="let transferType of transferTypeList"
                         [value]="transferType.transferTypeId"
                         >{{transferType.transferType}}</option>
@@ -126,7 +126,7 @@
             <div class="col-sm-4">
               <div class="form-group">
                 <div class="row">
-                  <label for="dateType" class="col-xs-4 col-form-label">DateType</label>
+                  <label for="dateType" class="col-xs-4 col-form-label">Date Type</label>
                   <div class="col-xs-8">
                     <label for="dateType" class="radio-inline">                   
                       <input name="dateType" type="radio" value="Loaded Date" [(ngModel)]=transferOrderSearch.dateType>Loaded
@@ -146,11 +146,17 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="form-group">
-                <div class="row"><label for="startDate" class="col-xs-4 col-form-label">StartDate</label>
-                  <div class="col-xs-8">
-                    <div id="startDate" class="input-group date"> <input type="type" class="form-control" name="startDate" useValueAsDate [(ngModel)]="transferOrderSearch.startDate">
+                <div class="row">
+                  <label for="startDate" class="col-xs-4 col-form-label">Start Date</label>
+                  <div class="col-xs-4">
+                    <div id="startDate" class="input-group date">
+                      <input type="type" class="form-control" name="startDate" ngui-datetime-picker useValueAsDate [(ngModel)]="transferOrderSearch.startDate">
                       <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                      <input type="type" class="form-control" name="startDate" useValueAsDate [(ngModel)]="transferOrderSearch.endDate">
+                    </div>
+                  </div>
+                  <div class="col-xs-4">
+                    <div id="startDate" class="input-group date"> <input type="type" ngui-datetime-picker class="form-control" name="startDate" useValueAsDate [(ngModel)]="transferOrderSearch.endDate">
+                      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                     </div>
                   </div>
                 </div>
