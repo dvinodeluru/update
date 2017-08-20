@@ -1,92 +1,117 @@
-<div class="container-fluid">
-    <h4><button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed">{{isCollapsed ? '+' : '-'}}</button>        Service</h4>
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="eequipmentTripService-panel">
+    <h4 class="panel-title" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#equipmentTripService"
+      aria-expanded="true" aria-controls="equipmentTripService">Service </h4>
+  </div>
+  <div id="equipmentTripService" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="equipmentTripService">
     <form #equipmentTripServiceForm="ngForm" (ngSubmit)="submitForm(equipmentTripServiceForm)" form-inline>
-        <div class="col-sm-12 row">
-            <div class="col-sm-10" [collapse]="isCollapsed">
-                <table class="table table-condensed table-bordered table-responsive table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Service</th>
-                            <th>Activity Date</th>
-                            <th>Quantity</th>
-                            <th>UOM</th>
-                            <th>Authjorized By</th>
-                            <th>Comment</th>
-                            <th>Voided</th>
-                        </tr>
-                    </thead>
 
-                    <tbody *ngIf="equipmentTripServices" [collapse]="isCollapsed">
-                        <tr *ngFor="let equipmentTripService of equipmentTripServices;let i=index">
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.serviceId}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.activityDate| date: 'MM/dd/yyyy'}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.quantity}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.uomId}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.authorizedBy}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.comment}}</td>
-                            <td><input type="checkbox" class="checkbox" name="{{i}}IsVoided" #{{i}}IsActive="ngModel" (change)="onChangeIsVoided(i,$event)"
-                                    [(ngModel)]=equipmentTripService.isVoided [disabled]="!pageSecurity.isWritable ? true : null"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+      <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Activity Date</th>
+              <th>Quantity</th>
+              <th>UOM</th>
+              <th>Authjorized By</th>
+              <th>Comment</th>
+              <th>Voided</th>
+            </tr>
+          </thead>
 
-            <!--<div class="col-sm-4" *ngIf="equipmentTripServiceObject">-->
-            <div class="col-sm-2" [collapse]="isCollapsed">
+          <tbody *ngIf="equipmentTripServices" [collapse]="isCollapsed">
+            <tr *ngFor="let equipmentTripService of equipmentTripServices;let i=index">
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.serviceId}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.activityDate| date: 'MM/dd/yyyy'}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.quantity}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.uomId}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.authorizedBy}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripService.comment}}</td>
+              <td><input type="checkbox" class="checkbox" name="{{i}}IsVoided" #{{i}}IsActive="ngModel" (change)="onChangeIsVoided(i,$event)"
+                  [(ngModel)]=equipmentTripService.isVoided [disabled]="!pageSecurity.isWritable ? true : null"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--<div class="col-sm-4" *ngIf="equipmentTripServiceObject">-->
+      <!--<div class="col-sm-2" [collapse]="isCollapsed">
                 <button class="btn btn-primary" type="button" (click)="onAddService()" [disabled]="equipmentTrip && (equipmentTrip.equipmentTripId ==0  || equipmentTrip.equipmentTripId ==null) || !pageSecurity.isWritable">Add Service</button>
             </div>
-        </div>
-        <popup #equipmentTripServicePopup (confirmClick)="onSaveEquipmentTripService()" (cancelClick)="onCancelEquipmentTripService();">
-            <div class="form-group row" *ngIf="equipmentTripServiceObject">
-                <label for="serviceId" class="col-sm-2 col-form-label">Service*</label>
-                <div class="col-sm-4">
-                    <select class="form-control readOnly" id="serviceId" name="serviceId" [(ngModel)]=equipmentTripServiceObject.serviceId (change)="onServiceChange($event.target.value)"
-                        required> 
+            -->
+  
+  <popup #equipmentTripServicePopup (confirmClick)="onSaveEquipmentTripService()" (cancelClick)="onCancelEquipmentTripService();">
+    <div class="form-group" *ngIf="equipmentTripServiceObject">
+      <div class="row">
+        <label for="serviceId" class="col-sm-2 col-form-label">Service*</label>
+        <div class="col-sm-4">
+          <select class="form-control readOnly" id="serviceId" name="serviceId" [(ngModel)]=equipmentTripServiceObject.serviceId (change)="onServiceChange($event.target.value)"
+            required> 
                         <option [ngValue]="">Select </option>
                     <option *ngFor="let service of serviceTypeList" 
                     [value]="service.serviceTypeId" [disabled]="!pageSecurity.isWritable"
                     >{{service.serviceType}}</option>
                 </select>
-                </div>
-            </div>
+        </div>
+      </div>
+    </div>
 
-            <div class="form-group row" *ngIf="equipmentTripServiceObject">
-                <label for="activityDate" class="col-sm-2 col-form-label">Activity Date*</label>
-                <div class="col-sm-4">
-                    <!--<input type="date" class="form-control readOnly" name="activityDate" [(ngModel)]=equipmentTripServiceObject.activityDate
+    <div class="form-group" *ngIf="equipmentTripServiceObject">
+      <div class="row">
+        <label for="activityDate" class="col-sm-2 col-form-label">Activity Date*</label>
+        <div class="col-sm-4">
+          <!--<input type="date" class="form-control readOnly" name="activityDate" [(ngModel)]=equipmentTripServiceObject.activityDate
                         required useValueAsDate>-->
-                    <input ngui-datetime-picker class="form-control readOnly" name="activityDate" [(ngModel)]=equipmentTripServiceObject.activityDate
-                        required />
-                </div>
-                <label for="quantity" class="col-sm-2 col-form-label">Quantity*</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="quantity" [(ngModel)]=equipmentTripServiceObject.quantity required>
-                </div>
-            </div>
-            <div class="form-group row" *ngIf="equipmentTripServiceObject">
-                <label for="uomId" class="col-sm-2 col-form-label">Unit Of Measure*</label>
-                <div class="col-sm-4">
-                    {{getUnitOfMeasureName(equipmentTripServiceObject.uomId)}}
-                </div>
-                <label for="authorizedBy" class="col-sm-2 col-form-label">Autorized By*</label>
-                <div class="col-sm-4">
-                    <input type="string" class="form-control readOnly" name="authorizedBy" [(ngModel)]=equipmentTripServiceObject.authorizedBy
-                        required>
-                </div>
+          <input ngui-datetime-picker class="form-control readOnly" name="activityDate" [(ngModel)]=equipmentTripServiceObject.activityDate
+            required />
+        </div>
+        <label for="quantity" class="col-sm-2 col-form-label">Quantity*</label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control readOnly" name="quantity" [(ngModel)]=equipmentTripServiceObject.quantity required>
+        </div>
+      </div>
+    </div>
 
-            </div>
-            <div class="form-group row" *ngIf="equipmentTripServiceObject">
-                <label for="comment" class="col-sm-2 col-form-label">Comment</label>
-                <div class="col-sm-4">
-                    <input type="string" class="form-control readOnly" name="comment" [(ngModel)]=equipmentTripServiceObject.comment>
-                </div>
-                <label for="isVoided" class="col-sm-2 col-form-label">Voided</label>
-                <div class="col-sm-4">
-                    <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=equipmentTripServiceObject.isVoided>
-                </div>
-            </div>
-        </popup>
-    </form>
-    <!--equipmentTripServiceObject:{{equipmentTripServiceObject|json}}-->
-    <!--
+    <div class="form-group" *ngIf="equipmentTripServiceObject">
+      <div class="row">
+        <label for="uomId" class="col-sm-2 col-form-label">Unit Of Measure*</label>
+        <div class="col-sm-4">
+          {{getUnitOfMeasureName(equipmentTripServiceObject.uomId)}}
+        </div>
+        <label for="authorizedBy" class="col-sm-2 col-form-label">Autorized By</label>
+        <div class="col-sm-4">
+          <input type="string" class="form-control readOnly" name="authorizedBy" [(ngModel)]=equipmentTripServiceObject.authorizedBy>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group" *ngIf="equipmentTripServiceObject">
+      <div class="row">
+        <label for="comment" class="col-sm-2 col-form-label">Comment</label>
+        <div class="col-sm-4">
+          <input type="string" class="form-control readOnly" name="comment" [(ngModel)]=equipmentTripServiceObject.comment>
+        </div>
+        <label for="isVoided" class="col-sm-2 col-form-label">Voided</label>
+        <div class="col-sm-4">
+          <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=equipmentTripServiceObject.isVoided>
+        </div>
+      </div>
+    </div>
+  </popup>
+  </form>
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--equipmentTripServiceObject:{{equipmentTripServiceObject|json}}-->
+<!--
   equipmentTrip: {{equipmentTrip | json}}-->

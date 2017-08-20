@@ -1,113 +1,141 @@
-<div class="container-fluid">
-    <h4><button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed">{{isCollapsed ? '+' : '-'}}</button>        Heatings</h4>
-    <form #equipmentTripHeatingForm="ngForm" (ngSubmit)="submitForm(equipmentTripHeatingForm)" form-inline>
-        <div class="col-sm-12 row">
-            <div class="col-sm-10" [collapse]="isCollapsed">
-                <table class="table table-condensed table-bordered table-responsive table-striped table-hover">
-                    <thead>
-                        <tr>
-                            <th>Hold Temp</th>
-                            <th>Pick Temp</th>
-                            <th>Start Date</th>
-                            <th>Start Temp</th>
-                            <th>End Date</th>
-                            <th>End temp</th>
-                            <th>Heat Hours</th>
-                            <th>Billable Hours</th>
-                            <th>Service</th>
-                            <th>Voided</th>
-                        </tr>
-                    </thead>
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="equipmentTripHeating-panel">
+    <h4 class="panel-title" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#equipmentTripHeating"
+      aria-expanded="true" aria-controls="equipmentTripHeatingForm">Heatings</h4>
+  </div>
+    
+  <div id="equipmentTripHeating" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="equipmentTripHeating">
 
-                    <tbody *ngIf="equipmentTripHeatings" [collapse]="isCollapsed">
-                        <tr style="cursor: pointer" (click)="onEdit(i,$event)" *ngFor="let equipmentTripHeating of equipmentTripHeatings;let i=index">
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.holdTemperature}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.pickupTemperature}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.startDate| date: 'MM/dd/yyyy'}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.startTemperature}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.endDate| date: 'MM/dd/yyyy'}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.endTemperature}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.heatHours}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.billableHours}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.service}}</td>
-                            <td><input type="checkbox" class="checkbox" name="{{i}}IsVoided" #{{i}}IsActive="ngModel"
-                                    (change)="onChangeIsVoided(i,$event)" [(ngModel)]=equipmentTripHeating.isVoided [disabled]="!pageSecurity.isWritable ? true : null">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+    <form #equipmentTripHeatingForm="ngForm" (ngSubmit)="submitForm(equipmentTripHeatingForm)">
 
-            <!--<div class="col-sm-4" *ngIf="equipmentTripHeating">-->
+      <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-responsive table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Hold Temp</th>
+              <th>Pick Temp</th>
+              <th>Start Date</th>
+              <th>Start Temp</th>
+              <th>End Date</th>
+              <th>End temp</th>
+              <th>Heat Hours</th>
+              <th>Billable Hours</th>
+              <th>Service</th>
+              <th>Voided</th>
+            </tr>
+          </thead>
+
+          <tbody *ngIf="equipmentTripHeatings" [collapse]="isCollapsed">
+            <tr style="cursor: pointer" (click)="onEdit(i,$event)" *ngFor="let equipmentTripHeating of equipmentTripHeatings;let i=index">
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.holdTemperature}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.pickupTemperature}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.startDate| date: 'MM/dd/yyyy'}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.startTemperature}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.endDate| date: 'MM/dd/yyyy'}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.endTemperature}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.heatHours}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.billableHours}}</td>
+              <td style="cursor: pointer" (click)="onEdit(i,$event)">{{equipmentTripHeating.service}}</td>
+              <td><input type="checkbox" class="checkbox" name="{{i}}IsVoided" #{{i}}IsActive="ngModel" (change)="onChangeIsVoided(i,$event)"
+                  [(ngModel)]=equipmentTripHeating.isVoided [disabled]="!pageSecurity.isWritable ? true : null">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--<div class="col-sm-4" *ngIf="equipmentTripHeating">-->
+      <!--  <div class="row">
             <div class="col-sm-2" [collapse]="isCollapsed">
-                <button class="btn btn-primary" type="button" (click)="onAddHeating()" [disabled]="equipmentTrip && (equipmentTrip.equipmentTripId ==0  || equipmentTrip.equipmentTripId ==null) || !pageSecurity.isWritable">Add Heating</button>
+              <button class="btn btn-primary" type="button" (click)="onAddHeating()" [disabled]="equipmentTrip && (equipmentTrip.equipmentTripId ==0  || equipmentTrip.equipmentTripId ==null) || !pageSecurity.isWritable">Add Heating</button>
             </div>
-        </div>
+          </div>
+-->
+
+
+      <div class="row">
         <popup #equipmentTripHeatingPopup (confirmClick)="onSaveEquipmentTripHeating()" (cancelClick)="onCancelEquipmentTripHeating()">
-            <div class="form-group row" *ngIf="equipmentTripHeatingObject">
-                <label for="holdTemperature" class="col-sm-2 col-form-label">Hold Temperature*</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="holdTemperature" [(ngModel)]=equipmentTripHeatingObject.holdTemperature
-                        required>
-                </div>
-                <label for="pickupTemperature" class="col-sm-2 col-form-label">Pickup Temperature*</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="pickupTemperature" [(ngModel)]=equipmentTripHeatingObject.pickupTemperature
-                        required>
-                </div>
+          <div class="form-group" *ngIf="equipmentTripHeatingObject">
+            <div class="row">
+              <label for="holdTemperature" class="col-xs-2 col-form-label">Hold Temperature*</label>
+              <div class="col-xs-4">
+                <input type="number" class="form-control readOnly" name="holdTemperature" [(ngModel)]=equipmentTripHeatingObject.holdTemperature
+                  required>
+              </div>
+              <label for="pickupTemperature" class="col-xs-2 col-form-label">Pickup Temperature*</label>
+              <div class="col-xs-4">
+                <input type="number" class="form-control readOnly" name="pickupTemperature" [(ngModel)]=equipmentTripHeatingObject.pickupTemperature
+                  required>
+              </div>
             </div>
-            <div class="form-group row" *ngIf="equipmentTripHeatingObject">
-                <label for="startDate" class="col-sm-2 col-form-label">Start Date*</label>
-                <div class="col-sm-4">
-                    <!--<input type="date" class="form-control readOnly" name="startDate" [(ngModel)]=equipmentTripHeatingObject.startDate required
+          </div>
+
+          <div class="form-group" *ngIf="equipmentTripHeatingObject">
+            <div class="row">
+              <label for="startDate" class="col-xs-2 col-form-label">Start Date*</label>
+              <div class="col-xs-4">
+                <!--<input type="date" class="form-control readOnly" name="startDate" [(ngModel)]=equipmentTripHeatingObject.startDate required
                         useValueAsDate>-->
-                        <input ngui-datetime-picker class="form-control readOnly" name="startDate" [(ngModel)]=equipmentTripHeatingObject.startDate required />
-                </div>
-                <label for="startTemperature" class="col-sm-2 col-form-label">Start Temperature*</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="startTemperature" [(ngModel)]=equipmentTripHeatingObject.startTemperature
-                        required>
-                </div>
+                <input ngui-datetime-picker class="form-control readOnly" name="startDate" [(ngModel)]=equipmentTripHeatingObject.startDate
+                  required />
+              </div>
+              <label for="startTemperature" class="col-xs-2 col-form-label">Start Temperature*</label>
+              <div class="col-xs-4">
+                <input type="number" class="form-control readOnly" name="startTemperature" [(ngModel)]=equipmentTripHeatingObject.startTemperature
+                  required>
+              </div>
             </div>
-            <div class="form-group row" *ngIf="equipmentTripHeatingObject">
-                <label for="endDate" class="col-sm-2 col-form-label">End Date</label>
-                <div class="col-sm-4">
-                    <!--<input type="date" class="form-control readOnly" name="endDate" [(ngModel)]=equipmentTripHeatingObject.endDate useValueAsDate>-->
-                     <input ngui-datetime-picker class="form-control readOnly" name="endDate" [(ngModel)]=equipmentTripHeatingObject.endDate required />
-                </div>
-                <label for="endTemperature" class="col-sm-2 col-form-label">End Temperature</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="endTemperature" [(ngModel)]=equipmentTripHeatingObject.endTemperature>
-                </div>
+          </div>
 
+          <div class="form-group" *ngIf="equipmentTripHeatingObject">
+            <div class="row">
+              <label for="endDate" class="col-xs-2 col-form-label">End Date</label>
+              <div class="col-xs-4">
+                <!--<input type="date" class="form-control readOnly" name="endDate" [(ngModel)]=equipmentTripHeatingObject.endDate useValueAsDate>-->
+                <input ngui-datetime-picker class="form-control readOnly" name="endDate" [(ngModel)]=equipmentTripHeatingObject.endDate required
+                />
+              </div>
+              <label for="endTemperature" class="col-xs-2 col-form-label">End Temperature</label>
+              <div class="col-xs-4">
+                <input type="number" class="form-control readOnly" name="endTemperature" [(ngModel)]=equipmentTripHeatingObject.endTemperature>
+              </div>
             </div>
-            <div class="form-group row" *ngIf="equipmentTripHeatingObject">
-                <label for="heatHours" class="col-sm-2 col-form-label">Heat Hours</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="heatHours" [(ngModel)]=equipmentTripHeatingObject.heatHours>
-                </div>
-                <label for="billableHours" class="col-sm-2 col-form-label">Billable Hours</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="billableHours" [(ngModel)]=equipmentTripHeatingObject.billableHours>
-                </div>
+          </div>
+
+          <div class="form-group" *ngIf="equipmentTripHeatingObject">
+            <div class="row">
+              <label for="heatHours" class="col-xs-2 col-form-label">Heat Hours</label>
+              <div class="col-xs-4">
+                <input type="number" class="form-control readOnly" name="heatHours" [(ngModel)]=equipmentTripHeatingObject.heatHours>
+              </div>
+              <label for="billableHours" class="col-xs-2 col-form-label">Billable Hours</label>
+              <div class="col-xs-4">
+                <input type="number" class="form-control readOnly" name="billableHours" [(ngModel)]=equipmentTripHeatingObject.billableHours>
+              </div>
             </div>
+          </div>
 
-
-            <div class="form-group row" *ngIf="equipmentTripHeatingObject">
-                <label for="service" class="col-sm-2 col-form-label">Service</label>
-                <div class="col-sm-4">
-                    <select class="form-control readOnly" name="service" [(ngModel)]=equipmentTripHeatingObject.service> 
+          <div class="form-group" *ngIf="equipmentTripHeatingObject">
+            <div class="row">
+              <label for="service" class="col-xs-2 col-form-label">Service</label>
+              <div class="col-xs-4">
+                <select class="form-control readOnly" name="service" [(ngModel)]=equipmentTripHeatingObject.service> 
                         <option [ngValue]="">Select </option>
                     <option *ngFor="let equipmentTripHeatingServiceType of equipmentTripHeatingServiceTypes" [value]="equipmentTripHeatingServiceType" [disabled]="!pageSecurity.isWritable">{{equipmentTripHeatingServiceType}}</option>
                 </select>
-                </div>
+              </div>
 
-                <label for="isVoided" class="col-sm-2 col-form-label">Voided</label>
-                <div class="col-sm-4">
-                    <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=equipmentTripHeatingObject.isVoided>
-                </div>
+              <label for="isVoided" class="col-xs-2 col-form-label">Voided</label>
+              <div class="col-xs-4">
+                <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=equipmentTripHeatingObject.isVoided>
+              </div>
             </div>
+          </div>
 
         </popup>
+      </div>
     </form>
-    <!--equipmentTrip: {{equipmentTrip | json}}-->
+
+
+  </div>
+</div>
