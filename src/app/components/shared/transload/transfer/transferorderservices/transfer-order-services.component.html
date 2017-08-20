@@ -1,91 +1,117 @@
-<div class="container-fluid">
-    <h4><button type="button" class="btn btn-primary" (click)="isCollapsed = !isCollapsed">{{isCollapsed ? '+' : '-'}}</button>        Misc Service</h4>
-    <form #transferOrderServiceForm="ngForm" (ngSubmit)="submitForm(transferOrderServiceForm)" form-inline>
-        <div class="col-sm-12 row">
-            <div class="col-sm-10" [collapse]="isCollapsed">
-                <table class="table table-condensed table-bordered table-responsive table-striped table-hover" >
-                    <thead>
-                        <tr>
-                            <th>Service</th>
-                            <th>Activity Date</th>
-                            <th>Quantity</th>
-                            <th>UOM</th>
-                            <th>Authjorized By</th>
-                            <th>Comment</th>
-                            <th>Voided</th>
-                        </tr>
-                    </thead>
+<div class="panel panel-default">
+  <div class="panel-heading" role="tab" id="miscService-panel">
+    <h4 class="panel-title" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#miscService" aria-expanded="true"
+      aria-controls="miscService">
+      Misc Service
+    </h4>
+  </div>
+  <div id="miscService" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="miscService">
+    <div class="panel-body">
+      <form #transferOrderServiceForm="ngForm" (ngSubmit)="submitForm(transferOrderServiceForm)">
+        <div class="row">
+          <div class="col-sm-10">
+            <table class="table table-condensed table-bordered table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Service</th>
+                  <th>Activity Date</th>
+                  <th>Quantity</th>
+                  <th>UOM</th>
+                  <th>Authjorized By</th>
+                  <th>Comment</th>
+                  <th>Voided</th>
+                </tr>
+              </thead>
 
-                    <tbody *ngIf="transferOrderServices" >
-                        <tr *ngFor="let transferOrderService of transferOrderServices;let i=index">
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{getServiceTypeName(transferOrderService.serviceId)}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{transferOrderService.activityDate| date: 'MM/dd/yyyy hh:mm'}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{transferOrderService.quantity}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{getUnitOfMeasureName(transferOrderService.uomId)}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{transferOrderService.authorizedBy}}</td>
-                            <td style="cursor: pointer" (click)="onEdit(i,$event)">{{transferOrderService.comment}}</td>
-                            <td><input type="checkbox" class="checkbox" name="{{i}}IsVoided" #{{i}}IsActive="ngModel" (change)="onChangeIsVoided(i,$event)"
-                                    [(ngModel)]=transferOrderService.isVoided [disabled]="!pageSecurity.isWritable ? true : null"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+              <tbody *ngIf="transferOrderServices">
+                <tr *ngFor="let transferOrderService of transferOrderServices;let i=index">
+                  <td (click)="onEdit(i,$event)">{{getServiceTypeName(transferOrderService.serviceId)}}</td>
+                  <td (click)="onEdit(i,$event)">{{transferOrderService.activityDate| date: 'MM/dd/yyyy hh:mm'}}</td>
+                  <td (click)="onEdit(i,$event)">{{transferOrderService.quantity}}</td>
+                  <td (click)="onEdit(i,$event)">{{getUnitOfMeasureName(transferOrderService.uomId)}}</td>
+                  <td (click)="onEdit(i,$event)">{{transferOrderService.authorizedBy}}</td>
+                  <td (click)="onEdit(i,$event)">{{transferOrderService.comment}}</td>
+                  <td><input type="checkbox" class="checkbox" name="{{i}}IsVoided" #{{i}}IsActive="ngModel" (change)="onChangeIsVoided(i,$event)"
+                      [(ngModel)]=transferOrderService.isVoided [disabled]="!pageSecurity.isWritable ? true : null"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-            <div class="col-sm-2" [collapse]="isCollapsed">
-                <!--<button class="btn btn-primary" type="button" (click)="onAddService()" [disabled]="transferOrder && (transferOrder.transferOrderId ==0  || transferOrder.transferOrderId ==null)">Add Service</button>-->
-                <button class="btn btn-primary" type="button" (click)="onAddService()" [disabled]="transferOrder && (transferOrder.transferOrderId ==0  || transferOrder.transferOrderId ==null) || !pageSecurity.isWritable  || transferOrder.isValidated || transferOrder.isCompleted" >Add Service</button>
-            </div>
+          <div class="col-sm-2">
+            <!--<button class="btn btn-primary" type="button" (click)="onAddService()" [disabled]="transferOrder && (transferOrder.transferOrderId ==0  || transferOrder.transferOrderId ==null)">Add Service</button>-->
+            <button class="btn btn-primary" type="button" (click)="onAddService()" [disabled]="transferOrder && (transferOrder.transferOrderId ==0  || transferOrder.transferOrderId ==null) || !pageSecurity.isWritable  || transferOrder.isValidated ">Add Service</button>
+          </div>
         </div>
         <popup #transferOrderServicePopup (confirmClick)="onSaveTransferOrderService()" (cancelClick)="onCancelTransferOrderService();">
-            <div class="form-group row" *ngIf="transferOrderServiceObject">
-                <label for="serviceId" class="col-sm-2 col-form-label">Service*</label>
-                <div class="col-sm-4">
-                    <select class="form-control readOnly" id="serviceId" name="serviceId" [(ngModel)]=transferOrderServiceObject.serviceId (change)="onServiceChange($event.target.value)"
-                        required>
+          <div class="form-group" *ngIf="transferOrderServiceObject">
+            <div class="row">
+              <label for="serviceId" class="col-xs-4 col-form-label">Service*</label>
+              <div class="col-xs-8">
+                <select class="form-control readOnly" id="serviceId" name="serviceId" [(ngModel)]=transferOrderServiceObject.serviceId (change)="onServiceChange($event.target.value)"
+                  required>
                         <option [ngValue]="null">Select</option>
                     <option *ngFor="let service of serviceTypeList"
                     [value]="service.serviceTypeId" [disabled]="!pageSecurity.isWritable"
                     >{{service.serviceType}}</option>
                 </select>
-                </div>
+              </div>
             </div>
+          </div>
 
-            <div class="form-group row" *ngIf="transferOrderServiceObject">
-                <label for="activityDate" class="col-sm-2 col-form-label">Activity Date*</label>
-                <div class="col-sm-4">
-                    <!--<input type="date" class="form-control readOnly" name="activityDate" [(ngModel)]=transferOrderServiceObject.activityDate
-                        required useValueAsDate>-->
-                    <input class="form-control readOnly" name="activityDate" [(ngModel)]=transferOrderServiceObject.activityDate ngui-datetime-picker required/>
-                </div>
-                <label for="quantity" class="col-sm-2 col-form-label">Quantity*</label>
-                <div class="col-sm-4">
-                    <input type="number" class="form-control readOnly" name="quantity" [(ngModel)]=transferOrderServiceObject.quantity required>
-                </div>
+          <div class="form-group" *ngIf="transferOrderServiceObject">
+            <div class="row"></div>
+            <label for="activityDate" class="col-xs-4 col-form-label">Activity Date*</label>
+            <div class="col-xs-4">
+              <div id="activityDate" class="input-group date">
+                <input class="form-control readOnly" name="activityDate" [(ngModel)]=transferOrderServiceObject.activityDate ngui-datetime-picker
+                  required/>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+              </div>
             </div>
-            <div class="form-group row" *ngIf="transferOrderServiceObject">
-                <label for="uomId" class="col-sm-2 col-form-label">Unit Of Measure*</label>
-                <div class="col-sm-4">
-                    {{getUnitOfMeasureName(transferOrderServiceObject.uomId)}}
-                </div>
-                <label for="authorizedBy" class="col-sm-2 col-form-label">Autorized By*</label>
-                <div class="col-sm-4">
-                    <input type="string" class="form-control readOnly" name="authorizedBy" [(ngModel)]=transferOrderServiceObject.authorizedBy
-                        required>
-                </div>
-
+            <div class="col-xs-4">
+              <input type="number" class="form-control readOnly" name="quantity" [(ngModel)]=transferOrderServiceObject.quantity required>
+              <label for="quantity" class="col-sm-2 col-form-label">Quantity*</label>
             </div>
-            <div class="form-group row" *ngIf="transferOrderServiceObject">
-                <label for="comment" class="col-sm-2 col-form-label">Comment</label>
-                <div class="col-sm-4">
-                    <input type="string" class="form-control readOnly" name="comment" [(ngModel)]=transferOrderServiceObject.comment>
-                </div>
-                <label for="isVoided" class="col-sm-2 col-form-label">Voided</label>
-                <div class="col-sm-4">
-                    <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=transferOrderServiceObject.isVoided>
-                </div>
+          </div>
+          <div class="form-group" *ngIf="transferOrderServiceObject">
+            <div class="row">
+              <label for="uomId" class="col-xs-4 col-form-label">Unit Of Measure*</label>
+              <div class="col-xs-8">
+                {{getUnitOfMeasureName(transferOrderServiceObject.uomId)}}
+              </div>
             </div>
+          </div>
+          <div class="form-group" *ngIf="transferOrderServiceObject">
+            <div class="row">
+              <label for="authorizedBy" class="col-xs-4 col-form-label">Autorized By</label>
+              <div class="col-xs-8">
+                <input type="string" class="form-control readOnly" name="authorizedBy" [(ngModel)]=transferOrderServiceObject.authorizedBy>
+              </div>
+            </div>
+          </div>
+          <div class="form-group " *ngIf="transferOrderServiceObject">
+            <div class="row">
+              <label for="comment" class="col-sm-2 col-form-label">Comment</label>
+              <div class="col-sm-4">
+                <input type="string" class="form-control readOnly" name="comment" [(ngModel)]=transferOrderServiceObject.comment>
+              </div>
+            </div>
+          </div>
+          <div class="form-group " *ngIf="transferOrderServiceObject">
+            <div class="row">
+              <label for="isVoided" class="col-sm-2 col-form-label">Voided</label>
+              <div class="col-sm-4">
+                <input type="checkbox" class="readOnly" name="isVoided" [(ngModel)]=transferOrderServiceObject.isVoided>
+              </div>
+            </div>
+          </div>
         </popup>
-    </form>
-    <!--transferOrderServiceObject:{{transferOrderServiceObject|json}}-->
-    <!--
+      </form>
+    </div>
+  </div>
+</div>
+
+<!--transferOrderServiceObject:{{transferOrderServiceObject|json}}-->
+<!--
   transferOrder: {{transferOrder | json}}-->

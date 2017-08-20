@@ -1,88 +1,94 @@
-<div class="container">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Inventory Adjustment</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <form #inventoryAdjustmentForm="ngForm" (ngSubmit)="onSubmitForm(inventoryAdjustmentForm)" class="form-horizontal">
 
-    <h2>Inventory Adjustment</h2>
-    <span layout="row"><hr flex/></span>
-    <form #inventoryAdjustmentForm="ngForm" (ngSubmit)="onSubmitForm(inventoryAdjustmentForm)" form-inline>
-
-        <div class="form-group row" *ngIf="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== 0 ">
-            <label for="inventoryAdjustmentId" class="col-sm-2 col-form-label">Id</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control readOnly" name="inventoryAdjustmentId" [(ngModel)]=inventoryAdjustment.inventoryAdjustmentId
-                    #inventoryAdjustmentId="ngModel" [readonly]="true">
+          <div class="form-group" *ngIf="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== 0 ">
+            <label for="inventoryAdjustmentId" class="col-xs-4 col-form-label">Id</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control readOnly" name="inventoryAdjustmentId" [(ngModel)]=inventoryAdjustment.inventoryAdjustmentId
+                #inventoryAdjustmentId="ngModel" [readonly]="true">
             </div>
-        </div>
+          </div>
 
-        <div class="form-group row" *ngIf="inventoryAdjustment">
-            <label for="equipmentId" class="col-sm-2 col-form-label">Equipment*</label>
-            <div class="col-sm-4">
-                <select class="form-control readOnly" name="equipmentId" [(ngModel)]=inventoryAdjustment.equipmentId #equipmentId="ngModel"
-                    (change)="onEquipmentChange($event.target.value)" required [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0">
+          <div class="form-group" *ngIf="inventoryAdjustment">
+            <label for="equipmentId" class="col-xs-4 col-form-label">Equipment*</label>
+            <div class="col-xs-8">
+              <select class="form-control readOnly" name="equipmentId" [(ngModel)]=inventoryAdjustment.equipmentId #equipmentId="ngModel"
+                (change)="onEquipmentChange($event.target.value)" required [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0">
                         <option [ngValue]="null">Select Equipment</option>
                         <option *ngFor="let equipment of equipmentList"
                     [value]="equipment.equipmentId"
                     >{{equipment.equipmentName}}</option>
                 </select>
             </div>
-        </div>
-        <div class="form-group row" *ngIf="inventoryAdjustment">
-            <label class="col-sm-2 col-form-label">Weight Unit Of Measure</label>
-            <div class="col-sm-4">
-                <span>
+          </div>
+          <div class="form-group" *ngIf="inventoryAdjustment">
+            <label class="col-xs-4 col-form-label">Weight Unit Of Measure</label>
+            <div class="col-xs-8">
+              <span>
                       {{getUnitOfMeasureName(inventoryAdjustment.weightUnitOfMeasureId)}}
                 </span>
             </div>
-        </div>
-        <div class="form-group row" *ngIf="inventoryAdjustment">
-            <label for="#amount" class="col-sm-2 col-form-label">Adjustment Amout</label>
-            <div class="col-sm-4">
-                <input type="number" class="form-control readOnly" name="amount" [(ngModel)]=inventoryAdjustment.amount #amount="ngModel"
-                    (change)="onAmountChange($event.target.value)" required [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0">
-                <span class="help-block alert-danger" *ngIf="(amount.touched || amount.dirty) && amount.errors">
-                            <span *ngIf="amount.errors.required">
-                                Amount is required
-                            </span>
-                </span>
-                <savage-message></savage-message>
+          </div>
+          <div class="form-group" *ngIf="inventoryAdjustment">
+            <label for="#amount" class="col-xs-4 col-form-label">Adjustment Amout</label>
+            <div class="col-xs-8">
+              <input type="number" class="form-control readOnly" name="amount" [(ngModel)]=inventoryAdjustment.amount #amount="ngModel"
+                (change)="onAmountChange($event.target.value)" required [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0">
+              <span class="help-block alert-danger" *ngIf="(amount.touched || amount.dirty) && amount.errors">
+                  <span *ngIf="amount.errors.required">
+                      Amount is required
+                  </span>
+              </span>
+              <savage-message></savage-message>
             </div>
-        </div>
+          </div>
 
-        <div class="form-group row" *ngIf="inventoryAdjustment">
-            <label for="#reason" class="col-sm-2 col-form-label">Reason</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control readOnly" name="reason" [(ngModel)]=inventoryAdjustment.reason #reason="ngModel" required
-                    minlength="3" maxlength="250" [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0">
-                <span class="help-block alert-danger" *ngIf="(reason.touched || reason.dirty) && reason.errors">
-                            <span *ngIf="reason.errors.required">
-                                Reason is required
-                            </span>
-                <span *ngIf="reason.errors.minlength">
-                                Reason must be longer than 3 characters.
-                            </span>
+          <div class="form-group" *ngIf="inventoryAdjustment">
+            <label for="#reason" class="col-xs-4 col-form-label">Reason</label>
+            <div class="col-xs-8">
+              <input type="text" class="form-control readOnly" name="reason" [(ngModel)]=inventoryAdjustment.reason #reason="ngModel" required
+                minlength="3" maxlength="250" [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0">
+              <span class="help-block alert-danger" *ngIf="(reason.touched || reason.dirty) && reason.errors">
+                <span *ngIf="reason.errors.required">
+                    Reason is required
                 </span>
+              <span *ngIf="reason.errors.minlength">
+                    Reason must be longer than 3 characters.
+                </span>
+              </span>
             </div>
-        </div>
+          </div>
 
-        <div class="form-group row" *ngIf="inventoryAdjustment">
-            <label for="transactionDate" class="col-sm-2 col-form-label">Transaction Date</label>
-            <div class="col-sm-4">
-                <!--<input type="date" class="form-control readOnly" name="transactionDate" [(ngModel)]=inventoryAdjustment.transactionDate
+          <div class="form-group" *ngIf="inventoryAdjustment">
+            <label for="transactionDate" class="col-xs-4 col-form-label">Transaction Date</label>
+            <div class="col-xs-8">
+              <!--<input type="date" class="form-control readOnly" name="transactionDate" [(ngModel)]=inventoryAdjustment.transactionDate
                     #transactionDate="ngModel"
                     ngui-datetime-picker
                     date-format="MM/DD/YYYY HH:mm" parse-format="YYYY-MM-DD HH:mm" required>-->
-
-                <input [(ngModel)]=inventoryAdjustment.transactionDate name="transactionDate" (change)="onTransactionDateChange($event.target.value)"
-                    ngui-datetime-picker [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0"
+              <div id="transDate" class="input-group date">
+                <input type="type" class="form-control pickdate" [(ngModel)]=inventoryAdjustment.transactionDate name="transactionDate" (change)="onTransactionDateChange($event.target.value)"
+                  ngui-datetime-picker [disabled]="inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0"
                 />
-                <savage-message2></savage-message2>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+              </div>
+
+              <savage-message2></savage-message2>
             </div>
-        </div>
+          </div>
 
-        <button type="submit" class="btn btn-primary" [disabled]="!inventoryAdjustmentForm.valid || isInvalid || (inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0) || !pageSecurity.isWritable">Save</button>
-        <button type="button" class="btn btn-primary" (click)="cancel($event)">Cancel</button>
-
-        <br/>
-        <br/>
-    </form>
+          <button type="submit" class="btn btn-primary" [disabled]="!inventoryAdjustmentForm.valid || isInvalid || (inventoryAdjustment && inventoryAdjustment.inventoryAdjustmentId !== null && inventoryAdjustment.inventoryAdjustmentId !== 0) || !pageSecurity.isWritable">Save</button>
+          <button type="button" class="btn btn-primary" (click)="cancel($event)">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 <!--<div class="form-value">
     Form value:

@@ -1,375 +1,423 @@
-<div class="container-fluid">
-    <h2>TransferOrder</h2>
-    <span layout="row"><hr flex/></span>
-    <form class="form-horizontal" novalidate (ngSubmit)="saveTransferOrder()" [formGroup]="transferOrderForm" form-inline>
-        <br/>
-        <br/>
-        <!-- first line -->
-        <savage-message4></savage-message4>
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder && transferOrder.transferOrderId !== 0 ">
-                    <label for="transferOrderId" class="col-sm-4 col-form-label">Id</label>
-                    <div class="col-sm-8">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Transfer Order</h2>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-12">
+        <form class="form-horizontal" novalidate (ngSubmit)="saveTransferOrder()" [formGroup]="transferOrderForm" form-inline>
+
+
+          <savage-message4></savage-message4>
+
+          <div class="row">
+            <div class="col-md-8">
+              <!-- first line -->
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder && transferOrder.transferOrderId !== 0 ">
+                    <div class="row"><label for="transferOrderId" class="col-xs-4 col-form-label">Id</label>
+                      <div class="col-xs-8">
                         <input type="number" id="transferOrderId" class="form-control readOnly" formControlName="transferOrderId" [readonly]="true">
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="transferTypeId" class="col-sm-4 col-form-label">Transfer Type*</label>
-                    <div class="col-sm-8">
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"><label for="transferTypeId" class="col-xs-4 col-form-label">Transfer Type*</label>
+                      <div class="col-xs-8">
                         <select class="form-control readOnly" name="transferTypeId" formControlName="transferTypeId" (change)="onTransferTypeChange($event.target.value)"
-                            required>
+                          required>
                         <option [ngValue]="null">Select</option>
                         <option *ngFor="let transferType of transferTypeList"
                         [value]="transferType.transferTypeId"
                         >{{transferType.transferType}}</option>
                     </select>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="transferSubTypeId" class="col-sm-4 col-form-label">SubType</label>
-                    <div class="col-sm-8">
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"><label for="transferSubTypeId" class="col-xs-4 col-form-label">SubType</label>
+                      <div class="col-xs-8">
                         <select class="form-control readOnly" name="transferSubTypeId" formControlName="transferSubTypeId">
-                        <option [ngValue]="null">Select</option>
-                        <option *ngFor="let transferSubType of transferSubTypeList"
-                        [value]="transferSubType.transferSubTypeId"
-                        >{{transferSubType.transferSubTypeName}}</option>
-                    </select>
+                                <option [ngValue]="null">Select</option>
+                                <option *ngFor="let transferSubType of transferSubTypeList"
+                                [value]="transferSubType.transferSubTypeId"
+                                >{{transferSubType.transferSubTypeName}}</option>
+                            </select>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
+              </div>
+              <!-- second line -->
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="scheduledDate" class="col-xs-4 col-form-label">Scheduled Date*</label>
+                      <div class="col-xs-8">
+                          <div id="scheduledDate" class="input-group date">
+                              <input formControlName="scheduledDate" ngui-datetime-picker required class="form-control" />                              
+                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                          </div>                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="shipperOrderNumber" class="col-xs-4 col-form-label">Shipper Order#*</label>
+                      <div class="col-xs-8">
+                        <input type="text" id="shipperOrderNumber" class="form-control readOnly" formControlName="shipperOrderNumber" required>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="consigneeOrderNumber" class="col-xs-4 col-form-label">Consignee Order#</label>
+                      <div class="col-xs-8">
+                        <input type="text" id="consigneeOrderNumber" class="form-control " formControlName="consigneeOrderNumber">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- third line -->
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="deliveryDate" class="col-xs-4 col-form-label">Delivery Date</label>
+                      <div class="col-xs-8">
+                          <div id="deliveryDate" class="input-group date">
+                              <input formControlName="deliveryDate" ngui-datetime-picker class="form-control" />
+                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                          </div>                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="weightUnitOfMeasureId" class="col-xs-4 col-form-label">Weight UOM**</label>
+                      <div class="col-xs-8">
+                        <select class="form-control " name="weightUnitOfMeasureId" formControlName="weightUnitOfMeasureId" *ngIf="!hasActivePlanning(transferOrder)"
+                          [disabled]="!pageSecurity.isWritable" (change)="onChangeWeightUOM($event.target.value)">
+                                <option [ngValue]="null">Select</option>
+                                <option *ngFor="let unitOfMeasure of weightUnitOfMeasureList"
+                                [value]="unitOfMeasure.unitOfMeasureId" [disabled]="!pageSecurity.isWritable"
+                                >{{unitOfMeasure.unitOfMeasure}}</option>
+                            </select>
+                        <div *ngIf="hasActivePlanning(transferOrder)">
+                          {{getCurrentWeightUnitOfMeasureName(currentWeightUnitOfMeasureId)}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="orderWeight" class="col-xs-4 col-form-label">Order Weight**</label>
+                      <div class="col-xs-8">
+                        <input type="number" id="orderWeight" class="form-control " formControlName="orderWeight" [disabled]="!pageSecurity.isWritable || hasActivePlanning(transferOrder)"
+                          (input)="onOrderWeightChange($event.target.value)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- fourth line -->
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="orderedDate" class="col-xs-4 col-form-label">Ordered Date+</label>
+                      <div class="col-xs-8">
+                          <div id="orderedDate" class="input-group date">
+                              <input formControlName="orderedDate" ngui-datetime-picker class="form-control" />
+                              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                          </div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"><label for="volumeUnitOfMeasureId" class="col-xs-4 col-form-label">Volume UOM**</label>
+                      <div class="col-xs-8">
+                        <select class="form-control " name="volumeUnitOfMeasureId" formControlName=volumeUnitOfMeasureId *ngIf="!hasActivePlanning(transferOrder)"
+                          [disabled]="!pageSecurity.isWritable || hasActivePlanning(transferOrder)" (change)="onChangeVolumeUOM($event.target.value)">
+                            <option [ngValue]="null">Select</option>
+                            <option *ngFor="let unitOfMeasure of volumeUnitOfMeasureList"
+                            [value]="unitOfMeasure.unitOfMeasureId" [disabled]="!pageSecurity.isWritable"
+                            > {{unitOfMeasure.unitOfMeasure}}</option>
+                        </select>
+                        <div *ngIf="hasActivePlanning(transferOrder)">
+                          {{getCurrentVolumeUnitOfMeasureName(currentVolumeUnitOfMeasureId)}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"><label for="orderVolume" class="col-xs-4 col-form-label">Order Volume**</label>
+                      <div class="col-xs-8">
+                        <input type="number" id="orderVolume" class="form-control " formControlName="orderVolume" [disabled]="!pageSecurity.isWritable || hasActivePlanning(transferOrder)"
+                          (input)="onOrderVolumeChange($event.target.value)">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- fifth line -->
+              <div class="row">
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="poNumber" class="col-xs-4 col-form-label"> PO#</label>
+                      <div class="col-xs-8">
+                        <input type="text" id="poNumber" class="form-control " formControlName="poNumber">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="freightCharge" class="col-xs-4 col-form-label">Freight Charge</label>
+                      <div class="col-xs-8">
+                        <select class="form-control " name="freightCharge" formControlName="freightCharge">
+                                <option [ngValue]="null">Select </option>
+                            <option *ngFor="let freightCharge of freightCharges"
+                            [value]="freightCharge"
+                            > {{freightCharge}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-4">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="consigneeAreaId" class="col-xs-4 col-form-label">Consignee Area</label>
+                      <div class="col-xs-8">
+                        <select class="form-control " name="consigneeAreaId" formControlName="consigneeAreaId">
+                            <option [ngValue]="null">Select</option>
+                            <option *ngFor="let companyArea of companyAreaList"
+                            [value]="companyArea.companyAreaId"
+                            >{{companyArea.areaName}}</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- line 6 -->
+          <div class="row">
+              <div class="col-sm-6 col-md-4">
+                <div class="form-group" *ngIf="transferOrder">
+                  <div class="row"><label for="isCompleted" class="col-xs-4 col-form-label">Is Complete</label>
+                    <div class="col-xs-8">
+                      <input type="checkbox" name="isCompleted" formControlName=isCompleted [disabled]="!isFormComplete">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
                 <div class="form-group " *ngIf="transferOrder">
-                    <label for="customerId" class="col-sm-4 col-form-label">Customer*</label>
-                    <div class="col-sm-8">
+                  <div class="row"><label for="billToId" class="col-xs-4 col-form-label">Bill To</label>
+                    <div class="col-xs-8">
+                      <select class="form-control " name="billToId" formControlName="billToId">
+                          <option [ngValue]="null">Select</option>
+                          <option *ngFor="let company of customerList"
+                          [value]="company.companyId"
+                          >{{company.companyName}}</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="customerId" class="col-xs-4 col-form-label">Customer*</label>
+                      <div class="col-xs-8">
                         <select class="form-control readOnly" name="customerId" formControlName="customerId" (change)="onChangeCustomer($event.target.value)"
-                            required *ngIf="transferOrder.transferOrderId === 0 || transferOrder.transferOrderId  === null ">
+                          required *ngIf="transferOrder.transferOrderId === 0 || transferOrder.transferOrderId  === null ">
                         <option [ngValue]="null">Select</option>
                         <option *ngFor="let customer of customerList"
                         [value]="customer.companyId"
                         >{{customer.companyName}}</option>
                     </select>
                         <div *ngIf="transferOrder.transferOrderId !== 0 ">
-                            {{getCompanyName(transferOrder.customerId)}}
+                          {{getCompanyName(transferOrder.customerId)}}
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <!-- second line -->
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="scheduledDate" class="col-sm-4 col-form-label">Scheduled Date*</label>
-                    <div class="col-sm-8">
-                        <input formControlName="scheduledDate" ngui-datetime-picker required class="form-control date-addon"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="shipperOrderNumber" class="col-sm-4 col-form-label">Shipper Order#*</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="shipperOrderNumber" class="form-control readOnly" formControlName="shipperOrderNumber" required>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="consigneeOrderNumber" class="col-sm-4 col-form-label">Consignee Order#</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="consigneeOrderNumber" class="form-control " formControlName="consigneeOrderNumber">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group" *ngIf="transferOrder">
-                    <label for="productId" class="col-sm-4 col-form-label">Product*</label>
-                    <div class="col-sm-8">
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group" *ngIf="transferOrder">
+                    <div class="row"> <label for="productId" class="col-xs-4 col-form-label">Product*</label>
+                      <div class="col-xs-8">
                         <select class="form-control readOnly" id="productId" name="productId" formControlName=productId (change)="onChangeProduct($event.target.value)"
-                            [disabled]="!pageSecurity.isWritable || hasActivePlanning()" *ngIf="transferOrder.transferOrderId === 0 || transferOrder.transferOrderId  === null ">
+                          [disabled]="!pageSecurity.isWritable || hasActivePlanning(transferOrder)" *ngIf="transferOrder.transferOrderId === 0 || transferOrder.transferOrderId  === null ">
                         <option [ngValue]="null">Select</option>
                         <option *ngFor="let product of productList"
-                        [value]="product.productId" [disabled]="!pageSecurity.isWritable || hasActivePlanning()"
+                        [value]="product.productId" [disabled]="!pageSecurity.isWritable || hasActivePlanning(transferOrder)"
                         >{{product.productName}}</option>
                     </select>
                         <div *ngIf="transferOrder.transferOrderId !== 0 ">
-                            {{getProductName(transferOrder.productId)}}
+                          {{getProductName(transferOrder.productId)}}
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <!-- third line -->
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="deliveryDate" class="col-sm-4 col-form-label">Delivery Date</label>
-                    <div class="col-sm-8">
-                        <input formControlName="deliveryDate" ngui-datetime-picker class="form-control date-addon"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="weightUnitOfMeasureId" class="col-sm-4 col-form-label">Weight UOM**</label>
-                    <div class="col-sm-8">
-                        <select class="form-control " name="weightUnitOfMeasureId" formControlName="weightUnitOfMeasureId" *ngIf="!hasActivePlanning()"
-                            [disabled]="!pageSecurity.isWritable" (change)="onChangeWeightUOM($event.target.value)">
-                            <option [ngValue]="null">Select</option>
-                            <option *ngFor="let unitOfMeasure of weightUnitOfMeasureList"
-                            [value]="unitOfMeasure.unitOfMeasureId" [disabled]="!pageSecurity.isWritable"
-                            >{{unitOfMeasure.unitOfMeasure}}</option>
-                        </select>
-                        <div *ngIf="hasActivePlanning()">
-                            {{getCurrentWeightUnitOfMeasureName(currentWeightUnitOfMeasureId)}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="orderWeight" class="col-sm-4 col-form-label">Order Weight**</label>
-                    <div class="col-sm-8">
-                        <input type="number" id="orderWeight" class="form-control " formControlName="orderWeight" [disabled]="!pageSecurity.isWritable || hasActivePlanning()"
-                            (input)="onOrderWeightChange($event.target.value)">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="consigneeId" class="col-sm-4 col-form-label">Consigee*</label>
-                    <div class="col-sm-8">
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="consigneeId" class="col-xs-4 col-form-label">Consigee*</label>
+                      <div class="col-xs-8">
                         <select class="form-control " name="consigneeId" formControlName="consigneeId" (change)="onChangeConsignee($event.target.value)"
-                            required>
-                        <option [ngValue]="null">Select</option>
-                        <option *ngFor="let company of consigneeList"
-                        [value]="company.companyId"
-                        >{{company.companyName}}</option>
-                    </select>
+                          required>
+                            <option [ngValue]="null">Select</option>
+                            <option *ngFor="let company of consigneeList"
+                            [value]="company.companyId"
+                            >{{company.companyName}}</option>
+                        </select>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <!-- fourth line -->
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="orderedDate" class="col-sm-4 col-form-label">Ordered Date+</label>
-                    <div class="col-sm-8">
-                        <input formControlName="orderedDate" ngui-datetime-picker class="form-control date-addon"/>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="volumeUnitOfMeasureId" class="col-sm-4 col-form-label">Volume UOM**</label>
-                    <div class="col-sm-8">
-                        <select class="form-control " name="volumeUnitOfMeasureId" formControlName=volumeUnitOfMeasureId *ngIf="!hasActivePlanning()"
-                            [disabled]="!pageSecurity.isWritable || hasActivePlanning()" (change)="onChangeVolumeUOM($event.target.value)">
-                        <option [ngValue]="null">Select</option>
-                        <option *ngFor="let unitOfMeasure of volumeUnitOfMeasureList"
-                        [value]="unitOfMeasure.unitOfMeasureId" [disabled]="!pageSecurity.isWritable"
-                        > {{unitOfMeasure.unitOfMeasure}}</option>
-                    </select>
-                        <div *ngIf="hasActivePlanning()">
-                            {{getCurrentVolumeUnitOfMeasureName(currentVolumeUnitOfMeasureId)}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="orderVolume" class="col-sm-4 col-form-label">Order Volume**</label>
-                    <div class="col-sm-8">
-                        <input type="number" id="orderVolume" class="form-control " formControlName="orderVolume" [disabled]="!pageSecurity.isWritable || hasActivePlanning()"
-                            (input)="onOrderVolumeChange($event.target.value)">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="shipperId" class="col-sm-4 col-form-label">Shipper</label>
-                    <div class="col-sm-8">
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row"> <label for="shipperId" class="col-xs-4 col-form-label">Shipper</label>
+                      <div class="col-xs-8">
                         <select class="form-control readOnly" name="shipperId" formControlName="shipperId">
                         <option [ngValue]="null">Select</option>
                         <option *ngFor="let shipper of shipperList"
                         [value]="shipper.companyId"
                         >{{shipper.companyName}}</option>
                     </select>
+                      </div>
                     </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <!-- fifth line -->
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="poNumber" class="col-sm-4 col-form-label"> PO#</label>
-                    <div class="col-sm-8">
-                        <input type="text" id="poNumber" class="form-control " formControlName="poNumber">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="freightCharge" class="col-sm-4 col-form-label">Freight Charge</label>
-                    <div class="col-sm-8">
-                        <select class="form-control " name="freightCharge" formControlName="freightCharge">
-                            <option [ngValue]="null">Select </option>
-                        <option *ngFor="let freightCharge of freightCharges"
-                        [value]="freightCharge"
-                        > {{freightCharge}}</option>
-                    </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="consigneeAreaId" class="col-sm-4 col-form-label">Consignee Area</label>
-                    <div class="col-sm-8">
-                        <select class="form-control " name="consigneeAreaId" formControlName="consigneeAreaId">
-                        <option [ngValue]="null">Select</option>
-                        <option *ngFor="let companyArea of companyAreaList"
-                        [value]="companyArea.companyAreaId"
-                        >{{companyArea.areaName}}</option>
-                    </select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="carrierId" class="col-sm-4 col-form-label">Carrier</label>
-                    <div class="col-sm-8">
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group " *ngIf="transferOrder">
+                    <div class="row">
+                      <label for="carrierId" class="col-xs-4 col-form-label">Carrier</label>
+                      <div class="col-xs-8">
                         <select class="form-control " name="carrierId" formControlName="carrierId">
-                            <option [ngValue]="null">Select </option>
-                            <option *ngFor="let company of carrierList"
-                        [value]="company.companyId"
-                        >{{company.companyName}}</option>
-                    </select>
+                                          <option [ngValue]="null">Select </option>
+                                          <option *ngFor="let company of carrierList"
+                                      [value]="company.companyId"
+                                      >{{company.companyName}}</option>
+                                  </select>
+                      </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
 
-        <!-- line 6 -->
-        <div class="row">
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group" *ngIf="transferOrder">
-                    <label for="isCompleted" class="col-sm-4 col-form-label">Is Complete</label>
-                    <div class="col-sm-8">
-                        <input type="checkbox" name="isCompleted" formControlName=isCompleted [disabled]="!isFormComplete">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="billToId" class="col-sm-4 col-form-label">Bill To</label>
-                    <div class="col-sm-8">
-                        <select class="form-control " name="billToId" formControlName="billToId">
-                        <option [ngValue]="null">Select</option>
-                        <option *ngFor="let company of customerList"
-                        [value]="company.companyId"
-                        >{{company.companyName}}</option>
-                    </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
+
+          
+          <div class="row">
             <div class="col-sm-12">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="workOrderComment" class="col-sm-1 col-form-label">WO Comment</label>
-                    <div class="col-sm-11">
-                        <input type="text" id="workOrderComment" class="form-control readOnly" formControlName="workOrderComment">
-                    </div>
+              <div class="form-group " *ngIf="transferOrder">
+                <div class="row"> <label for="workOrderComment" class="col-sm-2 col-md-1 col-form-label">WO Comment</label>
+                  <div class="col-sm-10 col-md-11">
+                    <input type="text" id="workOrderComment" class="form-control readOnly" formControlName="workOrderComment">
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-        <div class="row">
+          </div>
+          <div class="row">
             <div class="col-sm-12">
-                <div class="form-group " *ngIf="transferOrder">
-                    <label for="bolComment" class="col-sm-1 col-form-label">BOL Comment</label>
-                    <div class="col-sm-11">
-                        <input type="text" id="bolComment" class="form-control readOnly" formControlName="bolComment">
-                    </div>
+              <div class="form-group " *ngIf="transferOrder">
+                <div class="row"> <label for="bolComment" class="col-sm-2 col-md-1 col-form-label">BOL Comment</label>
+                  <div class="col-sm-10 col-md-11">
+                    <input type="text" id="bolComment" class="form-control readOnly" formControlName="bolComment">
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
-        <br/>
-        <savage-message></savage-message>
-        <transfer-order-plannings *ngIf="transferOrder" [transferOrder]="transferOrderForm.value" [newTransferOrderPlannings]="originalTransferOrderPlanningList"
-            [equipmentTripProductInfos]="equipmentTripProductInfoList" [productList]="productList" [equipmentList]="equipmentList"
-            [weightUnitOfMeasureList]="weightUnitOfMeasureList" (transferOrderPlanningSelect)="onXferOrderPlanningSelect($event)"></transfer-order-plannings>
-        <br/>
-        <transfer-order-arrivals *ngIf="transferOrder" [transferOrderArrivals]="transferOrderArrivalList" [transferOrder]="transferOrderForm.value"
-            [transferTypeName]="transferTypeName" [equipmentList]="equipmentList" (transferOrderResponseEvent)="onTransferOrderResponseEvent($event)"></transfer-order-arrivals>
-        <transfer-order-services *ngIf="transferOrder" [transferOrderServices]="transferOrder.transferOrderServices" [transferOrder]="transferOrderForm.value"></transfer-order-services>
-        <br/>
-        <hr/>
-        <br/>
-        <div class="row">
-            <div class="col-sm-6 col-md-3 button-group">
-                <li>
-                <ul>
-                    <button class="btn btn-primary grouped-button " type="button">Print Arrival Checklist</button>
-                </ul>                
-                <ul>
-                   <button class="btn btn-primary grouped-button " type="button">Print Departure CheckList</button>
-                </ul>
-                <ul>
-                    <button class="btn btn-primary grouped-button " type="button">Print Truck BOL</button>
-                </ul>
+          </div>
+
+          <savage-message></savage-message>
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <transfer-order-plannings *ngIf="transferOrder" [transferOrder]="transferOrderForm.value" [newTransferOrderPlannings]="originalTransferOrderPlanningList"
+              [equipmentTripProductInfos]="equipmentTripProductInfoList" [productList]="productList" [equipmentList]="equipmentList"
+              [weightUnitOfMeasureList]="weightUnitOfMeasureList" (transferOrderPlanningSelect)="onXferOrderPlanningSelect($event)"></transfer-order-plannings>
+
+            <transfer-order-arrivals *ngIf="transferOrder" [transferOrderArrivals]="transferOrderArrivalList" [transferOrder]="transferOrderForm.value"
+              [transferTypeName]="transferTypeName" [equipmentList]="equipmentList" (transferOrderResponseEvent)="onTransferOrderResponseEvent($event)"></transfer-order-arrivals>
+            <transfer-order-services *ngIf="transferOrder" [transferOrderServices]="transferOrder.transferOrderServices" [transferOrder]="transferOrderForm.value"></transfer-order-services>
+          </div>
+          <div class="row">
+            <div class="btn-group">
+              <!--Add "dropup" class for upside menu-->
+              <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Print <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="#">Arrival Checklist</a></li>
+                <li><a href="#">Work Order</a></li>
+                <li><a href="#">Transfer Order</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Truck BOL</a></li>
+                <li><a href="#">Departure CheckList</a></li>
+              </ul>
+            </div>
+            <div class="btn-group">
+              <!--Add "dropup" class for upside menu-->
+              <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Save <span class="caret"></span>
+                </button>
+
+              <ul class="dropdown-menu ">
+                <li> <a href="#" [attr.disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isWritable  || transferOrder.isValidated "
+                    (click)="saveTransferOrder($event)">Save Only</a>
                 </li>
-            </div>
-            <div class="col-sm-6 col-md-3 button-group">
                 <li>
-                <ul>
-                    <button class="btn btn-primary grouped-button " type="button">Print Transfer Order</button>
-                </ul>
-                <ul>
-                    <button class="btn btn-primary grouped-button " type="button">Print Work Order</button>
-                </ul>
+                  <a href="#" [attr.disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isWritable || transferOrder.isValidated "
+                    (click)="saveAndAddService($event)">Save and Add Service</a>
                 </li>
-            </div>
-            <div class="col-sm-6 col-md-3 button-group">
                 <li>
-                <ul>
-                    <button type="button" class="btn btn-primary grouped-button" [disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isWritable  || transferOrder.isValidated || transferOrder.isCompleted"
-                        (click)="saveTransferOrder($event)">Save</button>
-                </ul>
-                <ul>
-                    <button type="button" class="btn btn-primary grouped-button" [disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isWritable || transferOrder.isValidated || transferOrder.isCompleted"
-                        (click)="saveAndAddService($event)">Save And Add Service</button>
-                </ul>
-               <ul>
-                    <button type="button" class="btn btn-primary grouped-button" [disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isWritable || transferOrder.isValidated || transferOrder.isCompleted"
-                        (click)="saveAndRepeat($event)">Save And Repeat</button>
-               </ul>
-               </li>
+                  <a href="#" [attr.disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isWritable || transferOrder.isValidated "
+                    (click)="saveAndRepeat($event)">Save and Repeat</a>
+                </li>
+              </ul>
             </div>
-            <div class="col-sm-6 col-md-3 button-group">
-                <li>
-                <ul>
-                    <button type="button" class="btn btn-primary grouped-button" [disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isVoidable || transferOrder.isValidated || transferOrder.isCompleted"
-                    (click)="voidTransferOrder($event)">Void</button>
-               </ul>
-               <ul>
-                    <button type="button" class="btn btn-primary grouped-button" (click)="cancel($event)">Cancel</button>
-                </ul>
-               </li>
-           </div>
-        </div>
 
+            <button type="button" class="btn btn-warning grouped-button" [disabled]="!transferOrderForm.valid || isWeightVolumeInvalid||  !isUOMConversionValid || !pageSecurity.isVoidable || transferOrder.isValidated "
+              (click)="voidTransferOrder($event)">Void</button>
 
-    </form>
-    <br/>
+            <button type="button" class="btn btn-warning grouped-button" (click)="cancel($event)">Cancel</button>
 
-    <!--<br/> transferOrder:{{transferOrder | json}}
+          </div>
+        </form>
+
+        <div *ngIf="loading == true" class="loader">Loading/Processing..</div>
+      </div>
+    </div>
+  </div>
+
+  <!--<br/> transferOrder:{{transferOrder | json}}
     <br/> transferOrderPlanningList:{{transferOrderPlanningList | json}}
     <br/>
 
